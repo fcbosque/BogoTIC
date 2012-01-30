@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="span10">
+    <div class="well">
+      <form action="/foro" method="POST">
+        <fieldset>
+          <legend>Creación de nuevo foro</legend>
+          <div class="clearfix">
+            <label for="foro[nombre]">Nombre</label>
+            <div class="input">
+              <input class="xlarge" id="foroNombre" name="foro[nombre]" size="30" type="text">
+              <span class="help-block">
+                <strong>Nota:</strong> El nombre del foro debe ser descriptivo y no debe ser ofensivo. Asegurate de leer nuestros <a href="/tos">terminos de servicio</a>.
+              </span>
+            </div>
+          </div>
+          <div class="clearfix">
+            <label for=foro[descripcion]">Descripcion</label>
+            <div class="input">
+              <textarea class="xlarge" id="foroDescripcion" name="foro[descripcion]" rows="3"></textarea>
+              <span class="help-block">
+                Una descripcion acertada del foro ayudará a aumentar la participación de la gente.
+              </span>
+            </div>
+          </div>
+          <div class="clearfix">
+            <label for="foro[imagen]">Imagen del foro</label>
+            <div class="input">
+              <input class="input-file" id="foroImagen" name="foro[imagen]" type="file">
+            </div>
+          </div>
+          <div class="clearfix">
+            <label for="foro[categoria]">Categoria</label>
+            <div class="input">
+              <select class="xlarge" name="foro[categoria]" id="foroCategoria">
+                <option>Tecnología y deuda pública</option>
+                <option>Tecnología e investigación social</option>
+                <option>Tecnología y productividad</option>
+                <option>Tecnología y educación</option>
+                <option>Tecnología y fomento</option>
+                <option>Tecnología y gobierno</option>
+                <option>Tecnología y cultura</option>
+                <option>Tecnología e igualdad</option>
+                <option>Tecnología y derechos</option>
+                <option>Tecnología y pirateria</option>
+                <option>General</option>
+              </select>
+            </div>
+          </div>
+          <div class="actions">
+            <input type="submit" class="btn primary" value="Guardar">
+            <a type="reset" class="btn" href="/foros">Cancelar</a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  
+  <div class="span6">
+    <h1>Ayuda</h1>
+    <p>Test</p>
+  </div>
+</div>

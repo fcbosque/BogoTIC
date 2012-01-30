@@ -1,0 +1,40 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/bin/npm', 'start' ]
+info using npm@1.1.0-3
+info using node@v0.6.9
+verbose config file /home/arpunk/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/lib/node_modules/npm/npmrc
+verbose caching /home/arpunk/proyectos/Foros_BogoTIC/package.json
+verbose loadDefaults ForosBogoTIC@0.0.1-pre
+verbose run-script [ 'prestart', 'start', 'poststart' ]
+info prestart ForosBogoTIC@0.0.1-pre
+info start ForosBogoTIC@0.0.1-pre
+verbose unsafe-perm in lifecycle true
+silly exec sh "-c" "node server"
+silly spawning [ 'sh',
+silly spawning   [ '-c', 'node server' ],
+silly spawning   '/home/arpunk/proyectos/Foros_BogoTIC' ]
+info ForosBogoTIC@0.0.1-pre Failed to exec start script
+ERR! ForosBogoTIC@0.0.1-pre start: `node server`
+ERR! `sh "-c" "node server"` failed with 1
+ERR! 
+ERR! Failed at the ForosBogoTIC@0.0.1-pre start script.
+ERR! This is most likely a problem with the ForosBogoTIC package,
+ERR! not with npm itself.
+ERR! Tell the author that this fails on your system:
+ERR!     node server
+ERR! You can get their info via:
+ERR!     npm owner ls ForosBogoTIC
+ERR! There is likely additional logging output above.
+ERR! 
+ERR! System Linux 3.2.1-2-ARCH
+ERR! command "node" "/usr/bin/npm" "start"
+ERR! cwd /home/arpunk/proyectos/Foros_BogoTIC
+ERR! node -v v0.6.9
+ERR! npm -v 1.1.0-3
+ERR! code ELIFECYCLE
+ERR! message ForosBogoTIC@0.0.1-pre start: `node server`
+ERR! message `sh "-c" "node server"` failed with 1
+ERR! errno {}
+verbose exit [ 1, true ]

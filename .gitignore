@@ -1,0 +1,15 @@
+.project
+gmon.out
+.*.swp
+public/**/*.swp
+models/**/*.swp
+controllers/**/*.swp
+.settings.xml
+.DS_Store
+public/**/*.gz
+node_modules/**/*
+logs/master.log
+logs/workers.*.log
+pids/*.pid
+debug/*
+tmp/*

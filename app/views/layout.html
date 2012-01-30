@@ -1,0 +1,109 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Foros BogoTIC</title>
+    
+    <meta name="description" content="Foros públicos de participación ciudadana en TICs">
+    <meta name="author" content="BogoTIC">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/">BogoTIC</a>
+          <ul class="nav">
+            <li class="active"><a href="/">Inicio</a></li>
+            <li><a href="/acerca">Acerca</a></li>
+            <li><a href="/ayuda">Ayuda</a></li>
+          </ul>
+
+          <form class="pull-left" action>
+            <input type="text" placeholder="Buscar">
+          </form>
+
+          <ul class="nav secondary-nav">
+            <li class="dropdown" data-dropdown="dropdown">
+              <a href="#" class="dropdown-toggle">@usuario</a>
+              <ul class="dropdown-menu">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/perfil">Mi perfil</a></li>
+                <li class="divider"></li>
+                <li><a href="/usuario/signout">Salir</a></li>
+              </ul>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <h5>Menu</h5>
+          <ul>
+            <li><a href="/foros">Todos los foros</a></li>
+            <li><a href="#">Dos</a></li>
+            <li><a href="#">Tres</a></li>
+          </ul>
+        </div>
+
+        <div class="well">
+          <h5>Últimos foros</h5>
+          <ul>
+            <li><a href="#">Uno</a></li>
+            <li><a href="#">Dos</a></li>
+            <li><a href="#">Tres</a></li>
+          </ul>
+         </div>
+      </div>
+
+      <div class="content">
+        {{{body}}}
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="pull-right">
+          <a href="#">Volver al inicio</a>
+        </p>
+        <p>
+          Foros <a href="http://bogotic.com" target=_blank>BogoTIC</a> es un proyecto de la <a href="http://www.fcbosque.org" target=_blank>Fundación Casa del Bosque</a>. Vea nuestros <a href="/tos">terminos y condiciones</a> de uso.
+        </p>
+      </div>
+    </footer>
+
+    <script src="/js/jquery-1.7.1.min.js"></script>
+    <script src="/js/bootstrap-modal.js"></script>
+    <script src="/js/bootstrap-alerts.js"></script>
+    <script src="/js/bootstrap-twipsy.js"></script>
+    <script src="/js/bootstrap-popover.js"></script>
+    <script src="/js/bootstrap-dropdown.js"></script>
+    <script src="/js/bootstrap-scrollspy.js"></script>
+    <script src="/js/bootstrap-tabs.js"></script>
+    <script src="/js/bootstrap-buttons.js"></script>
+    <script src="/js/main.js"></script>
+
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+  </body>
+</html>

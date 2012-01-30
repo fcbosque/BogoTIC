@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="span10">
+    <div class="well">
+      <form action="/foro/{{foroId}}/pregunta" method="POST">
+        <fieldset>
+          <legend>Creación de nueva pregunta</legend>
+          <div class="clearfix">
+            <label for="pregunta[titulo]">Titulo</label>
+            <div class="input">
+              <input class="xlarge" id="preguntaTitulo" name="pregunta[titulo]" size="30" type="text">
+            </div>
+          </div>
+          <div class="clearfix">
+            <label for="pregunta[contenido]">¿Cual es su pregunta?</label>
+            <div class="input">
+              <textarea class="xlarge" id="preguntaContenido" name="pregunta[contenido]" rows="5"></textarea>
+              <span class="help-block">
+                Sea claro en la formulación de su pregunta.
+              </span>
+            </div>
+          </div>
+          <div class="clearfix">
+            <label for="pregunta[localidad]">Seleccione la localidad</label>
+            <div class="input">
+              <select class="xlarge" name="pregunta[localidad]" id="preguntaLocalidad">
+                <option>Antonio Nariño</option>
+                <option>Barrios Unidos</option>
+                <option>Bosa</option>
+                <option>Chapinero</option>
+                <option>Ciudad Bolívar</option>
+                <option>Engativá</option>
+                <option>Fontibón</option>
+                <option>Kennedy</option>
+                <option>La Candelaria</option>
+                <option>Los Mártires</option>
+                <option>Puente Aranda</option>
+                <option>Rafael Uribe Uribe</option>
+                <option>San Cristóbal</option>
+                <option>Santa Fe</option>
+                <option>Suba</option>
+                <option>Sumapaz</option>
+                <option>Teusaquillo</option>
+                <option>Tunjuelito</option>
+                <option>Usaquén</option>
+                <option>Usme</option>
+              </select>
+              <span class="help-block">
+              </span>
+            </div>
+          </div>
+          <div class="actions">
+            <input type="submit" class="btn primary" value="Guardar">
+            <a type="reset" class="btn" href="/">Cancelar</a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  
+  <div class="span6">
+    <h1>Ayuda</h1>
+    <p>Test</p>
+  </div>
+</div>

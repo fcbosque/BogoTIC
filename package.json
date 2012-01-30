@@ -1,0 +1,32 @@
+{
+  "author": "Fundación Casa del Bosque <info@fcbosque.org>",
+  "contributors": [
+    { "name": "Ricardo Lanziano", "email": "ricardo.lanziano@gmail.com" }
+  ],
+  "name": "ForosBogoTIC",
+  "private": "true",
+  "description": "Plataforma de foros de BogoTIC",
+  "main": "./lib/bogotic",
+  "version": "0.0.1-pre",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bogotic/main.git"
+  },
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "dependencies": {
+    "stylus": "0.22.x",
+    "matador": "0.0.x",
+    "mongoose": "2.4.x",
+    "mongodb": "0.9.x"
+  },
+  "devDependencies": {
+    "vows": "0.6.x",
+    "api-easy": "0.3.x"
+  },
+  "scripts": {
+    "start": "node server",
+    "test": "vows test/*-test.js --spec -i"
+  }
+}

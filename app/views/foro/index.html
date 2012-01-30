@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="span12">
+    <h1>Listado de foros</h1>
+    <p>Actualmente tenemos <strong>{{total}}</strong> foro(s) abierto(s):</p>
+  </div>
+  <div class="span4">
+    <div class="well">
+      <a class="btn primary large" href="/foros/new">Crear nuevo foro</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span16">
+    <table class="bordered-table zebra-striped">
+      <thead>
+        <tr>
+          <td>Categoria</td>
+          <td>Nombre</td>
+          <td>Preguntas</td>
+          <td>Descripcion</td>
+          <td>Fecha de creación</td>
+        </tr>
+      </thead>
+      <tbody>
+        {{#foros}}
+        <tr>
+          <td><span class="label">{{categoria}}</span></td>
+          <td><a href="/foro/{{id}}">{{nombre}}</a></td>
+          <td>{{preguntas.length}}</td>
+          <td>{{descripcion}}</td>
+          <td>{{fecha}}</td>
+        </tr>
+        {{/foros}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span16">
+    <div class="pagination">
+      <ul>
+        <li class="prev disabled"><a href="#">&larr; Anterior</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li class="next"><a href="#">Siguiente &rarr;</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
