@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="span10">
+    <div class="well">
+      <h1>Foro {{foro.nombre}}</h1>
+      <form action="/foro/{{foro.id}}/seguimiento" method="POST">
+      <input type="hidden" name="seguimiento[foro]" value="{{foro.id}}">
+        <fieldset>
+          <legend>Nuevo grupo de seguimiento</legend>
+          <div class="clearfix">
+            <label for="seguimiento[titulo]">Titulo</label>
+            <div class="input">
+              <input class="xlarge" id="seguimientoTitulo" name="seguimiento[titulo]" size="30" type="text">
+            </div>
+          </div>
+          <div class="clearfix">
+            <label for="seguimiento[descripcion]">Descripción del seguimiento</label>
+            <div class="input">
+              <textarea class="xlarge" id="seguimientoContenido" name="seguimiento[contenido]" rows="5"></textarea>
+              <span class="help-block">
+                Sea claro en la formulación de su pregunta.
+              </span>
+            </div>
+          </div>
+          <div class="clearfix">
+            <label for="seguimiento[localidad]">Seleccione la localidad</label>
+            <div class="input">
+              <select class="xlarge" name="seguimiento[localidad]" id="seguimientoLocalidad">
+                <option>Antonio Nariño</option>
+                <option>Barrios Unidos</option>
+                <option>Bosa</option>
+                <option>Chapinero</option>
+                <option>Ciudad Bolívar</option>
+                <option>Engativá</option>
+                <option>Fontibón</option>
+                <option>Kennedy</option>
+                <option>La Candelaria</option>
+                <option>Los Mártires</option>
+                <option>Puente Aranda</option>
+                <option>Rafael Uribe Uribe</option>
+                <option>San Cristóbal</option>
+                <option>Santa Fe</option>
+                <option>Suba</option>
+                <option>Sumapaz</option>
+                <option>Teusaquillo</option>
+                <option>Tunjuelito</option>
+                <option>Usaquén</option>
+                <option>Usme</option>
+              </select>
+              <span class="help-block">
+              </span>
+            </div>
+          </div>
+          <div class="actions">
+            <input type="submit" class="btn primary" value="Guardar">
+            <a type="reset" class="btn" href="/">Cancelar</a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  
+  <div class="span6">
+    <h1>Ayuda</h1>
+    <p>Test</p>
+  </div>
+</div>
+
