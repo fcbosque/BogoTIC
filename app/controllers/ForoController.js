@@ -24,7 +24,8 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     },
     show: function(id) {
       var self = this;
-      this.getModel('Foro').show(id, function(foro) {
+      var foro = this.request.params.id
+      this.getModel('Foro').show(foro, function(foro) {
         self.render('show', {
           foro: {
             nombre: foro.nombre,

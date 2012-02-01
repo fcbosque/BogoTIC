@@ -6,7 +6,6 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var foro = this.request.params.foro;
       this.getModel('Foro').show(foro, function(foro) {
-        console.log(foro.preguntas[0]);
         self.render('index', {
           foro: {
             preguntas: foro.preguntas,

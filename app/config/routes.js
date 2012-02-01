@@ -25,5 +25,12 @@ module.exports = {
     ['get', '/foro/:foro/pregunta/:id', 'Pregunta', 'show'],
     ['del', '/foro/:foro/pregunta/:id', 'Pregunta', 'remove'],
     ['put', '/foro/:foro/pregunta/:id', 'Pregunta', 'modify'],
+    // Consulta
+    ['get', '/foro/:foro/seguimientos', 'Seguimiento', 'index'],
+    ['get', '/foro/:foro/seguimientos/new', 'Seguimiento', 'new'],
+    ['post', '/foro/:foro/seguimiento', 'Seguimiento', 'create'],
+    ['get', '/foro/:foro/seguimiento/:id', 'Seguimiento', 'show'],
+    ['del', '/foro/:foro/seguimiento/:id', 'Seguimiento', 'remove'],
+    ['put', '/foro/:foro/seguimiento/:id', 'Seguimiento', 'modify']
   ]
 }

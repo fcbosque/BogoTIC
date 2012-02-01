@@ -1,57 +1,56 @@
-<div class="hero-unit">
-  <h1>Foros BogoTIC</h1>
-  <p>Foros ciudadanos para el abordaje de las TIC en Bogotá como medio para el fortalecimiento de la participación ciudadana, la interdisciplinariedad y la responsabilidad social tecnológica.</p>
-  <p><a href="/acerca" class="btn primary large" rel="popover" data-content="Participa activamente" data-original-title="Unete a la causa!">Conoce más »</a></p>
-</div>
-
-<div class="row">
-  <div class="span8">
-    <h2>Bienvenido a los foros de BogoTIC</h2>
-    <p>La migración, la corrupción en la administración pública, el detrimento del medio ambiente, la carencia de productividad, la violación de los derechos humanos, entre otros, como escenarios urgentes y de necesaria solución.</p>
-    <p>Para ello convidamos a la ciudadania en la participación de los foros para el impulso a la generación de escenarios ciudadanos enfocados en las problemáticas tecnológicas y sus impáctos jurídicos, culturales, financieros, industriales, fiscales e investigativos de cara a la ciudad.</p>
-    <blockquote>
-      <p>La transparencia y la veeduría ciudadana nos hace mejor sociedad.</p>
-      <small>BogoTIC</small>
-    </blockquote>
+<div class="span9">
+  <div class="hero-unit">
+    <h1>Foros BogoTIC</h1>
+    <p>Foros ciudadanos para el abordaje de las TIC en Bogotá como medio para el fortalecimiento de la participación ciudadana, la interdisciplinariedad y la responsabilidad social tecnológica.</p>
+    <p><a href="/acerca" class="btn primary large" rel="popover" data-content="Participa activamente" data-original-title="Unete a la causa!">Conoce más »</a></p>
   </div>
 
-  <div class="span8">
-    <h2>Registrate y realiza tus preguntas</h2>
-    <div class="well">
-    <form>
-      <fieldset>
-        <div class="clearfix">
-          <label for="usuario[username]">Usuario</label>
-          <div class="input">
-            <input type="text" class="xlarge" id="usuarioUsername" name"usuario[username]" size="30">
-          </div>
-        </div>
+  <div class="row-fluid">
+    <div class="span6">
+      <h2>Bienvenido a los foros de BogoTIC</h2>
+      <p style="text-align: justify;">La migración, la corrupción en la administración pública, el detrimento del medio ambiente, la carencia de productividad, la violación de los derechos humanos, entre otros, como escenarios urgentes y de necesaria solución.</p>
+      <p>Para ello convidamos a la ciudadania en la participación de los foros para el impulso a la generación de escenarios ciudadanos enfocados en las problemáticas tecnológicas y sus impáctos jurídicos, culturales, financieros, industriales, fiscales e investigativos de cara a la ciudad.</p>
+      <blockquote>
+        <p>La transparencia y la veeduría ciudadana nos hace mejor sociedad.</p>
+        <small>BogoTIC</small>
+      </blockquote>
+    </div>
 
-        <div class="clearfix">
-          <label for="usuario[correo]">Correo Electronico</label>
-          <div class="input">
-            <input type="email" class="xlarge" id="usuarioCorreo" name="usuario[correo]" size="30">
+    <div class="span6">
+      <h2>¿Desea participar?</h2>
+      <form class="form-horizontal">
+        <legend></legend>
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="usuario[username]">Usuario</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" id="usuarioUsername" name"usuario[username]" size="30">
+            </div>
           </div>
-        </div>
 
-        <div class="clearfix">
-          <div class="input">
-            <ul class="inputs-list">
-              <li>
-                <label>
-                  <input type="checkbox" name="tosCheckbox" value="true">
-                  <span>He leido y he aceptado los <a href="/tos">terminos de privacidad</a> de los foros.</span>
-                </label>
-              </li>
-            </ul>
+          <div class="control-group">
+             <label for="usuario[correo]">Correo Electronico</label>
+             <div class="controls">
+                <input type="email" class="input-xlarge" id="usuarioCorreo" name="usuario[correo]" size="30">
+              </div>
           </div>
-        </div>
 
-      </fieldset>
-      <div class="actions">
-        <button type="submit" class="btn primary">Crear cuenta</button>
-      </div>
-    </form>
+          <div class="control-group">
+            <div class="controls">
+              <label class="checkbox" for="usuario[tos]">
+                <input type="checkbox" id="tosCheckbox" value="usuario[tos]">
+                  <span>He leído y he aceptado los <a href="/tos">términos de privacidad</a> de los foros.</span>
+                </input>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Crear cuenta</button>
+          </div>
+        </fieldset>
+      </form>
+
     </div>
   </div>
 </div>
