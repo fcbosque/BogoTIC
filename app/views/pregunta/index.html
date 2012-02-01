@@ -1,56 +1,58 @@
-<div class="row">
-  <div class="span16">
-    <ul class="breadcrumb">
-      <li>
-        <a href="/foro/{{foro.id}}">{{foro.nombre}}</a>
-        <span class="divider">/</span>
-      </li>
-      <li class="active">
-        <a href="/foro/{{foro.id}}/preguntas">Preguntas</a>
-      </li>
-    </ul>
+<div class="span9">
+  <div class="row-fluid">
+    <div class="span12">
+      <ul class="breadcrumb">
+        <li>
+          <a href="/foro/{{foro.id}}">{{foro.nombre}}</a>
+          <span class="divider">/</span>
+        </li>
+        <li class="active">
+          <a href="/foro/{{foro.id}}/preguntas">Preguntas</a>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="span16">
-    <div class="row">
-      <div class="span10">
-        <div class="well">
-          <h1>Preguntas más votadas</h1>
-          <table>
-            <thead>
-              <tr>
-                <td>Pregunta</td>
-                <td>Favoritos</td>
-                <td>Votos</td>
-                <td>Localidad</td>
-              </tr>
-            </thead>
-            <tbody>
-              {{#foro.preguntas}}
-              <tr>
-                <td><a href="/foro/{{foro.id}}/pregunta/{{_id}}">{{titulo}}</a></td>
-                <td>{{favs}}</td>
-                <td>{{votos}}</td>
-                <td><span class="label">{{localidad}}</span></td>
-              </tr>
-              {{/foro.preguntas}}
-            </tbody>
-          </table>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="row-fluid">
+        <div class="span8">
+          <div class="well">
+            <h1>Preguntas más votadas</h1>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Pregunta</th>
+                  <th>Favoritos</th>
+                  <th>Votos</th>
+                  <th>Localidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#foro.preguntas}}
+                <tr>
+                  <td><a href="/foro/{{foro.id}}/pregunta/{{_id}}">{{titulo}}</a></td>
+                  <td>{{favs}}</td>
+                  <td>{{votos}}</td>
+                  <td><span class="label">{{localidad}}</span></td>
+                </tr>
+                {{/foro.preguntas}}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      <div class="span6">
-        <div class="well">
-          <h3>¿Qué se está comentando?</h3>
+        <div class="span4">
+          <div class="well">
+            <h3>¿Qué se está comentando?</h3>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="span16">
-    <h2>Últimas preguntas</h2>
+  <div class="row-fluid">
+    <div class="span12">
+      <h2>Últimas preguntas</h2>
+    </div>
   </div>
 </div>
