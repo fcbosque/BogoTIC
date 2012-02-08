@@ -1,36 +1,52 @@
 module.exports = {
   root: [
-    ['get', '/', 'Home', 'index'],
+    ['get', '/',       'Home', 'index'],
     ['get', '/acerca', 'Home', 'acerca'],
-    ['get', '/ayuda', 'Home', 'ayuda'],
-    ['get', '/tos', 'Home', 'tos'],
-    // Foro
-    ['get', '/foros', 'Foro', 'index'],
-    ['get', '/foros/new', 'Foro', 'new'],
-    ['post', '/foro', 'Foro', 'create'],
-    ['get', '/foro/:id', 'Foro', 'show'],
-    ['del', '/foro/:id', 'Foro', 'remove'],
-    ['put', '/foro/:id', 'Foro', 'modify'],
-    // Usuario
-    ['get', '/usuarios', 'Usuario', 'index'],
-    ['get', '/usuarios/new', 'Usuario', 'new'],
-    ['post', '/usuario', 'Usuario', 'create'],
-    ['get', '/usuario/:username', 'Usuario', 'show'],
-    ['del', '/usuario/:username', 'Usuario', 'remove'],
-    ['put', '/usuario/:username', 'Usuario', 'modify'],
+    ['get', '/ayuda',  'Home', 'ayuda'],
+    ['get', '/tos',    'Home', 'tos']
+  ],
+  foros: [
+    ['get',   '/',      'Foro', 'index'],
+    ['get',   '/nuevo', 'Foro', 'new'],
+    ['post',  '/',      'Foro', 'create'],
+    ['get',   '/:id',   'Foro', 'show'],
+    ['del',   '/:id',   'Foro', 'remove'],
+    ['put',   '/:id',   'Foro', 'modify'],
     // Pregunta
-    ['get', '/foro/:foro/preguntas', 'Pregunta', 'index'],
-    ['get', '/foro/:foro/preguntas/new', 'Pregunta', 'new'],
-    ['post', '/foro/:foro/pregunta', 'Pregunta', 'create'],
-    ['get', '/foro/:foro/pregunta/:id', 'Pregunta', 'show'],
-    ['del', '/foro/:foro/pregunta/:id', 'Pregunta', 'remove'],
-    ['put', '/foro/:foro/pregunta/:id', 'Pregunta', 'modify'],
-    // Consulta
-    ['get', '/foro/:foro/seguimientos', 'Seguimiento', 'index'],
-    ['get', '/foro/:foro/seguimientos/new', 'Seguimiento', 'new'],
-    ['post', '/foro/:foro/seguimiento', 'Seguimiento', 'create'],
-    ['get', '/foro/:foro/seguimiento/:id', 'Seguimiento', 'show'],
-    ['del', '/foro/:foro/seguimiento/:id', 'Seguimiento', 'remove'],
-    ['put', '/foro/:foro/seguimiento/:id', 'Seguimiento', 'modify']
+    ['get',   '/:foro/preguntas',       'Pregunta', 'index'],
+    ['get',   '/:foro/preguntas/nueva', 'Pregunta', 'new'],
+    ['post',  '/:foro/preguntas',       'Pregunta', 'create'],
+    ['get',   '/:foro/preguntas/:id',   'Pregunta', 'show'],
+    ['del',   '/:foro/preguntas/:id',   'Pregunta', 'remove'],
+    ['put',   '/:foro/preguntas/:id',   'Pregunta', 'modify'],
+    // Seguimiento
+    ['get',   '/:foro/seguimientos',       'Seguimiento', 'index'],
+    ['get',   '/:foro/seguimientos/nuevo', 'Seguimiento', 'new'],
+    ['post',  '/:foro/seguimientos',       'Seguimiento', 'create'],
+    ['get',   '/:foro/seguimientos/:id',   'Seguimiento', 'show'],
+    ['del',   '/:foro/seguimientos/:id',   'Seguimiento', 'remove'],
+    ['put',   '/:foro/seguimientos/:id',   'Seguimiento', 'modify'],
+    // Seguimiento / Preguntas
+    ['get',   '/:foro/seguimientos/:seguimiento/preguntas',       'Seguimiento', 'getPreguntas'],
+    ['get',   '/:foro/seguimientos/:seguimiento/preguntas/nueva', 'Seguimiento', 'newPregunta'],
+    ['post',  '/:foro/seguimientos/:seguimiento/preguntas',       'Seguimiento', 'addPregunta'],
+    ['get',   '/:foro/seguimientos/:seguimiento/preguntas/:id',   'Seguimiento', 'getPregunta'],
+    ['del',   '/:foro/seguimientos/:seguimiento/preguntas/:id',   'Seguimiento', 'delPregunta'],
+    ['put',   '/:foro/seguimientos/:seguimiento/preguntas/.id',   'Seguimiento', 'editPregunta'],
+    // Seguimiento / Consultas
+    ['get',   '/:foro/seguimientos/:seguimiento/consultas',       'Seguimiento', 'getConsultas'],
+    ['get',   '/:foro/seguimientos/:seguimiento/consultas/nueva', 'Seguimiento', 'newConsulta'],
+    ['post',  '/:foro/seguimientos/:seguimiento/consultas',       'Seguimiento', 'addConsulta'],
+    ['get',   '/:foro/seguimientos/:seguimiento/consultas/:id',   'Seguimiento', 'getConsulta'],
+    ['del',   '/:foro/seguimientos/:seguimiento/consultas/:id',   'Seguimiento', 'delConsulta'],
+    ['put',   '/:foro/seguimientos/:seguimiento/consultas/:id',   'Seguimiento', 'editConsulta']
+  ],
+  usuarios: [
+    ['get',   '/',          'Usuario', 'index'],
+    ['get',   '/nuevo',     'Usuario', 'new'],
+    ['post',  '/',          'Usuario', 'create'],
+    ['get',   '/:username', 'Usuario', 'show'],
+    ['del',   '/:username', 'Usuario', 'remove'],
+    ['put',   '/:username', 'Usuario', 'modify']
   ]
 }
