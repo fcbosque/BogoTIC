@@ -3,11 +3,11 @@
     <div class="span12">
       <ul class="breadcrumb">
         <li>
-          <a href="/foro/{{foro.id}}">{{foro.nombre}}</a>
+          <a href="/foros/{{foro.id}}">{{foro.nombre}}</a>
           <span class="divider">/</span>
         </li>
         <li class="active">
-          <a href="/foro/{{foro.id}}/preguntas">Preguntas</a>
+          <a href="/foros/{{foro.id}}/preguntas">Preguntas</a>
         </li>
       </ul>
     </div>
@@ -31,7 +31,7 @@
               <tbody>
                 {{#foro.preguntas}}
                 <tr>
-                  <td><a href="/foro/{{foro.id}}/pregunta/{{_id}}">{{titulo}}</a></td>
+                  <td><a href="/foros/{{foro.id}}/preguntas/{{_id}}">{{titulo}}</a></td>
                   <td>{{favs}}</td>
                   <td>{{votos}}</td>
                   <td><span class="label">{{localidad}}</span></td>

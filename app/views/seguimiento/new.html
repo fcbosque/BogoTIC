@@ -1,30 +1,29 @@
-<div class="row">
-  <div class="span10">
-    <div class="well">
-      <h1>Foro {{foro.nombre}}</h1>
-      <form action="/foro/{{foro.id}}/seguimiento" method="POST">
+<div class="span9">
+  <div class="row-fluid">
+    <div class="span8">
+      <form class="form-horizontal" action="/foros/{{foro.id}}/seguimientos" method="POST">
       <input type="hidden" name="seguimiento[foro]" value="{{foro.id}}">
         <fieldset>
-          <legend>Nuevo grupo de seguimiento</legend>
-          <div class="clearfix">
-            <label for="seguimiento[titulo]">Titulo</label>
-            <div class="input">
-              <input class="xlarge" id="seguimientoTitulo" name="seguimiento[titulo]" size="30" type="text">
+          <legend>Nuevo grupo de seguimiento para {{foro.nombre}}</legend>
+          <div class="control-group">
+            <label class="control-label" for="seguimiento[titulo]">Titulo</label>
+            <div class="controls">
+              <input class="input-xlarge" id="seguimientoTitulo" name="seguimiento[titulo]" size="30" type="text">
             </div>
           </div>
-          <div class="clearfix">
-            <label for="seguimiento[descripcion]">Descripción del seguimiento</label>
-            <div class="input">
-              <textarea class="xlarge" id="seguimientoContenido" name="seguimiento[contenido]" rows="5"></textarea>
-              <span class="help-block">
+          <div class="control-group">
+            <label class="control-label" for="seguimiento[descripcion]">Descripción del seguimiento</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id="seguimientoContenido" name="seguimiento[contenido]" rows="5"></textarea>
+              <p class="help-block">
                 Sea claro en la formulación de su pregunta.
-              </span>
+              </p>
             </div>
           </div>
-          <div class="clearfix">
-            <label for="seguimiento[localidad]">Seleccione la localidad</label>
-            <div class="input">
-              <select class="xlarge" name="seguimiento[localidad]" id="seguimientoLocalidad">
+          <div class="control-group">
+            <label class="control-input" for="seguimiento[localidad]">Seleccione la localidad</label>
+            <div class="controls">
+              <select class="input-xlarge" name="seguimiento[localidad]" id="seguimientoLocalidad">
                 <option>Antonio Nariño</option>
                 <option>Barrios Unidos</option>
                 <option>Bosa</option>
@@ -46,22 +45,21 @@
                 <option>Usaquén</option>
                 <option>Usme</option>
               </select>
-              <span class="help-block">
-              </span>
+              <p class="help-block">
+              </p>
             </div>
           </div>
-          <div class="actions">
-            <input type="submit" class="btn primary" value="Guardar">
-            <a type="reset" class="btn" href="/">Cancelar</a>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="reset" class="btn" href="/">Cancelar</button>
           </div>
         </fieldset>
       </form>
     </div>
-  </div>
   
-  <div class="span6">
-    <h1>Ayuda</h1>
-    <p>Test</p>
+    <div class="span4">
+      <h1>Ayuda</h1>
+      <p>Test</p>
+    </div>
   </div>
 </div>
-

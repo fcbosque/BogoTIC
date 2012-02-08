@@ -1,85 +1,156 @@
-<div class="span9">
+<div class="span10">
   <div class="row-fluid">
     <div class="span12">
       <ul class="breadcrumb">
         <li class="active">
-          <a href="/foro/{{foro.id}}">{{foro.nombre}}</a>
+          <a href="/foros/{{foro.id}}">{{foro.nombre}}</a>
           <span class="divider">/</span>
         </li>
         <li>
-          <a href="/foro/{{foro.id}}/preguntas">Preguntas</a> | <a href="/foro/{{foro.id}}/seguimientos">Seguimientos</a>
+          <a href="/foros/{{foro.id}}/seguimientos">Seguimientos</a>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="row-fluid">
-    <div class="span8">
-      <h1>Foro {{foro.nombre}} <small>{{foro.id}}</small></h1>
-    </div>
-
-    <div class="span4">
-      <h2>Descripción</h2>
-      <p>{{foro.descripcion}}</p>
-      <ul class="thumbnails">
-        <li><a href="#"><img class="thumbnail" src="http://placehold.it/90x90" alt=""></a></li>
-      </ul>
-      <a class="btn btn-primary btn-large" style="margin-bottom: 5px;" href="/foro/{{foro.id}}/preguntas/new">Formular nueva pregunta</a>
-      <a class="btn btn-primary btn-large" href="/foro/{{foro.id}}/seguimientos/new">Crear grupo de seguimiento</a>
-    </div>
-  </div>
-
-  <hr>
+  <!-- /breadcumbs -->
 
   <div class="row-fluid">
-    <div class="span12">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Titulo</th>
-            <th>Descripción</th>
-            <th>Preguntas</th>
-            <th>Fecha de creación</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#seguimientos}}
-          <tr>
-            <td>{{titulo}}</td>
-            <td>{{descripcion}}</td>
-            <td>{{preguntas.length}}</td>
-            <td>{{fecha}}</div>
-          </tr>
-          {{/seguimientos}}
-        </tbody>
-      </table>
+    <div class="span6">
+      <div class="row-fluid">
+        <div class="span12">
+          <h1>Foro {{foro.nombre}} <small>{{foro.id}}</small></h1>
+          <h2>Descripción</h2>
+          <p>{{foro.descripcion}}</p>
+          <ul class="thumbnails">
+            <li><a href="#"><img class="thumbnail" src="http://placehold.it/90x90" alt=""></a></li>
+          </ul>
+        </div>
+        <div class="span12">
+          <h2>Formulación pregunta</h2>
+          <form class="form-horizontal" action="/foro/{{foroId}}/pregunta" method="POST">
+            <fieldset>
+              <legend>Nueva pregunta</legend>
+              <div class="control-group">
+                <label class="control-label" for="pregunta[titulo]">Titulo</label>
+                <div class="controls">
+                  <input class="input-xlarge" id="preguntaTitulo" name="pregunta[titulo]" size="30" type="text">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="pregunta[contenido]">¿Cual es su pregunta?</label>
+                <div class="controls">
+                  <textarea class="input-xlarge" id="preguntaContenido" name="pregunta[contenido]" rows="5"></textarea>
+                  <p class="help-block">Sea claro en la formulación de su pregunta.</p>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="pregunta[localidad]">Seleccione la localidad</label>
+                <div class="controls">
+                  <select class="input-xlarge" name="pregunta[localidad]" id="preguntaLocalidad">
+                    <option>Antonio Nariño</option>
+                    <option>Barrios Unidos</option>
+                    <option>Bosa</option>
+                    <option>Chapinero</option>
+                    <option>Ciudad Bolívar</option>
+                    <option>Engativá</option>
+                    <option>Fontibón</option>
+                    <option>Kennedy</option>
+                    <option>La Candelaria</option>
+                    <option>Los Mártires</option>
+                    <option>Puente Aranda</option>
+                    <option>Rafael Uribe Uribe</option>
+                    <option>San Cristóbal</option>
+                    <option>Santa Fe</option>
+                    <option>Suba</option>
+                    <option>Sumapaz</option>
+                    <option>Teusaquillo</option>
+                    <option>Tunjuelito</option>
+                    <option>Usaquén</option>
+                    <option>Usme</option>
+                  </select>
+                  <span class="help-block">
+                  </span>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="reset" class="btn">Cancelar</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="row-fluid">
-    <div class="span12">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Pregunta</th>
-            <th>Fecha</th>
-            <th>Favoritos</th>
-            <th>Votos</th>
-            <th>Localidad</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#foro.preguntas}}
-          <tr>
-            <td><a href="/foro/{{foro.id}}/pregunta/{{_id}}">{{titulo}}</a></td>
-            <td>{{fecha}}</td>
-            <td>{{favs}}</td>
-            <td>{{votos}}</td>
-            <td><span class="label">{{localidad}}</span></td>
-          </tr>
-          {{/foro.preguntas}}
-        </tbody>
-      </table>
+    <div class="span6">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="span7">
+            <h2>Participantes</h2>
+            <ul class="thumbnails">
+              <li class="span4">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li class="span4">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li class="span4">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li class="span4">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li class="span4">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li class="span4">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+            </ul>
+          </div>
+          <div class="span3">
+            <h3>Sponsors</h3>
+            <ul class="thumbnails">
+              <li class="span6">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li class="span6">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li class="span6">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li class="span6">
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="span12">
+          <h2>Preguntas más votadas</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Pregunta</th>
+                <th>Favoritos</th>
+                <th>Votos</th>
+                <th>Localidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#foro.preguntas}}
+              <tr>
+                <td><a href="/foros/{{foro.id}}/preguntas/{{_id}}">{{titulo}}</a></td>
+                <td>{{favs}}</td>
+                <td>{{votos}}</td>
+                <td><span class="label">{{localidad}}</span></td>
+              </tr>
+              {{/foro.preguntas}}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

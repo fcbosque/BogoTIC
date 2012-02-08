@@ -1,17 +1,17 @@
 <div class="span9">
   <div class="row-fluid">
     <div class="span8">
-      <form class="form-horizontal" action="/foro/{{foroId}}/pregunta" method="POST">
+      <form class="form-horizontal" action="/foros/{{foroId}}/preguntas" method="POST">
         <fieldset>
           <legend>Creación de nueva pregunta</legend>
           <div class="control-group">
-            <label class="control-label" for="pregunta[titulo]">Titulo</label>
+            <label class="control-label" for="pregunta[titulo]">Título</label>
             <div class="controls">
               <input class="input-xlarge" id="preguntaTitulo" name="pregunta[titulo]" size="30" type="text">
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="pregunta[contenido]">¿Cual es su pregunta?</label>
+            <label class="control-label" for="pregunta[contenido]">¿Cuál es su pregunta?</label>
             <div class="controls">
               <textarea class="input-xlarge" id="preguntaContenido" name="pregunta[contenido]" rows="5"></textarea>
               <p class="help-block">

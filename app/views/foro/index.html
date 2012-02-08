@@ -1,12 +1,13 @@
-<div class="span9">
+<div class="span10">
   <div class="row-fluid">
     <div class="span9">
       <h1>Listado de foros</h1>
-      <p>Actualmente tenemos <strong>{{total}}</strong> foro(s) abierto(s):</p>
+      <p>Actualmente tenemos <strong>{{total_foros}}</strong> foro(s) abierto(s) y <strong>{{total_seguimientos}}</strong> seguimiento(s):</p>
+      {{{seguimientos}}}
     </div>
     <div class="span3">
       <div class="well">
-        <a class="btn btn-primary btn-large" href="/foros/new">Crear nuevo foro</a>
+        <a class="btn btn-primary btn-large" href="/foros/nuevo">Crear nuevo foro</a>
       </div>
     </div>
   </div>
@@ -27,7 +28,7 @@
           {{#foros}}
           <tr>
             <td><span class="label">{{categoria}}</span></td>
-            <td><a href="/foro/{{id}}">{{nombre}}</a></td>
+            <td><a href="/foros/{{id}}">{{nombre}}</a></td>
             <td>{{descripcion}}</td>
             <td>{{preguntas.length}}</td>
             <td>{{fecha}}</td>
