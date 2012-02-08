@@ -5,11 +5,12 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     creador     : { type: ObjectId, required: false },
     descripcion : { type: String, required: false },
     categoria   : { type: String, required: false },
+    preguntas   : { type: Array, required: false, default: [] },
     preguntas   : [Pregunta],
     fecha       : { type: Date, default: Date.now, required: true }
   }));
-
-  var Pregunta = this.mongoose.model('Pregunta', new this.Schema({
+  
+  var Pregunta = new this.Schema({
     autor        : { type: String, required: true },
     localidad    : { type: String, required: true },
     titulo       : { type: String, required: true },
@@ -18,7 +19,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     autor        : { type: String, required: true },
     votos        : { type: Number, default: 0 },
     favs         : { type: Number, default: 0 }
-  }));
+  });
 
   this.Pregunta = Pregunta;
 })
@@ -58,11 +59,11 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         if(err) throw new Error(err);
         var _pregunta = new self.Pregunta(pregunta);
         _pregunta.save(function() {
-          foro.preguntas.push(_pregunta);
+          foro.preguntas.push(pregunta);
           foro.save(function() {
             callback(foro)
           })
-        });
+        })
       })
     },
     getPregunta: function(foro, pregunta, callback) {

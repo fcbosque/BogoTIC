@@ -31,6 +31,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     votos        : { type: Number, default: 0 },
     favs         : { type: Number, default: 0 }
   });
+
+  this.Pregunta = Pregunta;
+  this.Consulta = Consulta;
 })
   .methods({
     create: function(foro, resource, callback) {
@@ -45,8 +48,19 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         if(callback) callback(foro, item);
       });
     },
-    remove: function(id, callback) {},
-    modify: function(id, params, callback) {},
+    remove: function(id, callback) {
+      var _resource = this.DBModel.findById(id);
+      _resource.remove(function(err, callback) {
+        if(err) throw new Error(err);
+        if(callback) callback;
+      })
+    },
+    modify: function(id, params, callback) {
+      var self = this;
+      this.DBModel.findById(id, function(resource, callback) {
+        resource.update(self.params.id, self.params, callback)
+      });
+    },
     all: function(foro, callback) {
       var ObjectId = this.ObjectId;
       this.DBModel.find({ foro: foro }, function(err, items) {
@@ -60,8 +74,36 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         if(callback) callback(_foro, items);
       });
     },
-    addPregunta: function(pregunta, callback) {},
-    getPregunta: function(pregunta, callback) {},
+    addPregunta: function(seguimiento, callback) {
+      var self = this;
+      this.DBModel.findById(seguimiento, function(err, seguimiento) {
+        if(err) throw new Error(err);
+        var _pregunta = new self.Pregunta(pregunta);
+        _pregunta.save(function() {
+          seguimiento.preguntas.push(_pregunta);
+          seguimiento.save(function() {
+            callback(seguimiento);
+          })
+        })
+      })
+    },
+    getPregunta: function(seguimiento, pregunta, callback) {
+      var self = this;
+      this.DBModel.findById(seguimiento, function(err, seguimiento) {
+        if(err) throw new Error(err);
+        for(var _pregunta in seguimiento.preguntas) {
+          if(seguimiento.preguntas[_pregunta],_id == pregunta) {
+            callback({
+              pregunta: seguimiento.preguntas[_pregunta],
+              seguimiento: {
+                id: seguimiento._id,
+                nombre: seguimiento.nombre
+              }
+            })
+          }
+        }
+      })
+    },
     addSeguidor: function(seguidor, callback) {},
     delSeguidor: function(seguidor, callback) {}
   })
