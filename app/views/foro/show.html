@@ -28,7 +28,7 @@
         </div>
         <div class="span12">
           <h2>Formulación pregunta</h2>
-          <form class="form-horizontal" action="/foro/{{foroId}}/pregunta" method="POST">
+          <form class="form-horizontal" action="/foros/{{foro.id}}/preguntas" method="POST">
             <fieldset>
               <legend>Nueva pregunta</legend>
               <div class="control-group">
@@ -149,6 +149,7 @@
               {{/foro.preguntas}}
             </tbody>
           </table>
+          <p style="text-align: right;"><small>Ver <a href="/foros/{{foro.id}}/preguntas">más</a></small></p>
         </div>
       </div>
     </div>

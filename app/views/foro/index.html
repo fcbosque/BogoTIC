@@ -2,7 +2,7 @@
   <div class="row-fluid">
     <div class="span9">
       <h1>Listado de foros</h1>
-      <p>Actualmente tenemos <strong>{{total_foros}}</strong> foro(s) abierto(s) y <strong>{{total_seguimientos}}</strong> seguimiento(s):</p>
+      <p>Actualmente tenemos <strong>{{total_foros}}</strong> foro(s) abierto(s):</p>
       {{{seguimientos}}}
     </div>
     <div class="span3">
@@ -14,26 +14,18 @@
 
   <div class="row-fluid">
     <div class="span12">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Categoría</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Preguntas</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#foros}}
-          <tr>
-            <td><span class="label">{{categoria}}</span></td>
-            <td><a href="/foros/{{id}}">{{nombre}}</a></td>
-            <td>{{descripcion}}</td>
-            <td>{{preguntas.length}}</td>
-          </tr>
-          {{/foros}}
-        </tbody>
-      </table>
+      <ul class="thumbnails">
+        {{#foros}}
+        <li class="span5">
+          <div class="thumbnail">
+            <a class="thumbnail" href="/foros/{{id}}"><img src="http://placehold.it/260x180" alt=""></a>
+            <h5>{{nombre}} <small>{{fecha}}</small></h5>
+            <span class="label">{{categoria}}</span>
+            <p>{{descripcion}}</p>
+          </div>
+        </li>
+        {{/foros}}
+      </ul>
     </div>
   </div>
 
