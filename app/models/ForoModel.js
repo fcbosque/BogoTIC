@@ -50,11 +50,6 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     votos        : { type: Number, default: 0 },
     favs         : { type: Number, default: 0 }
   });
-
-  this.Pregunta     = Pregunta;
-  this.Participante = Participante;
-  this.Sponsor      = Sponsor;
-  this.Alianza      = Alianza;
 })
   .methods({
     create: function(resource, callback) {
@@ -90,12 +85,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
       var self = this;
       this.DBModel.findById(foro, function(err, foro) {
         if(err) throw new Error(err);
-        var _pregunta = new self.Pregunta(pregunta);
-        _pregunta.save(function() {
-          foro.preguntas.push(pregunta);
-          foro.save(function() {
-            callback(foro)
-          })
+        foro.preguntas.push(pregunta);
+        foro.save(function() {
+          callback(foro)
         })
       })
     },

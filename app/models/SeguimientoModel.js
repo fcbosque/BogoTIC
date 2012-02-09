@@ -1,22 +1,20 @@
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
-  var categorias = this.categorias;
   var localidades = this.localidades;
+  var estadosConsultas = ['En votación', 'Satisfactoria', 'No satisfactoria', 'En respuesta']
 
   var ObjectId = this.ObjectId
   this.DBModel = this.mongoose.model('Seguimiento', new this.Schema({
-    titulo      : { type: String, required: false, match: /[a-z]/ },
-    foro        : { type: ObjectId, required: false },
+    titulo      : { type: String, required: true, match: /[a-z]/ },
+    foro        : { type: ObjectId, required: true },
     creador     : { type: ObjectId, required: false },
     descripcion : { type: String, required: false },
-    categoria   : { type: String, required: false, enum: categorias},
     fecha       : { type: Date, default: Date.now, required: true },
     seguidores  : { type: Array, default: [], required: false },
     localidad   : { type: String, required: true, enum: localidades },
     consultas   : [Consulta],
     preguntas   : [Pregunta],
     informes    : [Informe],
-    abierto     : { type: Boolean, required: true, default: true },
-    seguidores  : { type: Array, required: true, default: [] }
+    abierto     : { type: Boolean, required: true, default: true }
   }));
 
   var Informe = new this.Schema({
@@ -28,6 +26,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
 
   var Consulta = new this.Schema({
     votos         : { type: Number, required: true, default: 0 },
+    estado        : { type: String, required: true, default: 'En votación', enum: estadosConsulta },
     motivo        : { type: String, required: true },
     fecha         : { type: Date, required: true, default: Date.now },
     interlocutor  : { type: String, required: true },
@@ -44,19 +43,14 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
   });
 
   var Pregunta = new this.Schema({
-    autor        : { type: String, required: true },
+    autor        : { type: String, required: false },
     localidad    : { type: String, required: true, enum: localidades },
     titulo       : { type: String, required: true },
     contenido    : { type: String, required: true },
     fecha        : { type: Date, required: true, default: Date.now },
-    votos        : { type: Number, default: 0 },
-    favs         : { type: Number, default: 0 }
+    votos        : { type: Number, required: false, default: 0 },
+    favs         : { type: Number, required: false, default: 0 }
   });
-
-  this.Pregunta  = Pregunta;
-  this.Consulta  = Consulta;
-  this.Respuesta = Respuesta;
-  this.Informe   = Informe;
 })
   .methods({
     create: function(foro, resource, callback) {
@@ -97,16 +91,25 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         if(callback) callback(_foro, items);
       });
     },
-    addPregunta: function(seguimiento, callback) {
+    addConsulta: function(seguimiento, consulta, callback) {
       var self = this;
       this.DBModel.findById(seguimiento, function(err, seguimiento) {
         if(err) throw new Error(err);
-        var _pregunta = new self.Pregunta(pregunta);
-        _pregunta.save(function() {
-          seguimiento.preguntas.push(_pregunta);
-          seguimiento.save(function() {
-            callback(seguimiento);
-          })
+        seguimiento.consultas.push(consulta);
+        seguimiento.save(function(err) {
+          if(err) throw new Error(err);
+          if(callback) callback(seguimiento);
+        });
+      });
+    },
+    addPregunta: function(seguimiento, pregunta, callback) {
+      var self = this;
+      this.DBModel.findById(seguimiento, function(err, seguimiento) {
+        if(err) throw new Error(err);
+        seguimiento.preguntas.push(pregunta);
+        seguimiento.save(function(err) {
+          if(err) throw new Error(err);
+          if(callback) callback(seguimiento);
         })
       })
     },

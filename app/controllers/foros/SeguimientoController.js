@@ -33,7 +33,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var foro = this.request.params.foro;
       var seguimiento = this.request.body.seguimiento;
-      this.getModel('Seguimiento').create(foro, seguimiento, function(seguimiento) {
+      this.getModel('Seguimiento').create(foro, seguimiento, function() {
         self.response.redirect("/foros/" + foro + "/seguimientos");
       });
     },
@@ -66,20 +66,25 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
         self.send(200);
       });
     },
-    newPregunta: function() {
-      var self = this;
-      var seguimiento = this.request.params.seguimiento;
-      var foro = this.request.params.foro;
-      console.log(seguimiento);
-      console.log(foro);
-      this.getModel('Seguimiento').show(foro, seguimiento, function(seguimiento) {
-        self.render('addPregunta', {
-          foros: self.response.foros,
-          seguimientoId: seguimiento._id
-        })
-      })
-    },
     addPregunta: function() {
+      var self = this;
+      var foro = this.request.params.foro;
+      var seguimiento = this.request.params.seguimiento;
+      var pregunta = this.request.body.pregunta;
+      this.getModel('Seguimiento').addPregunta(seguimiento, pregunta, function() {
+        self.response.redirect('/foros/' + foro + '/seguimientos/' + seguimiento);
+      });
+    },
+    addConsulta: function() {
+      var self = this;
+      var foro = this.request.params.foro;
+      var seguimiento = this.request.params.seguimiento;
+      var consulta = this.request.body.consulta;
+      this.getModel('Seguimiento').addConsulta(seguimiento, consulta, function() {
+        self.response.redirect('/foros/' + foro + '/seguimientos/' + seguimiento);
+      });
+    },
+    getConsulta: function() {
 
     },
     getPregunta: function() {
