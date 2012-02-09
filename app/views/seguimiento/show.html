@@ -103,8 +103,41 @@
       <h3>Nueva consulta</h3>
       </div>
       <div class="modal-body">
+        <form class="form-horizontal" action="/foros/{{foro.id}}/seguimientos/{{seguimiento.id}}/consultas" method="POST">
+          <fieldset>
+            <div class="control-group">
+              <label class="control-label" for="consulta[motivo]">Motivo</label>
+              <div class="controls">
+                <input class="input-xlarge" id="consultaMotivo" name="consulta[motivo]" size="30" type="text">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="consulta[interlocutor]">Interlocutor</label>
+              <div class="controls">
+                <input class="input-xlarge" id="consultaInterlocutor" name="consulta[interlocutor]" size="30" type="text">
+                <p class="help-block">
+                  El correo electrónico de la persona quien responderá la consulta.
+                </p>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="consulta[descripcion]">¿Cuál es la consulta?</label>
+              <div class="controls">
+                <textarea class="input-xlarge" id="consultaDescripcion" name="consulta[descripcion]" rows="5"></textarea>
+                <p class="help-block">
+                  Sea claro en la formulación de su consulta.
+                </p>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Guardar</button>
+              <button type="reset" data-dismiss="modal" class="btn"><i class="icon-remove"></i> Cancelar</button>
+            </div>
+          </fieldset>
+        </form>
       </div>
       <div class="modal-footer">
+        <p><small>Acepto los <a href="/tos" target=_blank>términos y condiciones</a> de uso.</small></p>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
   var localidades = this.localidades;
-  var estadosConsultas = ['En votación', 'Satisfactoria', 'No satisfactoria', 'En respuesta']
+  var estadosConsulta = ['En votación', 'Satisfactoria', 'No satisfactoria', 'En respuesta']
 
   var ObjectId = this.ObjectId
   this.DBModel = this.mongoose.model('Seguimiento', new this.Schema({
