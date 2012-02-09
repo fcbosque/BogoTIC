@@ -4,22 +4,11 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
   .methods({
     index: function() {
       var self = this;
-      var seguimientos = [];
       var foros = this.response.foros;
       
-      foros.forEach(function(foro) {
-        self.getModel('Seguimiento').all(foro._id, function(_foro, seguimientos) {
-          seguimientos.forEach(function(seguimiento) {
-            seguimientos.push(seguimiento);
-          });
-        });
-      });
-        
       this.render('index', {
         foros: foros,
         total_foros: foros.length,
-        total_seguimientos: seguimientos.length,
-        seguimientos: seguimientos
       });
     },
     new: function() {
