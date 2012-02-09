@@ -1,8 +1,9 @@
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
+  var localidades = this.localidades;
   var ObjectId = this.ObjectId
   this.DBModel = this.mongoose.model('Pregunta', new this.Schema({
     autor        : { type: String, required: true },
-    localidad    : { type: String, required: true },
+    localidad    : { type: String, required: true, enum: localidades },
     titulo       : { type: String, required: true },
     contenido    : { type: String, required: true },
     fecha        : { type: Date, required: true, default: Date.now },

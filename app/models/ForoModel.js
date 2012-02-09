@@ -1,18 +1,48 @@
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
+  var categorias = this.categorias;
+  var localidades = this.localidades;
   var ObjectId = this.ObjectId
   this.DBModel = this.mongoose.model('Foro', new this.Schema({
-    nombre      : { type: String, required: false, match: /[a-z]/ },
-    creador     : { type: ObjectId, required: false },
-    descripcion : { type: String, required: false },
-    categoria   : { type: String, required: false },
-    preguntas   : { type: Array, required: false, default: [] },
-    preguntas   : [Pregunta],
-    fecha       : { type: Date, default: Date.now, required: true }
+    nombre        : { type: String, required: false, match: /[a-z]/ },
+    descripcion   : { type: String, required: false },
+    categoria     : { type: String, required: false, enum: categorias },
+    participantes : [Participante],
+    sponsors      : [Sponsor],
+    preguntas     : [Pregunta],
+    alianzas      : [Alianza],
+    fecha         : { type: Date, required: true },
+    abierto       : { type: Boolean, required: true, default: true },
+    imagen        : { type: String, required: true },
+    lugar         : { type: String, required: true },
+    url           : { type: String, required: false },
+    relatoria     : { type: String, required: false },
+    video         : { type: String, required: false },
+    asistentes    : { type: Array, required: false, default: [] },
+    informes      : { type: Array, required: false, default: [] }
   }));
   
+  var Participante = new this.Schema({
+    nombre       : { type: String, required: true },
+    imagen       : { type: String, required: true },
+    descripcion  : { type: String, required: true },
+    entidad      : { type: String, required: true }
+  });
+
+  var Sponsor = new this.Schema({
+    nombre       : { type: String, required: true },
+    imagen       : { type: String, required: true }
+  });
+
+  var Alianza = new this.Schema({
+    nombre      : { type: String, required: true },
+    url         : { type: String, required: true },
+    descripcion : { type: String, required: true },
+    twitter     : { type: String, required: true }
+  });
+
   var Pregunta = new this.Schema({
     autor        : { type: String, required: true },
-    localidad    : { type: String, required: true },
+    localidad    : { type: String, required: true, enum: localidades },
     titulo       : { type: String, required: true },
     contenido    : { type: String, required: true },
     fecha        : { type: Date, required: true, default: Date.now },
@@ -21,7 +51,10 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     favs         : { type: Number, default: 0 }
   });
 
-  this.Pregunta = Pregunta;
+  this.Pregunta     = Pregunta;
+  this.Participante = Participante;
+  this.Sponsor      = Sponsor;
+  this.Alianza      = Alianza;
 })
   .methods({
     create: function(resource, callback) {

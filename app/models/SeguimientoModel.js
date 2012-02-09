@@ -1,39 +1,62 @@
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
+  var categorias = this.categorias;
+  var localidades = this.localidades;
+
   var ObjectId = this.ObjectId
   this.DBModel = this.mongoose.model('Seguimiento', new this.Schema({
     titulo      : { type: String, required: false, match: /[a-z]/ },
     foro        : { type: ObjectId, required: false },
     creador     : { type: ObjectId, required: false },
     descripcion : { type: String, required: false },
-    categoria   : { type: String, required: false },
+    categoria   : { type: String, required: false, enum: categorias},
     fecha       : { type: Date, default: Date.now, required: true },
     seguidores  : { type: Array, default: [], required: false },
-    localidad   : { type: String, required: true },
+    localidad   : { type: String, required: true, enum: localidades },
     consultas   : [Consulta],
-    preguntas   : [Pregunta]
+    preguntas   : [Pregunta],
+    informes    : [Informe],
+    abierto     : { type: Boolean, required: true, default: true },
+    seguidores  : { type: Array, required: true, default: [] }
   }));
 
+  var Informe = new this.Schema({
+    titulo      : { type: String, required: true },
+    responsable : { type: String, required: true },
+    referencia  : { type: String, required: true },
+    contenido   : { type: String, required: true }
+  });
+
   var Consulta = new this.Schema({
+    votos         : { type: Number, required: true, default: 0 },
     motivo        : { type: String, required: true },
     fecha         : { type: Date, required: true, default: Date.now },
     interlocutor  : { type: String, required: true },
     respuesta     : { type: String, requided: false },
-    descripcion   : { type: String, required: true }
+    descripcion   : { type: String, required: true },
+    satisfactoria : { type: Boolean, required: false }
+  });
+
+  var Respuesta = new this.Schema({
+    autor     : { type: String, required: true },
+    contenido : { type: String, required: true },
+    votos     : { type: Number, default: 0 },
+    fecha     : { type: Date, required: true, default: Date.now }
   });
 
   var Pregunta = new this.Schema({
     autor        : { type: String, required: true },
-    localidad    : { type: String, required: true },
+    localidad    : { type: String, required: true, enum: localidades },
     titulo       : { type: String, required: true },
     contenido    : { type: String, required: true },
     fecha        : { type: Date, required: true, default: Date.now },
-    autor        : { type: String, required: true },
     votos        : { type: Number, default: 0 },
     favs         : { type: Number, default: 0 }
   });
 
-  this.Pregunta = Pregunta;
-  this.Consulta = Consulta;
+  this.Pregunta  = Pregunta;
+  this.Consulta  = Consulta;
+  this.Respuesta = Respuesta;
+  this.Informe   = Informe;
 })
   .methods({
     create: function(foro, resource, callback) {
