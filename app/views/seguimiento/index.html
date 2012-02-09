@@ -3,11 +3,11 @@
     <div class="span12">
       <ul class="breadcrumb">
         <li>
-          <a href="/foros/{{foro.id}}">{{foro.nombre}}</a>
+          <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
           <span class="divider">/</span>
         </li>
         <li class="active">
-          <a href="/foros/{{foro.id}}/seguimientos">Seguimientos</a>
+          <a href="/foros/{{foro.id}}/seguimientos"><i class="icon-eye-open"></i> Seguimientos</a>
         </li>
       </ul>
     </div>
@@ -65,7 +65,72 @@
           </div>
         </div>
         <div class="span12">
-          <button class="btn btn-primary btn-large">Crear nuevo grupo</button>
+          <a class="btn btn-primary btn-large" data-toggle="modal" data-target="#crearGrupo" href="#crearGrupo"><i class="icon-pencil icon-white"></i> Crear nuevo grupo</a>
+        </div>
+
+        <div id="crearGrupo" class="modal hide fade">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>Creación de grupo de seguimiento</h3>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="/foros/{{foro.id}}/seguimientos" method="POST">
+            <input type="hidden" name="seguimiento[foro]" value="{{foro.id}}">
+              <fieldset>
+                <div class="control-group">
+                  <label class="control-label" for="seguimiento[titulo]">Titulo</label>
+                  <div class="controls">
+                    <input class="input-xlarge" id="seguimientoTitulo" name="seguimiento[titulo]" size="30" type="text">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="seguimiento[descripcion]">Descripción del seguimiento</label>
+                  <div class="controls">
+                    <textarea class="input-xlarge" id="seguimientoContenido" name="seguimiento[contenido]" rows="5"></textarea>
+                    <p class="help-block">
+                      Sea claro en la formulación de su pregunta.
+                    </p>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-input" for="seguimiento[localidad]">Seleccione la localidad</label>
+                  <div class="controls">
+                    <select class="input-xlarge" name="seguimiento[localidad]" id="seguimientoLocalidad">
+                      <option>Antonio Nariño</option>
+                      <option>Barrios Unidos</option>
+                      <option>Bosa</option>
+                      <option>Chapinero</option>
+                      <option>Ciudad Bolívar</option>
+                      <option>Engativá</option>
+                      <option>Fontibón</option>
+                      <option>Kennedy</option>
+                      <option>La Candelaria</option>
+                      <option>Los Mártires</option>
+                      <option>Puente Aranda</option>
+                      <option>Rafael Uribe Uribe</option>
+                      <option>San Cristóbal</option>
+                      <option>Santa Fe</option>
+                      <option>Suba</option>
+                      <option>Sumapaz</option>
+                      <option>Teusaquillo</option>
+                      <option>Tunjuelito</option>
+                      <option>Usaquén</option>
+                      <option>Usme</option>
+                    </select>
+                    <p class="help-block">
+                    </p>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Guardar</button>
+                  <button type="reset" data-dismiss="modal" class="btn" href="/"><i class="icon-remove"></i> Cancelar</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <p><small>Acepto los <a href="/tos" target=_blank>términos y condiciones</a> de uso.</small></p>
+          </div>
         </div>
       </div>
     </div>

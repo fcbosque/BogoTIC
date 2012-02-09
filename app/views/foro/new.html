@@ -1,4 +1,4 @@
-<div class="span9">
+<div class="span10">
   <div class="row-fluid">
     <div class="span8">
       <form class="form-horizontal" action="/foros" method="POST">
@@ -19,6 +19,33 @@
                 <textarea class="input-xlarge" id="foroDescripcion" name="foro[descripcion]" rows="3"></textarea>
                 <p class="help-block">
                   Una descripcion acertada del foro ayudará a aumentar la participación de la gente.
+                </p>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="foro[lugar]">Lugar</label>
+              <div class="controls">
+                <textarea class="input-xlarge" id=foroLugar" name="foro[lugar]" rows="2"></textarea>
+                <p class="help-block">
+                  Locación del foro.
+                </p>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="foro[fecha]">Fecha</label>
+              <div class="controls">
+                <input class="input-xlarge" id="foroFecha" name="foro[fecha]" size="30" type="text">
+                <p class="help-block">
+                  Una vez se pase esta fecha el foro quedará clausurado y no se podrán realizar nuevas preguntas.
+                </p>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="foro[url]">URL</label>
+              <div class="controls">
+                <input class="input-xlarge" id="foroUrl" name="foro[url]" size="30" type="text">
+                <p class="help-block">
+                  Esta es la URL del anuncio oficial en el portal de BogoTIC.
                 </p>
               </div>
             </div>

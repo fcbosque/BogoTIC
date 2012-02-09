@@ -7,7 +7,7 @@
     </div>
     <div class="span3">
       <div class="well">
-        <a class="btn btn-primary btn-large" href="/foros/nuevo">Crear nuevo foro</a>
+        <a class="btn btn-primary btn-large" href="/foros/nuevo"><i class="icon-flag icon-white"></i> Crear nuevo foro</a>
       </div>
     </div>
   </div>
@@ -21,7 +21,6 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Preguntas</th>
-            <th>Fecha de creación</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +30,6 @@
             <td><a href="/foros/{{id}}">{{nombre}}</a></td>
             <td>{{descripcion}}</td>
             <td>{{preguntas.length}}</td>
-            <td>{{fecha}}</td>
           </tr>
           {{/foros}}
         </tbody>
