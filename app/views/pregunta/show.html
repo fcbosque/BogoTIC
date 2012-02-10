@@ -1,42 +1,42 @@
-<div class="span9">
-<div class="row-fluid">
-  <div class="span12">
-    <ul class="breadcrumb">
-      <li>
-        <a href="/foros/{{foro.id}}">{{foro.nombre}}</a>
-        <span class="divider">/</span>
-      </li>
-      <li>
-        <a href="/foros/{{foro.id}}/preguntas">Preguntas</a>
-        <span class="divider">/</span>
-      </li>
-      <li class="active">
-        <a href="/foros/{{foro.id}}/preguntas/{{pregunta._id}}">{{pregunta.titulo}}</a>
-      <li>
-    </ul>
-  </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span12">
-    <div class="row">
-
-      <div class="span7">
-        <div class="well">
-          <h1>{{pregunta.titulo}}</h1>
-          <blockquote><p>{{pregunta.contenido}}</p><small>{{pregunta.autor}}</small></blockquote>
-        </div>
+<div class="span10">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="subnav subnav-fluid">
+        <ul class="nav nav-pills">
+          <li>
+            <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
+          </li>
+          <li>
+            <a href="/foros/{{foro.id}}/preguntas"><i class="icon-question-sign"></i> Preguntas</a>
+          </li>
+          <li class="active">
+            <a href="/foros/{{foro.id}}/preguntas/{{pregunta._id}}"><i class="icon-comment"></i> {{pregunta.titulo}}</a>
+          <li>
+        </ul>
       </div>
-
-      <div class="span4">
-        <div class="well">
-          <h2>Estadisticas</h2>
-          <p>Favs: {{pregunta.favs}}</p>
-          <p>Votos: {{pregunta.votos}}</p>
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="row">
+
+        <div class="span7">
+          <div class="well">
+            <h1>{{pregunta.titulo}}</h1>
+            <blockquote><p>{{pregunta.contenido}}</p><small>{{pregunta.autor}}</small></blockquote>
+          </div>
+        </div>
+
+        <div class="span4">
+          <div class="well">
+            <h2>Estadisticas</h2>
+            <p>Favs: {{pregunta.favs}}</p>
+            <p>Votos: {{pregunta.votos}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
