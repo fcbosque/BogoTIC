@@ -1,20 +1,21 @@
 <div class="span10">
   <div class="row-fluid">
     <div class="span12">
-      <ul class="breadcrumb">
-        <li class="active">
-          <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
-          <span class="divider">/</span>
-        </li>
-        <li>
-          <a href="/foros/{{foro.id}}/seguimientos"><i class="icon-eye-open"></i> Seguimientos</a>
-        </li>
-      </ul>
+      <div class="subnav subnav-fluid">
+        <ul class="nav nav-pills">
+          <li class="active">
+            <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
+          </li>
+          <li>
+            <a href="/foros/{{foro.id}}/seguimientos"><i class="icon-eye-open"></i> Seguimientos</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <!-- /breadcumbs -->
-
+  <br>
   <div class="row-fluid">
     <div class="span6">
       <div class="row-fluid">

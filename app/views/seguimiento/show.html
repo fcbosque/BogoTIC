@@ -1,22 +1,23 @@
 <div class="span10">
   <div class="row-fluid">
     <div class="span12">
-      <ul class="breadcrumb">
-        <li>
-          <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
-          <span class="divider">/</span>
-        </li>
-        <li>
-          <a href="/foros/{{foro.id}}/seguimientos"><i class="icon-eye-open"></i> Seguimientos</a>
-          <span class="divider">/</span>
-        </li>
-        <li class="active">
-          <a href="/foros/{{foro.id}}/seguimientos/{{seguimiento.id}}"><i class="icon-pencil"></i> {{seguimiento.titulo}}</a>
-        </li>
-      </ul>
+      <div class="subnav subnav-fluid">
+        <ul class="nav nav-pills">
+          <li>
+            <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
+          </li>
+          <li>
+            <a href="/foros/{{foro.id}}/seguimientos"><i class="icon-eye-open"></i> Seguimientos</a>
+          </li>
+          <li class="active">
+            <a href="/foros/{{foro.id}}/seguimientos/{{seguimiento.id}}"><i class="icon-pencil"></i> {{seguimiento.titulo}}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
+  <br>
   <div class="row-fluid">
     <div class="span8">
       <h1>Grupo {{seguimiento.titulo}} <small>{{foro.nombre}}</small></h1>
