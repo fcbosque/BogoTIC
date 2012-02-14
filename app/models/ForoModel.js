@@ -58,8 +58,15 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
 })
   .methods({
     create: function(resource, callback) {
+    console.log('Recibiendo', resource);
       var _resource = new this.DBModel(resource);
-      _resource.save(callback);
+    console.log('Otro', _resource);
+      _resource.save(function (err, doc) {
+        console.log('Errorcillo', err);
+        console.log('Documento');
+        callback(err, doc);
+      });
+      //_resource.save(callback);
     },
     show: function(id, callback) {
       this.DBModel.findById(id, function(err, item) {
