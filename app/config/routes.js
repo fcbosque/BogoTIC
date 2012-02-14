@@ -38,7 +38,7 @@ module.exports = {
     ['put',   '/:foro/seguimientos/:seguimiento/consultas/:id',   'Seguimiento', 'editConsulta']
   ],
   usuarios: [
-    ['get',   '/',          'Usuario', 'index'],
+    ['get',   '/dashboard', 'Usuario', 'index'],
     ['get',   '/nuevo',     'Usuario', 'new'],
     ['post',  '/',          'Usuario', 'create'],
     ['get',   '/:username', 'Usuario', 'show'],
