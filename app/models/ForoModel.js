@@ -10,7 +10,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     sponsors      : [Sponsor],
     preguntas     : [Pregunta],
     alianzas      : [Alianza],
-    fecha         : { type: Date, required: true },
+    fecha         : { type: Date, required: true, default: Date.now },
     abierto       : { type: Boolean, required: true, default: true },
     imagen        : { type: String, required: true, default: "bogotic.png" },
     lugar         : { type: String, required: true, default: "Por definir" },
