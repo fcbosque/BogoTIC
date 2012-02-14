@@ -23,7 +23,8 @@
   },
   "devDependencies": {
     "vows": "0.6.x",
-    "api-easy": "0.3.x"
+    "api-easy": "0.3.x",
+    "klass": "1.2.2"
   },
   "scripts": {
     "start": "node server",
