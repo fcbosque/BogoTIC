@@ -13,3 +13,4 @@ logs/workers.*.log
 pids/*.pid
 debug/*
 tmp/*
+.nide
