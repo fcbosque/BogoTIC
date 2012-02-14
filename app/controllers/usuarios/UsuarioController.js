@@ -6,37 +6,42 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       this.getModel('Usuario').all(function(usuarios) {
         self.render('index', {
-          usuarios: usuarios
+          usuarios: usuarios,
+          foros: this.response.foros
         })
       })
     },
     new: function() {
-      this.render('new', {});
+      this.render('new', { foros: this.response.foros });
     },
     create: function() {
       var self = this;
-      var usuario = this.request.body
+      var usuario = this.request.body.usuario;
       this.getModel('Usuario').create(usuario, v.bind(this, function(usuario) {
-        self.send(200, {})
+        self.response.redirect("/");
       }))
     },
-    show: function(id) {
+    show: function() {
       var self = this;
-      this.getModel('Usuario').show(id, function(usuario) {
+      var username = this.request.params.username;
+      this.getModel('Usuario').show(username, function(usuario) {
         self.render('show', {
-          usuario: usuario
+          usuario: usuario,
+          foros: this.response.foros
         })
       })
     },
-    remove: function(id) {
+    remove: function() {
       var self = this;
-      this.getModel('Usuario').remove(id, function(usuario) {
+      var username = this.request.params.username;
+      this.getModel('Usuario').remove(username, function(usuario) {
         self.send(200);
       })
     },
-    modify: function(id) {
-      var self = this
-      this.getModel('Usuario').modify(id, params, function(usuario) {
+    modify: function() {
+      var self = this;
+      var username = this.request.params.username;
+      this.getModel('Usuario').modify(username, params, function(usuario) {
         self.send(200);
       });
     }
