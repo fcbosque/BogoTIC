@@ -19,6 +19,8 @@ var testForo = {
   abierto: true
 };
 
+var testContext = {};
+
 vows.describe('app/models/ForoModel').addBatch({
   "Modelo del Foro": {
     "revisando la clase": {
@@ -74,6 +76,7 @@ vows.describe('app/models/ForoModel').addBatch({
       assert.equal(foro.fecha, testForo.fecha);
       assert.equal(foro.descripcion, testForo.descripcion);
       assert.ok(foro._id);
+      testContext.Foro = foro;
       }
     }
   }
@@ -88,7 +91,39 @@ vows.describe('app/models/ForoModel').addBatch({
         assert.isNull(err);
         assert.isArray(lista);
         assert.isObject(lista[0]);
+      },
+      "Foro con nombre y descripcion": function (err, lista) {
+        var foro = lista[0];
+        assert.isNull(err);
+        assert.isString(foro.nombre);
+        assert.isString(foro.descripcion);
+      }
+    },
+    "show() ": {
+      topic: function (Foro) {
+        Foro.show(testContext.Foro._id, this.callback);
+      },
+      "Muestra los datos de un foro en especifico": function (err, foro) {
+        assert.isNull(err);
+        assert.ok(foro);
+        assert.equal(foro.nombre, testContext.Foro.nombre);
+        assert.equal(foro.descripcion, testContext.Foro.descripcion);
+      }
+    },
+    /**
+    "modify() ": {
+      topic: function (Foro) {
+        Foro.modify(testContext.Foro._id, {
+          nombre:'Esto es un nuevo nombre',
+          descripcion: 'La nueva descripcion',
+          id: testContext.Foro._id
+        }, this.callback);
+      },
+      "Responde correctamente el callback": function (err, doc, otro) {
+        assert.isNull(err);
+        assert.ok(false);
       }
     }
+    **/
   }
 }).export(module);

@@ -67,7 +67,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     show: function(id, callback) {
       this.DBModel.findById(id, function(err, item) {
         if(err) throw new Error(err);
-        if(callback) callback(item);
+        if(callback) callback(err, item);
       });
     },
     remove: function(id, callback) {
