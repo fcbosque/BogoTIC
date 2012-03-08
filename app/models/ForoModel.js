@@ -58,9 +58,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
 })
   .methods({
     create: function(resource, callback) {
-    console.log('Recibiendo', resource);
       var _resource = new this.DBModel(resource);
-    console.log('Otro', _resource);
       _resource.save(function (err, doc) {
         callback(err, doc);
       });
@@ -88,7 +86,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     all: function(callback) {
       this.DBModel.find({}, function(err, items) {
         if(err) throw new Error(err);
-        if(callback) callback(items);
+        if(callback) callback(err, items);
       });
     },
     addPregunta: function(foro, pregunta, callback) {

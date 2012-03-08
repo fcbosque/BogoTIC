@@ -77,4 +77,18 @@ vows.describe('app/models/ForoModel').addBatch({
       }
     }
   }
+}).addBatch({
+  "Metodo del Foro": {
+    topic: new ForoModel(),
+    "all() ": {
+      topic: function (Foro) {
+        Foro.all(this.callback)
+      },
+      "Listado de foros": function (err, lista) {
+        assert.isNull(err);
+        assert.isArray(lista);
+        assert.isObject(lista[0]);
+      }
+    }
+  }
 }).export(module);

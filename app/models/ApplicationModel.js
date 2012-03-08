@@ -4,7 +4,6 @@ module.exports = require('./BaseModel').extend(function() {
   this.Schema = this.mongoose.Schema;
   this.ObjectId = this.Schema.ObjectId;
   this.mongoose.connect('mongodb://localhost/BogoTIC');
-  console.log('Conexion', this.mongoose.connections[0].readyState);
 
   this.categorias = ['Tecnología y deuda pública', 'Tecnología e investigación social',
                      'Tecnología y productividad', 'Tecnología y educación',
