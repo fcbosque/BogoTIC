@@ -28,6 +28,6 @@
   },
   "scripts": {
     "start": "node server",
-    "test": "vows test/*-test.js --spec -i"
+    "test": "vows -v tests/*-test.js --spec -i"
   }
 }

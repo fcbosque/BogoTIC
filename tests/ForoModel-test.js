@@ -23,7 +23,7 @@ vows.describe('app/models/ForoModel').addBatch({
   "Modelo del Foro": {
     "revisando la clase": {
       "y modelos anexos": {
-        topic: ForoModel,
+        topic: new ForoModel(),
         "debe tener los 4 modelos anexos": function (clase) {
           assert.isFunction(clase.Participante);
           assert.isFunction(clase.Sponsor);
@@ -69,9 +69,11 @@ vows.describe('app/models/ForoModel').addBatch({
         nuevo.create(testForo, this.callback);
       },
       "debe cargarse con los datos": function (err, foro) {
-      console.log('Error', err);
-      console.log('El Foro', foro);
-      assert.ok(false);
+      assert.isNull(err);
+      assert.equal(foro.nombre, testForo.nombre);
+      assert.equal(foro.fecha, testForo.fecha);
+      assert.equal(foro.descripcion, testForo.descripcion);
+      assert.ok(foro._id);
       }
     }
   }

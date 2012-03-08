@@ -62,8 +62,6 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
       var _resource = new this.DBModel(resource);
     console.log('Otro', _resource);
       _resource.save(function (err, doc) {
-        console.log('Errorcillo', err);
-        console.log('Documento');
         callback(err, doc);
       });
       //_resource.save(callback);
@@ -129,4 +127,4 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     remAlianza: function(foro, alianza, callback) {},
     addAsistente: function(foro, asistente, callback) {},
     remAsistente: function(foro, asistente, callback) {}
-  })
+  });
