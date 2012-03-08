@@ -56,7 +56,7 @@ vows.describe('app/models/ForoModel').addBatch({
     },
     "Instanciando": {
       topic: new ForoModel(),
-      "debe caargarse un modelo tipo foro": function (foro) {
+      "debe cargarse un modelo tipo foro": function (foro) {
         assert.isFunction(foro.DBModel);
         assert.equal(foro.DBModel.modelName, 'Foro');
       },
@@ -71,12 +71,12 @@ vows.describe('app/models/ForoModel').addBatch({
         nuevo.create(testForo, this.callback);
       },
       "debe cargarse con los datos": function (err, foro) {
-      assert.isNull(err);
-      assert.equal(foro.nombre, testForo.nombre);
-      assert.equal(foro.fecha, testForo.fecha);
-      assert.equal(foro.descripcion, testForo.descripcion);
-      assert.ok(foro._id);
-      testContext.Foro = foro;
+        assert.isNull(err);
+        assert.equal(foro.nombre, testForo.nombre);
+        assert.equal(foro.fecha, testForo.fecha);
+        assert.equal(foro.descripcion, testForo.descripcion);
+        assert.ok(foro._id);
+        testContext.Foro = foro;
       }
     }
   }
@@ -125,5 +125,18 @@ vows.describe('app/models/ForoModel').addBatch({
       }
     }
     **/
+  }
+}).addBatch({
+  "Modelo del Foro": {
+    topic: new ForoModel(),
+    "remove() ": {
+      topic: function (Foro) {
+        Foro.remove(testContext.Foro._id, this.callback);
+      },
+      "Responde correctamente sin errores": function (err, res) {
+        assert.isNull(err);
+        assert.equal(res, 1);
+      }
+    }
   }
 }).export(module);

@@ -59,10 +59,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
   .methods({
     create: function(resource, callback) {
       var _resource = new this.DBModel(resource);
-      _resource.save(function (err, doc) {
-        callback(err, doc);
-      });
-      //_resource.save(callback);
+      _resource.save(callback);
     },
     show: function(id, callback) {
       this.DBModel.findById(id, function(err, item) {
@@ -72,9 +69,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     },
     remove: function(id, callback) {
       var _resource = this.DBModel.findById(id);
-      _resource.remove(function(err, callback) {
+      _resource.remove(function(err, confirm) {
         if(err) throw new Error(err);
-        if(callback) callback;
+        callback(err, confirm);
       });        
     },
     modify: function(id, params, callback) {
