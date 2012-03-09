@@ -4,77 +4,77 @@
       <form class="form-horizontal" action="/foros" method="POST">
         <fieldset>
           <legend>Creación de nuevo foro</legend>
-            <div class="control-group">
-              <label class="control-label" for="foro[nombre]">Nombre</label>
-              <div class="controls">
-                <input class="input-xlarge" id="foroNombre" name="foro[nombre]" size="30" type="text">
-                <p class="help-block">
-                  <strong>Nota:</strong> El nombre del foro debe ser descriptivo y no debe ser ofensivo. Asegurate de leer nuestros <a href="/tos">términos de servicio</a>.
-                </p>
-              </div>
+          <div class="control-group">
+            <label class="control-label" for="foro[nombre]">Nombre</label>
+            <div class="controls">
+              <input class="input-xlarge" id="foroNombre" name="foro[nombre]" size="30" type="text">
+              <p class="help-block">
+                <strong>Nota:</strong> El nombre del foro debe ser descriptivo y no debe ser ofensivo. Asegurate de leer nuestros <a href="/tos">términos de servicio</a>.
+              </p>
             </div>
-            <div class="control-group">
-              <label class="control-label" for=foro[descripcion]">Descripción</label>
-              <div class="controls">
-                <textarea class="input-xlarge" id="foroDescripcion" name="foro[descripcion]" rows="3"></textarea>
-                <p class="help-block">
-                  Una descripcion acertada del foro ayudará a aumentar la participación de la gente.
-                </p>
-              </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for=foro[descripcion]">Descripción</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id="foroDescripcion" name="foro[descripcion]" rows="3"></textarea>
+              <p class="help-block">
+                Una descripcion acertada del foro ayudará a aumentar la participación de la gente.
+              </p>
             </div>
-            <div class="control-group">
-              <label class="control-label" for="foro[lugar]">Lugar</label>
-              <div class="controls">
-                <textarea class="input-xlarge" id=foroLugar" name="foro[lugar]" rows="2"></textarea>
-                <p class="help-block">
-                  Locación del foro.
-                </p>
-              </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="foro[lugar]">Lugar</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id=foroLugar" name="foro[lugar]" rows="2"></textarea>
+              <p class="help-block">
+                Locación del foro.
+              </p>
             </div>
-            <div class="control-group">
-              <label class="control-label" for="foro[fecha]">Fecha</label>
-              <div class="controls">
-                <input class="input-xlarge" id="foroFecha" name="foro[fecha]" value="Fri Feb 10 2012 12:56:09 GMT-0500 (COT)" size="30" type="text">
-                <p class="help-block">
-                  Una vez se pase esta fecha el foro quedará clausurado y no se podrán realizar nuevas preguntas.
-                </p>
-              </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="foro[fecha]">Fecha</label>
+            <div class="controls">
+              <input class="input-xlarge" id="foroFecha" name="foro[fecha]" value="Fri Feb 10 2012 12:56:09 GMT-0500 (COT)" size="30" type="text">
+              <p class="help-block">
+                Una vez se pase esta fecha el foro quedará clausurado y no se podrán realizar nuevas preguntas.
+              </p>
             </div>
-            <div class="control-group">
-              <label class="control-label" for="foro[url]">URL</label>
-              <div class="controls">
-                <input class="input-xlarge" id="foroUrl" name="foro[url]" size="30" type="text">
-                <p class="help-block">
-                  Esta es la URL del anuncio oficial en el portal de BogoTIC.
-                </p>
-              </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="foro[url]">URL</label>
+            <div class="controls">
+              <input class="input-xlarge" id="foroUrl" name="foro[url]" size="30" type="text">
+              <p class="help-block">
+                Esta es la URL del anuncio oficial en el portal de BogoTIC.
+              </p>
             </div>
-            <div class="control-group">
-              <label for="foro[imagen]">Imágen del foro</label>
-              <div class="controls">
-                <input class="input-file" id="foroImagen" name="foro[imagen]" type="file">
-              </div>
+          </div>
+          <div class="control-group">
+            <label for="foro[imagen]">Imágen del foro</label>
+            <div class="controls">
+              <input class="input-file" id="foroImagen" name="foro[imagen]" type="file">
             </div>
-            <div class="control-group">
-              <label class="control-label" for="foro[categoria]">Categoría</label>
-              <div class="controls">
-                <select class="input-xlarge" name="foro[categoria]" id="foroCategoria">
-                  <option>Tecnología y deuda pública</option>
-                  <option>Tecnología e investigación social</option>
-                  <option>Tecnología y productividad</option>
-                  <option>Tecnología y educación</option>
-                  <option>Tecnología y fomento</option>
-                  <option>Tecnología y gobierno</option>
-                  <option>Tecnología y cultura</option>
-                  <option>Tecnología e igualdad</option>
-                  <option>Tecnología y derechos</option>
-                  <option>Tecnología y pirateria</option>
-                </select>
-              </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="foro[categoria]">Categoría</label>
+            <div class="controls">
+              <select class="input-xlarge" name="foro[categoria]" id="foroCategoria">
+                <option>Tecnología y deuda pública</option>
+                <option>Tecnología e investigación social</option>
+                <option>Tecnología y productividad</option>
+                <option>Tecnología y educación</option>
+                <option>Tecnología y fomento</option>
+                <option>Tecnología y gobierno</option>
+                <option>Tecnología y cultura</option>
+                <option>Tecnología e igualdad</option>
+                <option>Tecnología y derechos</option>
+                <option>Tecnología y pirateria</option>
+              </select>
             </div>
+          </div>
           <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <button type="reset" class="btn">Cancelar</button>
+            <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Guardar</button>
+            <button type="reset" class="btn"><i class="icon-remove"></i> Cancelar</button>
           </div>
         </fieldset>
       </form>
