@@ -1,7 +1,8 @@
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
   var localidades = this.localidades;
-  var ObjectId = this.ObjectId
-  this.DBModel = this.mongoose.model('Pregunta', new this.Schema({
+  var ObjectId = this.ObjectId;
+
+  var PreguntaSchema = new this.Schema({
     autor        : { type: String, required: true },
     localidad    : { type: String, required: true, enum: localidades },
     titulo       : { type: String, required: true },
@@ -9,7 +10,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     fecha        : { type: Date, required: true, default: Date.now },
     votos        : { type: Number, default: 0 },
     favs         : { type: Number, default: 0}
-  }))
+  });
+
+  this.DBModel = this.mongoose.model('Pregunta', PreguntaSchema);
 })
   .methods({
     create: function(resource, callback) {
