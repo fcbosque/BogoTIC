@@ -3,7 +3,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
   var estadosConsulta = ['En votación', 'Satisfactoria', 'No satisfactoria', 'En respuesta'];
   var ObjectId = this.ObjectId;
 
-  this.SeguimientoSchema = new this.Schema({
+  var SeguimientoSchema = new this.Schema({
     titulo      : { type: String, required: true, match: /[a-z]/ },
     foro        : { type: ObjectId, required: true },
     creador     : { type: ObjectId, required: false },
