@@ -19,68 +19,70 @@
   <div class="row-fluid">
     <div class="span6">
       <div class="row-fluid">
-        <div class="span12">
-          <h1>Foro {{foro.nombre}} <small>{{foro.id}}</small></h1>
-          <h2>Descripción</h2>
-          <p>{{foro.descripcion}}</p>
-          <ul class="thumbnails">
-            <li><a href="#"><img class="thumbnail" src="http://placehold.it/90x90" alt=""></a></li>
-          </ul>
+        <h1>Foro {{foro.nombre}} <small>{{foro.id}}</small></h1>
+        <p style="text-align:center">
+          <a href="#"><img class="thumbnail" src="http://placehold.it/360x268" alt=""></a>
+        </p>
+        <h2>Descripción</h2>
+        <p>{{foro.descripcion}}</p>
+        <div class="modal hide fade in" id="modal-formular-pregunta">
+            <div class="modal-header">
+              <a class="close" data-dismiss="modal">x</a>
+              <h3>Formula tu pregunta</h3>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" action="/foros/{{foro.id}}/preguntas" method="POST">
+                  <div class="control-group">
+                    <label class="control-label" for="pregunta[titulo]">Titulo</label>
+                    <div class="controls">
+                      <input class="input-xlarge" id="preguntaTitulo" name="pregunta[titulo]" size="30" type="text">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="pregunta[contenido]">¿Cual es su pregunta?</label>
+                    <div class="controls">
+                      <textarea class="input-xlarge" id="preguntaContenido" name="pregunta[contenido]" rows="5"></textarea>
+                      <p class="help-block">Sea claro en la formulación de su pregunta.</p>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="pregunta[localidad]">Seleccione la localidad</label>
+                    <div class="controls">
+                      <select class="input-xlarge" name="pregunta[localidad]" id="preguntaLocalidad">
+                        <option>Antonio Nariño</option>
+                        <option>Barrios Unidos</option>
+                        <option>Bosa</option>
+                        <option>Chapinero</option>
+                        <option>Ciudad Bolívar</option>
+                        <option>Engativá</option>
+                        <option>Fontibón</option>
+                        <option>Kennedy</option>
+                        <option>La Candelaria</option>
+                        <option>Los Mártires</option>
+                        <option>Puente Aranda</option>
+                        <option>Rafael Uribe Uribe</option>
+                        <option>San Cristóbal</option>
+                        <option>Santa Fe</option>
+                        <option>Suba</option>
+                        <option>Sumapaz</option>
+                        <option>Teusaquillo</option>
+                        <option>Tunjuelito</option>
+                        <option>Usaquén</option>
+                        <option>Usme</option>
+                      </select>
+                      <span class="help-block">
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Guardar</button>
+                    <button type="reset" class="btn"><i class="icon-remove"></i> Cancelar</button>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
         </div>
-        <div class="span12">
-          <h2>Formulación pregunta</h2>
-          <form class="form-horizontal" action="/foros/{{foro.id}}/preguntas" method="POST">
-            <fieldset>
-              <legend>Nueva pregunta</legend>
-              <div class="control-group">
-                <label class="control-label" for="pregunta[titulo]">Titulo</label>
-                <div class="controls">
-                  <input class="input-xlarge" id="preguntaTitulo" name="pregunta[titulo]" size="30" type="text">
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="pregunta[contenido]">¿Cual es su pregunta?</label>
-                <div class="controls">
-                  <textarea class="input-xlarge" id="preguntaContenido" name="pregunta[contenido]" rows="5"></textarea>
-                  <p class="help-block">Sea claro en la formulación de su pregunta.</p>
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="pregunta[localidad]">Seleccione la localidad</label>
-                <div class="controls">
-                  <select class="input-xlarge" name="pregunta[localidad]" id="preguntaLocalidad">
-                    <option>Antonio Nariño</option>
-                    <option>Barrios Unidos</option>
-                    <option>Bosa</option>
-                    <option>Chapinero</option>
-                    <option>Ciudad Bolívar</option>
-                    <option>Engativá</option>
-                    <option>Fontibón</option>
-                    <option>Kennedy</option>
-                    <option>La Candelaria</option>
-                    <option>Los Mártires</option>
-                    <option>Puente Aranda</option>
-                    <option>Rafael Uribe Uribe</option>
-                    <option>San Cristóbal</option>
-                    <option>Santa Fe</option>
-                    <option>Suba</option>
-                    <option>Sumapaz</option>
-                    <option>Teusaquillo</option>
-                    <option>Tunjuelito</option>
-                    <option>Usaquén</option>
-                    <option>Usme</option>
-                  </select>
-                  <span class="help-block">
-                  </span>
-                </div>
-              </div>
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Guardar</button>
-                <button type="reset" class="btn"><i class="icon-remove"></i> Cancelar</button>
-              </div>
-            </fieldset>
-          </form>
-        </div>
+        <a class="btn" data-toggle="modal" href="#modal-formular-pregunta">Formula tu pregunta</a>
       </div>
     </div>
 
