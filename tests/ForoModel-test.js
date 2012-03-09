@@ -127,7 +127,7 @@ vows.describe('app/models/ForoModel').addBatch({
     **/
   }
 }).addBatch({
-  "Modelo del Foro": {
+  "Metodo del Foro": {
     topic: new ForoModel(),
     "remove() ": {
       topic: function (Foro) {
@@ -136,6 +136,58 @@ vows.describe('app/models/ForoModel').addBatch({
       "Responde correctamente sin errores": function (err, res) {
         assert.isNull(err);
         assert.equal(res, 1);
+      }
+    }
+  }
+}).addBatch({
+  "Metodos adicionales del Foro": {
+    topic: function () {
+      var self = this;
+      var Foro = new ForoModel();
+      Foro.create(testForo, function (err, foro) {
+        self.callback(err, Foro, foro);
+      });
+    },
+    "el addPregunta()": {
+      topic: function (Foro, foro) {
+        Foro.addPregunta(foro._id, {
+          autor: "testAuthor",
+          localidad: "Kennedy",
+          titulo: "¿Pregunta de prueba?",
+          contenido: "Espero que la pregunta quede guardada en la base de datos",
+          fecha: new Date()
+        }, this.callback);
+      },
+      "Debo recibir un foro": function (foro) {
+        assert.equal(foro.nombre, testForo.nombre);
+        assert.equal(foro.descripcion, testForo.descripcion);
+        assert.ok(foro._id);
+      },
+      "Debe tener un array de preguntas": function (foro) {
+        assert.isArray(foro.preguntas);
+        assert.ok(foro.preguntas.length > 0);
+      },
+      "Debe tener la pregunta": function (foro) {
+        var pregunta = foro.preguntas[0];
+        assert.isObject(pregunta);
+        assert.ok(pregunta._id);
+        assert.equal(pregunta.autor, "testAuthor");
+        assert.equal(pregunta.localidad, "Kennedy");
+        assert.equal(pregunta.contenido.length, 57);
+        testContext.Pregunta = pregunta;
+        testContext.PreguntaForo = foro;
+      },
+      "despues el getPregunta()": {
+        topic: function () {
+          var Foro = new ForoModel();
+          Foro.getPregunta(testContext.PreguntaForo._id, testContext.Pregunta._id, this.callback);
+        },
+        "Debe traer la pregunta": function (res) {
+         assert.ok(res);
+         assert.ok(res.foro._id);
+         assert.ok(res.pregunta._id);
+         assert.equal(res.pregunta.contenido.length, 57);
+        },
       }
     }
   }

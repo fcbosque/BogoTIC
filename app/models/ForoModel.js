@@ -93,25 +93,22 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         foro.preguntas.push(new self.Pregunta(pregunta));
         foro.save(function(err) {
           if(err) throw new Error(err);
-          callback(foro)
+          callback(err, foro);
         })
       })
     },
-    getPregunta: function(foro, pregunta, callback) {
+    getPregunta: function(foro, preguntaId, callback) {
       var self = this;
       this.DBModel.findById(foro, function(err, foro) {
         if(err) throw new Error(err);
-        for(var _pregunta in foro.preguntas) {
-          if(foro.preguntas[_pregunta]._id == pregunta) {
-            callback({
-              pregunta: foro.preguntas[_pregunta],
-              foro: {
-                id: foro._id,
-                nombre: foro.nombre
-              }
-            })
-          }
-        };
+        var pregunta = foro.preguntas.filter(function (preg) {
+          return (preg._id.toString() == preguntaId.toString());
+        });
+
+        callback(null, {
+          pregunta: pregunta[0],
+          foro: foro
+        });
       });
     },
     addParticipante: function(foro, participante, callback) {},
