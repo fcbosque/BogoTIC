@@ -26,7 +26,7 @@ de la siguiente manera:
 
 La forma más facil es ejecutar `app.js` directamente:
 
-`% node app.js`
+`% node server.js`
 
 Sin embargo, existen diferentes ambientes de producción para los
 siguientes escenarios, especificados como valores a la variable
