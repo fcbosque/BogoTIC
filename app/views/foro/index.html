@@ -6,7 +6,7 @@
       {{{seguimientos}}}
     </div>
     <div class="span3">
-      <div class="well">
+      <div class="well" style="text-align:center">
         <a class="btn btn-primary btn-large" href="/foros/nuevo"><i class="icon-flag icon-white"></i> Crear nuevo foro</a>
       </div>
     </div>
@@ -14,14 +14,18 @@
 
   <div class="row-fluid">
     <div class="span6">
-      <div id="ultimo-foro" id="thumbnail">
+      <div class="span4">
+        <div id="ultimo-foro" id="thumbnail">
           <a class="thumbnail" href="#"><img src="http://placehold.it/360x268" alt=""></a>
-          <h5 style="margin-bottom: 10px">Nombre del Foro <small>2012-12-12</small></h5>
-          <p>
-            <span class="label">Categoría</span>
-          </p>
-          <p>Descripción ...</p>
-          <p><a class="btn" href="/foros/{{id}}">Entrar</a></p>
+        </div>
+      </div>
+      <div class="span2">
+        <h5 style="margin-bottom: 10px">Nombre del Foro <small>2012-12-12</small></h5>
+        <p>
+          <span class="label">Categoría</span>
+        </p>
+        <p>Descripción ...</p>
+        <p style="text-align:right"><a class="btn" href="#">Entrar</a></p>
       </div>
     </div>
     <div class="span6">
@@ -35,7 +39,7 @@
               <span class="label">{{categoria}}</span>
             </p>
             <p>{{descripcion}}</p>
-            <p><a class="btn" href="/foros/{{id}}">Entrar</a></p>
+            <p style="text-align:right"><a class="btn" href="/foros/{{id}}">Entrar</a></p>
           </div>
         </li>
         {{/foros}}
