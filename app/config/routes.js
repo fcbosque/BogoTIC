@@ -43,6 +43,8 @@ module.exports = {
     ['post',  '/',          'Usuario', 'create'],
     ['get',   '/:username', 'Usuario', 'show'],
     ['del',   '/:username', 'Usuario', 'remove'],
-    ['put',   '/:username', 'Usuario', 'modify']
+    ['put',   '/:username', 'Usuario', 'modify'],
+    ['get',   '/perfil',    'Usuario', 'getPerfil'],
+    ['get',   '/signout',   'Usuario', 'signout']
   ]
 }
