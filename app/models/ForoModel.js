@@ -1,16 +1,17 @@
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
   var categorias = this.categorias;
   var localidades = this.localidades;
-  var ObjectId = this.ObjectId
-  this.DBModel = this.mongoose.model('Foro', new this.Schema({
+  var ObjectId = this.ObjectId;
+
+  var ForoSchema = new this.Schema({
     nombre        : { type: String, required: false, match: /[a-z]/ },
     descripcion   : { type: String, required: false },
     categoria     : { type: String, required: false, enum: categorias },
-    participantes : [Participante],
-    sponsors      : [Sponsor],
-    preguntas     : [Pregunta],
-    alianzas      : [Alianza],
-    fecha         : { type: Date, required: true, default: Date.now },
+    participantes : [ParticipanteSchema],
+    sponsors      : [SponsorSchema],
+    preguntas     : [PreguntaSchema],
+    alianzas      : [AlianzaSchema],
+    fecha         : { type: Date, required: true },
     abierto       : { type: Boolean, required: true, default: true },
     imagen        : { type: String, required: true, default: "bogotic.png" },
     lugar         : { type: String, required: true, default: "Por definir" },
@@ -19,28 +20,28 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     video         : { type: String, required: false },
     asistentes    : { type: Array, required: false, default: [] },
     informes      : { type: Array, required: false, default: [] }
-  }));
+  });
   
-  var Participante = this.mongoose.model('Participante', new this.Schema({
+  var ParticipanteSchema = new this.Schema({
     nombre       : { type: String, required: true },
     imagen       : { type: String, required: true },
     descripcion  : { type: String, required: true },
     entidad      : { type: String, required: true }
-  }));
+  });
 
-  var Sponsor = this.mongoose.model('Sponsor', new this.Schema({
-    nombre       : { type: String, required: true },
-    imagen       : { type: String, required: true }
-  }));
+  var SponsorSchema = new this.Schema({
+    nombre    : { type: String, required: true },
+    imagen    : { type: String, required: true }
+  });
 
-  var Alianza = this.mongoose.model('Alianza', new this.Schema({
+  var AlianzaSchema = new this.Schema({
     nombre      : { type: String, required: true },
     url         : { type: String, required: true },
     descripcion : { type: String, required: true },
     twitter     : { type: String, required: true }
-  }));
+  });
 
-  var Pregunta = this.mongoose.model('Pregunta', new this.Schema({
+  var PreguntaSchema = new this.Schema({
     autor        : { type: String, required: true },
     localidad    : { type: String, required: true, enum: localidades },
     titulo       : { type: String, required: true },
@@ -49,12 +50,13 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     autor        : { type: String, required: true },
     votos        : { type: Number, default: 0 },
     favs         : { type: Number, default: 0 }
-  }));
+  });
 
-  this.Participante = Participante;
-  this.Sponsor      = Sponsor;
-  this.Alianza      = Alianza;
-  this.Pregunta     = Pregunta;
+  this.Participante = this.mongoose.model('Participante', ParticipanteSchema);
+  this.Sponsor = this.mongoose.model('Sponsor', SponsorSchema);
+  this.Alianza = this.mongoose.model('Alianza', AlianzaSchema);
+  this.Pregunta = this.mongoose.model('Pregunta', PreguntaSchema);
+  this.DBModel = this.mongoose.model('Foro', ForoSchema);
 })
   .methods({
     create: function(resource, callback) {
@@ -85,6 +87,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         if(err) throw new Error(err);
         if(callback) callback(items);
       });
+    },
+    search: function(param, callback) {
+      this.DBModel.where('', new RegExp(param, 'i')).run(callback);
     },
     addPregunta: function(foro, pregunta, callback) {
       var self = this;
