@@ -14,15 +14,21 @@
 
   <div class="row-fluid">
     <div class="span6">
-      <div id="ultimo-foro" class="thumbnail">
+      <div id="ultimo-foro" id="thumbnail">
           <a class="thumbnail" href="#"><img src="http://placehold.it/360x268" alt=""></a>
+          <h5 style="margin-bottom: 10px">Nombre del Foro <small>2012-12-12</small></h5>
+          <p>
+            <span class="label">Categoría</span>
+          </p>
+          <p>Descripción ...</p>
+          <p><a class="btn" href="/foros/{{id}}">Entrar</a></p>
       </div>
     </div>
     <div class="span6">
       <ul class="thumbnails">
         {{#foros}}
         <li class="span3">
-          <div class="thumbnail">
+          <div id="thumbnail">
             <a class="thumbnail" href="/foros/{{id}}"><img src="http://placehold.it/260x180" alt=""></a>
             <h5 style="margin-bottom: 10px">{{nombre}} <small>{{fecha}}</small></h5>
             <p>
