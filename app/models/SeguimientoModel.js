@@ -1,9 +1,9 @@
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
   var localidades = this.localidades;
-  var estadosConsulta = ['En votación', 'Satisfactoria', 'No satisfactoria', 'En respuesta']
+  var estadosConsulta = ['En votación', 'Satisfactoria', 'No satisfactoria', 'En respuesta'];
+  var ObjectId = this.ObjectId;
 
-  var ObjectId = this.ObjectId
-  this.DBModel = this.mongoose.model('Seguimiento', new this.Schema({
+  var SeguimientoSchema = new this.Schema({
     titulo      : { type: String, required: true, match: /[a-z]/ },
     foro        : { type: ObjectId, required: true },
     creador     : { type: ObjectId, required: false },
@@ -11,21 +11,21 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     fecha       : { type: Date, default: Date.now, required: true },
     seguidores  : { type: Array, default: [], required: false },
     localidad   : { type: String, required: true, enum: localidades },
-    consultas   : [Consulta],
-    preguntas   : [Pregunta],
-    informes    : [Informe],
+    consultas   : [ConsultaSchema],
+    preguntas   : [PreguntaSchema],
+    informes    : [InformeSchema],
     abierto     : { type: Boolean, required: true, default: true }
-  }));
+  });
 
-  var Informe = this.mongoose.model('Informe', new this.Schema({
+  var InformeSchema = new this.Schema({
     titulo      : { type: String, required: true },
     responsable : { type: String, required: true },
     referencia  : { type: String, required: true },
     contenido   : { type: String, required: true },
     fecha       : { type: Date, required: true, default: Date.now }
-  }));
+  });
 
-  var Consulta = this.mongoose.model('Consulta', new this.Schema({
+  var ConsultaSchema = new this.Schema({
     votos         : { type: Number, required: true, default: 0 },
     estado        : { type: String, required: true, default: 'En votación', enum: estadosConsulta },
     motivo        : { type: String, required: true },
@@ -34,29 +34,30 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     respuesta     : { type: String, requided: false },
     descripcion   : { type: String, required: true },
     satisfactoria : { type: Boolean, required: false }
-  }));
+  });
 
-  var Respuesta = this.mongoose.model('Respuesta', new this.Schema({
+  var RespuestaSchema = new this.Schema({
     autor     : { type: String, required: true },
     contenido : { type: String, required: true },
     votos     : { type: Number, default: 0 },
     fecha     : { type: Date, required: true, default: Date.now }
-  }));
+  });
 
-  var Pregunta = this.mongoose.model('Pregunta', new this.Schema({
-    autor        : { type: String, required: false },
-    localidad    : { type: String, required: true, enum: localidades },
-    titulo       : { type: String, required: true },
-    contenido    : { type: String, required: true },
-    fecha        : { type: Date, required: true, default: Date.now },
-    votos        : { type: Number, required: false, default: 0 },
-    favs         : { type: Number, required: false, default: 0 }
-  }));
+  var PreguntaSchema = new this.Schema({
+    autor     : { type: String, required: false },
+    localidad : { type: String, required: true, enum: localidades },
+    titulo    : { type: String, required: true },
+    contenido : { type: String, required: true },
+    fecha     : { type: Date, required: true, default: Date.now },
+    votos     : { type: Number, required: false, default: 0 },
+    favs      : { type: Number, required: false, default: 0 }
+  });
 
-  this.Pregunta  = Pregunta;
-  this.Respuesta = Respuesta;
-  this.Consulta  = Consulta;
-  this.Informe   = Informe;
+  this.Pregunta  = this.mongoose.model('Pregunta', PreguntaSchema);
+  this.Respuesta = this.mongoose.model('Respuesta', RespuestaSchema);
+  this.Consulta  = this.mongoose.model('Consulta', ConsultaSchema);
+  this.Informe   = this.mongoose.model('Informe', InformeSchema);
+  this.DBModel   = this.mongoose.model('Seguimiento', SeguimientoSchema);
 })
   .methods({
     create: function(foro, resource, callback) {

@@ -20,17 +20,23 @@
           <input type="text" class="search-query span2" placeholder="Buscar">
         </form>
 
-        <ul class="nav pull-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@usuario <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="/dashboard">Dashboard</a></li>
-              <li><a href="/perfil">Mi perfil</a></li>
-              <li class="divider"></li>
-              <li><a href="/usuario/signout">Salir</a></li>
-            </ul>
-          </li>
-        </ul>
+        {{#usuario}}
+          {{> usermenu}}
+        {{/usuario}}
+
+        {{^usuario}}
+          <ul class="nav pull-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresa <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#iniciarSesion">Iniciar sesión</a></li>
+                <li><a href="/usuarios/nuevo">Nuevo usuario</a></li>
+                <li class="divider"></li>
+                <li><a href="/ayuda">Ayuda</a></li>
+              </ul>
+            </li>
+          </ul>
+        {{/usuario}}
 
       </div>
     </div>

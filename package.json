@@ -19,12 +19,13 @@
     "stylus": "0.22.x",
     "matador": "0.0.x",
     "mongoose": "2.4.x",
+    "mongoose-auth": "0.0.x",
     "mongodb": "0.9.x"
   },
   "devDependencies": {
     "vows": "0.6.x",
-    "api-easy": "0.3.x",
-    "klass": "1.2.2"
+    "klass": "1.2.x",
+    "api-easy": "0.3.x"
   },
   "scripts": {
     "start": "node server",
