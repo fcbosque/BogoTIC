@@ -1,20 +1,20 @@
-= Foros BogoTIC
+# Foros BogoTIC
 
 TBD
 
-== Introducción
+## Introducción
 
 TBD
 
-== Instalación
+## Instalación
 
-=== Dependencias
+### Dependencias
 
   * MongoDB
   * Node.JS
   * NPM
 
-==== Instalación de dependencias
+#### Instalación de dependencias
 
 En el directorio raíz donde se encuentra el código fuente se deben
 descargar las dependencias especificadas en el archivo `package.json`
@@ -22,7 +22,7 @@ de la siguiente manera:
 
 `% npm install`
 
-=== Ejecución y puesta en marcha
+### Ejecución y puesta en marcha
 
 La forma más facil es ejecutar `app.js` directamente:
 
@@ -36,12 +36,12 @@ de entorno `NODE_ENV`:
   * `TESTING`
   * `PRODUCTION`
 
-== Participación y desarrollo
+## Participación y desarrollo
 
 Empieza por enviarnos un pull request al repositorio solucionando
 algunos de los issues que tenemos actualmente abiertos.
 
-=== Pruebas
+### Pruebas
 
 Todos los pull request deben ir acompañados de sus casos de pruebas
 pasando 100%. En realidad esa es la condición más estricta.
@@ -49,14 +49,14 @@ pasando 100%. En realidad esa es la condición más estricta.
 En cuanto al estilo de desarrollo y demás, consulta en nuestra
 wiki.
 
-=== Inclusión a los repos
+### Inclusión a los repos
 
 Los pull request que cumplan con una suite de pruebas completo y que
 solucionen algún issue ya reportado es candidato para merge al branch
 `development` para luego ser puesto en producción cuando un nuevo
 release sea necesario.
 
-=== Versionamiento
+### Versionamiento
 
 Por transparencia y retrospección dentro de nuestro ciclo de releases,
 y por intentar al máximo la compatibilidad hacia atrás, la aplicación
@@ -65,7 +65,7 @@ podamos.
 
 Los releases serán nombrados de esta manera:
 
-<mayor>.<menor>.<patch>
+`<mayor>.<menor>.<patch>`
 
 Y construido con los siguientes lineamientos:
 
@@ -75,6 +75,6 @@ Y construido con los siguientes lineamientos:
 
 Para más información sobre SemVer, visite http://semver.org/
 
-== Licencia
+## Licencia
 
 GPLv3
