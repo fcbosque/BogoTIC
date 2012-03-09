@@ -1,3 +1,26 @@
+/*!
+ * This file is part of Foros BogoTIC.
+ *
+ * Foros BogoTIC is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Foros BogoTIC is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Foros BogoTIC.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/**
+ * El modelo de seguimientos.
+ *
+ * @api public
+ */
+
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
   var localidades = this.localidades;
   var estadosConsulta = ['En votación', 'Satisfactoria', 'No satisfactoria', 'En respuesta'];
@@ -58,20 +81,67 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
   this.Consulta  = this.mongoose.model('Consulta', ConsultaSchema);
   this.Informe   = this.mongoose.model('Informe', InformeSchema);
   this.DBModel   = this.mongoose.model('Seguimiento', SeguimientoSchema);
-})
-  .methods({
+}).methods({
+    /**
+     * Creación de un nuevo grupo de seguimiento asociado a un foro.
+     *
+     * La acción de guardar la ejecuta directamente mongoose
+     * junto con el callback especificado en el controlador.
+     *
+     * El recurso es guardado en una colección independiente
+     * con una propiedad `foro` que hace referencia al `ObjectId`
+     * del foro en particular en la colección de Foros.
+     *
+     * @api public
+     * @param {Integer} foro
+     * @param {Object} resource
+     * @param {Function} callback
+     * @see SeguimientoController.create
+     */
+
     create: function(foro, resource, callback) {
       var _resource = new this.DBModel(resource);
       _resource.foro = foro;
       _resource.save(callback);
     },
+
+    /**
+     * Mostrar grupo de seguimiento individual.
+     *
+     * La busqueda del grupo de seguimiento la realiza mongoose,
+     * arrojando una excepción en caso de error o ejecutando el
+     * callback especificado en el controlador con el objeto del
+     * grupo de seguimiento.
+     *
+     * La busqueda se realiza mediante `foro` y se pasa como
+     * parámetro en el `callback` que especifica el controlador.
+     *
+     * @api public
+     * @param {Integer} foro
+     * @param {Integer} id
+     * @param {Function} callback
+     * @see ForoController.show
+     */
+
     show: function(foro, id, callback) {
-      var ObjectId = this.ObjectId;
       this.DBModel.findById(id, function(err, item) {
         if(err) throw new Error(err);
         if(callback) callback(foro, item);
       });
     },
+    
+    /**
+     * Eliminar un grupo de seguimiento de la base de datos.
+     *
+     * Elimina un registro de grupo de seguimiento vía `id`
+     * usando mongoose para luego arrojar una excepción en
+     * caso de error o ejecutar el callback del controlador.
+     *
+     * @api public
+     * @param {Integer} id
+     * @param {Function} callback
+     */
+ 
     remove: function(id, callback) {
       var _resource = this.DBModel.findById(id);
       _resource.remove(function(err, callback) {
@@ -79,12 +149,46 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         if(callback) callback;
       })
     },
+
+    /**
+     * Modificar un grupo de seguimiento existente.
+     *
+     * Actualiza un registro en la base de datos usando
+     * `params` como objeto con las propiedades actualizadas.
+     *
+     * @api public
+     * @param {Integer} id
+     * @param {Object} params
+     * @param {Function} callback
+     */
+
     modify: function(id, params, callback) {
       var self = this;
       this.DBModel.findById(id, function(resource, callback) {
         resource.update(self.params.id, self.params, callback)
       });
     },
+
+    /**
+     * Devuelve todos los grupos de seguimiento disponibles en
+     * la base de datos según `foro`.
+     *
+     * Ejecuta el callback especificado por el controlador con
+     * un arreglo que contiene todos los grupos de segumiento y
+     * también con un objeto temporal `_foro` con las propiedades
+     * para construir la vista. Estas son:
+     *
+     *  - `id` id del foro
+     *  - `nombre` nombre del foro
+     *  - `localidad` localidad que compete el foro
+     *  - `fecha` la fecha de realización del foro
+     *  - `categoria` la categoría particular de ese foro
+     *
+     * @api public
+     * @param {Integer} foro
+     * @param {Function} callback
+     */
+
     all: function(foro, callback) {
       var ObjectId = this.ObjectId;
       this.DBModel.find({ foro: foro }, function(err, items) {
@@ -98,6 +202,41 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         if(callback) callback(_foro, items);
       });
     },
+
+    /**
+     * Busca en toda la colección de grupos de seguimiento
+     * usando expresiones regulares.
+     *
+     * `callback` se ejecuta al final de la compilación del
+     * RegExp en la clausula de query de mongoose.
+     *
+     * @api public
+     * @param {String} param
+     * @param {Function} callback
+     */
+
+    search: function(param, callback) {
+      this.DBModel.where('', new RegExp(param, 'i')).run(callback);
+    },
+
+    /**
+     * Añade una consulta a un grupo de seguimiento en particular.
+     *
+     * La consulta cuando se crea es sometida a votación por todos
+     * los miembros del grupo. Si la votación es exitosa, entonces
+     * la consulta se puede realizar.
+     *
+     * La realización de la consulta incluye la generación de una
+     * URL temporal donde se registrará la respuesta de la consulta
+     * por parte de un usuario invitado. La URL se destruye una vez
+     * se ha respondido la consulta.
+     *
+     * @api public
+     * @param {Integer} seguimiento
+     * @param {Object} consulta
+     * @param {Function} callback
+     */
+
     addConsulta: function(seguimiento, consulta, callback) {
       var self = this;
       this.DBModel.findById(seguimiento, function(err, seguimiento) {
@@ -115,6 +254,21 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     answerConsulta: function(seguimiento, consulta, callback) {
 
     },
+
+    /**
+     * Añadir una nueva pregunta a un grupo de consulta en particular.
+     *
+     * En caso de que no se arroje una excepción, se incluirá la
+     * `pregunta` al `seguimiento` para luego ejecutar `callback`
+     * con el objeto completo de `seguimiento` que retorna la consulta
+     * de mongoose.
+     *
+     * @api public
+     * @param {Integer} seguimiento
+     * @param {Object} pregunta
+     * @param {Function} callback
+     */
+
     addPregunta: function(seguimiento, pregunta, callback) {
       var self = this;
       this.DBModel.findById(seguimiento, function(err, seguimiento) {
@@ -126,6 +280,26 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         })
       })
     },
+
+    /**
+     * Traer una pregunta especifica de un grupo de seguimiento en
+     * particular.
+     *
+     * Si no se arroja una excepción entonces luego de recorrer el
+     * arreglo de `seguimiento.preguntas` y se encuentre en registrado
+     * se ejecutará `callback` con los siguientes objetos:
+     *
+     *  - `pregunta` objeto de la pregunta en cuestión
+     *  - `seguimiento` objeto seguimiento que consta de:
+     *    - `id` id del seguimiento
+     *    - `nombre` nombre del seguimiento
+     *
+     * @api public
+     * @param {Integer} seguimiento
+     * @param {Integer} pregunta
+     * @param {Function} callback
+     */
+
     getPregunta: function(seguimiento, pregunta, callback) {
       var self = this;
       this.DBModel.findById(seguimiento, function(err, seguimiento) {
