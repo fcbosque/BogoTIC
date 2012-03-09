@@ -1,7 +1,41 @@
+/*!
+ * This file is part of Foros BogoTIC.
+ *
+ * Foros BogoTIC is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Foros BogoTIC is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Foros BogoTIC.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 module.exports = require(app.set('controllers') + '/ApplicationController').extend(function() {
   this.viewFolder = 'pregunta'
-})
-  .methods({
+}).methods({
+   /**
+    * Renderiza el listado las preguntas.
+    * 
+    * Los objetos que se envian a la plantilla son
+    *
+    *  - `foros` arreglo de objetos foro
+    *  - `foro` objeto foro compuesto de
+    *    - `preguntas` arreglo de objetos pregunta
+    *    - `nombre` nombre del foro
+    *    - `id` id del foro
+    * 
+    * @api public
+    * @render pregunta/index
+    * @param {Integer} foro
+    * @see ApplicationController.index
+    * @see ForoModel.show
+    */
+
     index: function() {
       var self = this;
       var foro = this.request.params.foro;
@@ -16,6 +50,22 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
         })
       })
     },
+
+    /**
+     * Renderiza el formulario para la creación de preguntas.
+     *
+     * Los objetos que se envian a la plantilla son
+     *
+     *  - `foros` arreglo de objetos foro
+     *  - `foroId` id del foro
+     * 
+     * @api public
+     * @render pregunta/new
+     * @param {Integer} foro
+     * @see ApplicationController.new
+     * @see ForoModel.show
+     */
+
     new: function() {
       var self = this;
       var foro = this.request.params.foro;
@@ -26,15 +76,52 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
         });
       });
     },
+
+    /**
+     * Crea un nueva pregunta en un foro determinado.
+     *
+     * La nueva pregunta se construye mediante los middlewares de
+     * express para luego ser enviado al modelo de Foro para ser
+     * almacenado. Arroja una excepción en caso de error.
+     *
+     * @api public
+     * @redirect /foros/:id/preguntas
+     * @param {Integer} foro
+     * @param {Object} pregunta
+     * @see ForoModel.create
+     * @see ApplicationController.create
+     */
+
     create: function() {
       var self = this;
       var foro = this.request.params.foro;
       var pregunta = this.request.body.pregunta;
-      this.getModel('Foro').addPregunta(foro, pregunta, function(pregunta) {
+      this.getModel('Foro').addPregunta(foro, pregunta, function(err) {
+        if(err) throw new Error(err);
         self.response.redirect("/foros/" + foro + "/preguntas");
       });
     },
-    show: function(foro, pregunta) {
+
+    /**
+     * Renderiza una pregunta de un foro en particular.
+     *
+     * Los objetos que se envian a la plantilla son
+     *
+     *  - `foros` arreglo de objetos foro
+     *  - `foro` objeto con las siguientes propiedades
+     *    - `nombre` nombre del foro
+     *    - `id` id del foro
+     *  - `pregunta` objeto de la pregunta
+     *
+     * @api public
+     * @render foro/show
+     * @param {Integer} foro
+     * @param {Integer} pregunta
+     * @see ApplicationController.show
+     * @see ForoModel.show
+     */
+
+    show: function() {
       var self = this;
       var foro = this.request.params.foro;
       var pregunta = this.request.params.id;
@@ -49,14 +136,38 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
         })
       })
     },
-    remove: function(id) {
+
+    /**
+     * Elimina una pregunta de un foro en particular.
+     *
+     * @api public
+     * @redirect /foros/:foro/preguntas
+     * @param {Integer} id
+     * @see ApplicationController.remove
+     * @see ForoModel.remove
+     */
+
+    remove: function() {
       var self = this;
+      var id = this.request.params.id;
       this.getModel('Pregunta').remove(id, function(pregunta) {
         self.send(200);
       })
     },
-    modify: function(id) {
-      var self = this
+
+    /**
+     * Modifica una pregunta de un foro en particular.
+     *
+     * @api public
+     * @redirect /foros/:foro/preguntas/:id
+     * @param {Integer} id
+     * @see ApplicationController.modify
+     * @see ForoModel.modify
+     */
+
+    modify: function() {
+      var self = this;
+      var id = this.request.params.id;
       this.getModel('Pregunta').modify(id, params, function(pregunta) {
         self.send(200);
       });
