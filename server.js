@@ -1,5 +1,4 @@
-var matador = require('matador'),
-    everyauth = require('everyauth')
+var matador = require('matador')
 
 app.configure(function () {
   app.set('models', __dirname + '/app/models')
@@ -14,7 +13,6 @@ app.configure(function () {
   app.use(matador.bodyParser())
   app.use(matador.methodOverride())
   app.use(matador.static(__dirname + '/public'))
-  app.use(everyauth.middleware())
 })
 
 app.configure('development', function () {
@@ -24,11 +22,7 @@ app.configure('development', function () {
 app.configure('production', function () {
   app.use(matador.errorHandler())
 })
-
 app.set('viewPartials', matador.partials.build(app.set('views')))
-
 matador.mount(require('./app/config/routes'))
-
 app.listen(3000)
-
 console.log('matador running on port 3000')
