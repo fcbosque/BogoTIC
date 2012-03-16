@@ -18,9 +18,13 @@
 
     <div class="span6">
       <h2>¿Desea participar?</h2>
-      <form class="form-horizontal">
+      <form class="form-horizontal" action="/usuarios/login" method="post">
         <legend></legend>
         <fieldset>
+          <div class="form-actions">
+            <a href="/usuarios/nuevo" class="btn btn-primary btn-large" >Crear cuenta nueva. »</a></p>
+          </div>
+
           <div class="control-group">
             <label class="control-label" for="usuario[username]">Usuario</label>
             <div class="controls">
@@ -29,13 +33,14 @@
           </div>
 
           <div class="control-group">
-             <label for="usuario[correo]">Correo Electronico</label>
+             <label for="usuario[clave]" class="control-label">Contraseña</label>
              <div class="controls">
-                <input type="email" class="input-xlarge" id="usuarioCorreo" name="usuario[correo]" size="30">
+                <input type="password" class="input-xlarge" id="usuarioCorreo" name="usuario[clave]" size="30">
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px">Ingresar</button>
               </div>
           </div>
 
-          <div class="control-group">
+          <!-- <div class="control-group">
             <div class="controls">
               <label class="checkbox" for="usuario[tos]">
                 <input type="checkbox" id="tosCheckbox" value="usuario[tos]">
@@ -43,11 +48,9 @@
                 </input>
               </label>
             </div>
-          </div>
+        </div> -->
 
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Crear cuenta</button>
-          </div>
+
         </fieldset>
       </form>
 

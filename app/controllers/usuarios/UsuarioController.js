@@ -17,6 +17,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     create: function() {
       var self = this;
       var usuario = this.request.body.usuario;
+      console.log(usuario);
       this.getModel('Usuario').create(usuario, v.bind(this, function(usuario) {
         self.response.redirect("/");
       }))
@@ -44,5 +45,8 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       this.getModel('Usuario').modify(username, params, function(usuario) {
         self.send(200);
       });
+    },
+    login: function () {
+      console.log(this.request.body);
     }
   })

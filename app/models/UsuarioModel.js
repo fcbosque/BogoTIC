@@ -20,10 +20,6 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     notificaciones  : [NotificacionSchema]
   });
 
-  this.DBModel.plugin(this.mongooseAuth, {
-    password: true
-  });
-
   var MensajeSchema = new this.Schema({
     titulo    : { type: String, required: true, match: /[a-z]/ },
     autor     : { type: ObjectId, required: true },
@@ -50,7 +46,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
       })
     },
     show: function(username, callback) {
-      this.DBModel.find({ username: username }, function(usuario, callback) {
+      this.DBModel.find({ username: username }, function(err, usuario) {
         if(err) throw new Error(err);
         if(callback) callback(usuario);
       })
