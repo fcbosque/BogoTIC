@@ -27,7 +27,6 @@
 module.exports = require('./BaseModel').extend(function() {
   this.mongo = require('mongodb');
   this.mongoose = require('mongoose');
-  this.mongooseAuth = require('mongoose-auth');
   this.Schema = this.mongoose.Schema;
   this.ObjectId = this.Schema.ObjectId;
   this.mongoose.connect('mongodb://localhost/BogoTIC');
