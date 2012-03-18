@@ -16,6 +16,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     twitter         : { type: String, required: false },
     foros           : { type: Array, required: false },
     avisos          : { type: Boolean, required: false, default: true },
+    password        : { type: String, required: false },
     mensajes        : [MensajeSchema],
     notificaciones  : [NotificacionSchema]
   });
@@ -60,7 +61,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     create: function(resource, callback) {
       var crypto = require('crypto');
       resource.password = crypto.createHmac('sha256', 'BOGOTIC').update(resource.clave).digest('hex');
-      console.log('Cifrado', resource.password);
+      delete resource.clave;
       var _resource = new this.DBModel(resource);
       _resource.save(callback);
     }

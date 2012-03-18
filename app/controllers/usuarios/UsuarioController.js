@@ -17,10 +17,10 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     create: function() {
       var self = this;
       var usuario = this.request.body.usuario;
-      console.log(usuario);
-      this.getModel('Usuario').create(usuario, v.bind(this, function(usuario) {
+      this.getModel('Usuario').create(usuario, function(err, usuario) {
+        if (err) console.log(err);
         self.response.redirect("/");
-      }))
+      });
     },
     show: function() {
       var self = this;
