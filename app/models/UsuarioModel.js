@@ -58,6 +58,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     
     },
     create: function(resource, callback) {
+      var crypto = require('crypto');
+      resource.password = crypto.createHmac('sha256', 'BOGOTIC').update(resource.clave).digest('hex');
+      console.log('Cifrado', resource.password);
       var _resource = new this.DBModel(resource);
       _resource.save(callback);
     }
