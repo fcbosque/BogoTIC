@@ -47,6 +47,13 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       });
     },
     login: function () {
-      console.log(this.request.body);
+      var self = this;
+      var data = this.request.body.usuario;
+      this.getModel('Usuario').authenticate(data, function (err, user) {
+        if (err) console.log(err);
+        if (user) {
+          // @todo Poner en el middleware de sessiones.
+        }
+      });
     }
   })

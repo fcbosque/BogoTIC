@@ -1,3 +1,5 @@
+var crypto = require('crypto');
+
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
   var localidades = this.localidades;
   var ObjectId = this.ObjectId;
@@ -59,10 +61,25 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     
     },
     create: function(resource, callback) {
-      var crypto = require('crypto');
       resource.password = crypto.createHmac('sha256', 'BOGOTIC').update(resource.clave).digest('hex');
       delete resource.clave;
       var _resource = new this.DBModel(resource);
       _resource.save(callback);
+    },
+    authenticate: function (loginData, callback) {
+      this.DBModel.findOne({correo:loginData.correo}, function (err, user) {
+        if (err) throw new Erro(err);
+        if (user) {
+          var clave = crypto.createHmac('sha256', 'BOGOTIC').update(loginData.clave).digest('hex');
+          if (clave === user.password) {
+            console.log('Autenticado COrrectamente');
+            callback(null, user);
+          } else {
+            callback({message:'Datos Incorrectos'});
+          }
+        } else {
+          callback({message:'Correo no registrado'});
+        }
+      });
     }
   })
