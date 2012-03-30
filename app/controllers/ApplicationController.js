@@ -13,6 +13,7 @@ module.exports = require('matador').BaseController.extend(function () {
     },
     usuarioActual: function(callback) {
       var self = this;
+      console.log('Se ejecuta el middleware', this.request.cookies);
       if(this.request.cookies.autorizado) {
         this.getModel('Usuario').show(function(usuario) {
           self.response.usuario = usuario;

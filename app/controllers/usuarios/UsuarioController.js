@@ -53,6 +53,12 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
         if (err) console.log(err);
         if (user) {
           // @todo Poner en el middleware de sessiones.
+          self.response.usuario = user;
+          console.log('Mostrando', user);
+          self.render('../index');
+        } else {
+          self.response.message = { type: 'Error', message: 'El usuario no se encontro'};
+          self.response.redirect('/');
         }
       });
     }
