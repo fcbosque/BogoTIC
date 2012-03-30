@@ -15,15 +15,29 @@
  * along with Foros BogoTIC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require.config({
-  paths: {
-    jquery: 'libs/jquery/jquery-min',
-    bootstrap: 'libs/bootstrap/bootstrap-min',
-    underscore: 'libs/underscore/underscore-min',
-    backbone: 'libs/backbone/backbone-min'
-  }
-});
+define([
+  "jquery",
+  "underscore",
+  "backbone",
+  "collections/foros",
+  "views/foros"
+  ], function($, _, Backbone, ForoCollection, ForoView) {
 
-require(["views/app"], function(AppView) {
-  var appView = new AppView();
+  var AppView = Backbone.View.extend({
+    el: $("#contenedor"),
+    events: {
+      "click .algo": "function"
+    },
+    initialize: function() {
+      this.Foros = new ForoCollection();
+
+
+      //this.Foros.fetch();
+    },
+    render: function() {
+
+    }
+  });
+
+  return AppView;
 });

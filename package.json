@@ -24,10 +24,14 @@
   "devDependencies": {
     "vows": "0.6.x",
     "klass": "1.2.x",
-    "api-easy": "0.3.x"
+    "api-easy": "0.3.x",
+    "dox": "0.2.x",
+    "commander": "0.5.x",
+    "hogan.js": "1.0.x"
   },
   "scripts": {
     "start": "node server",
-    "test": "vows -v tests/*-test.js --spec -i"
+    "test": "vows tests/*-test.js --spec -i",
+    "docs": "dox < **/*.js | node bin/doc_builder.js > docs/index.html && dox < **/*.js > docs/index.json"
   }
 }
