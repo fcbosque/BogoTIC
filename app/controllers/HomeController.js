@@ -24,7 +24,11 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @render index
      */
     index: function () {
-      this.render('index', { foros: this.response.foros });
+      if (this.request.session.usuario) {
+        this.render('dashboard', { usuario: this.request.session.usuario });
+      } else {
+        this.render('index', { foros: this.response.foros });
+      }
     },
     /**
      * Ruta de acerca

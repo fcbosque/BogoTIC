@@ -137,15 +137,17 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     authenticate: function (loginData, callback) {
       this.DBModel.findOne({correo:loginData.correo}, function (err, user) {
         if (err) throw new Erro(err);
+
         if (user) {
           var clave = crypto.createHmac('sha256', 'BOGOTIC').update(loginData.clave).digest('hex');
           if (clave === user.password) {
-            console.log('Autenticado COrrectamente');
             callback(null, user);
           } else {
+            console.log('Fallo Autenticacion');
             callback({message:'Datos Incorrectos'});
           }
         } else {
+          console.log('Solicitado un usuario que no existe', loginData);
           callback({message:'Correo no registrado'});
         }
       });

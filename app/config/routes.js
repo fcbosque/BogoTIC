@@ -68,6 +68,7 @@ module.exports = {
     ['get',   '/nuevo',     'Usuario', 'new'],
     ['get',   '/perfil',    'Usuario', 'getPerfil'],
     ['post',  '/login',     'Usuario', 'login'],
+    ['get',   '/logout',    'Usuario', 'logout'],
     ['get',   '/:username', 'Usuario', 'show'],
     ['del',   '/:username', 'Usuario', 'remove'],
     ['put',   '/:username', 'Usuario', 'modify']

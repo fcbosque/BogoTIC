@@ -148,16 +148,17 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var data = this.request.body.usuario;
       this.getModel('Usuario').authenticate(data, function (err, user) {
-        if (err) console.log(err);
+        if (err) self.request.flash('error', err.message);
         if (user) {
-          // @todo Poner en el middleware de sessiones.
-          self.response.usuario = user;
-          console.log('Mostrando', user);
-          self.render('../index');
+          self.request.session.usuario = user;
         } else {
-          self.response.message = { type: 'Error', message: 'El usuario no se encontro'};
-          self.response.redirect('/');
+          self.request.flash('error', 'El usuario no se encontro');
         }
+        self.response.redirect('/');
       });
+    },
+    logout: function () {
+      this.request.session.destroy();
+      this.response.redirect('/');
     }
   })

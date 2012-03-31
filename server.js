@@ -26,9 +26,10 @@ app.configure(function () {
   app.set('view engine', 'html')
   app.register('.html', matador.engine)
 
-  app.use(matador.cookieParser())
-  app.use(matador.bodyParser())
   app.use(matador.methodOverride())
+  app.use(matador.bodyParser())
+  app.use(matador.cookieParser())
+  app.use(matador.session({ secret:"SeSiOnEsDeBoGoTiC" }))
   app.use(matador.static(__dirname + '/public'))
 })
 
