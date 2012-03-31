@@ -114,7 +114,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     show: function(id, callback) {
       this.DBModel.findById(id, function(err, item) {
         if(err) throw new Error(err);
-        if(callback) callback(item);
+        if(callback) callback(err, item);
       });
     },
 
@@ -132,9 +132,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     
     remove: function(id, callback) {
       var _resource = this.DBModel.findById(id);
-      _resource.remove(function(err, callback) {
+      _resource.remove(function(err, confirm) {
         if(err) throw new Error(err);
-        if(callback) callback;
+        callback(err, confirm);
       });        
     },
 
@@ -170,7 +170,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     all: function(callback) {
       this.DBModel.find({}, function(err, items) {
         if(err) throw new Error(err);
-        if(callback) callback(items);
+        if(callback) callback(err, items);
       });
     },
 
@@ -206,7 +206,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         foro.preguntas.push(new self.Pregunta(pregunta));
         foro.save(function(err) {
           if(err) throw new Error(err);
-          callback(foro)
+          callback(err, foro);
         })
       })
     },
@@ -233,17 +233,14 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
       var self = this;
       this.DBModel.findById(foro, function(err, foro) {
         if(err) throw new Error(err);
-        for(var _pregunta in foro.preguntas) {
-          if(foro.preguntas[_pregunta]._id == pregunta) {
-            callback({
-              pregunta: foro.preguntas[_pregunta],
-              foro: {
-                id: foro._id,
-                nombre: foro.nombre
-              }
-            })
-          }
-        };
+        var pregunta = foro.preguntas.filter(function (preg) {
+          return (preg._id.toString() == preguntaId.toString());
+        });
+
+        callback(null, {
+          pregunta: pregunta[0],
+          foro: foro
+        });
       });
     },
     addParticipante: function(foro, participante, callback) {},
@@ -254,4 +251,4 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     remAlianza: function(foro, alianza, callback) {},
     addAsistente: function(foro, asistente, callback) {},
     remAsistente: function(foro, asistente, callback) {}
-  })
+  });

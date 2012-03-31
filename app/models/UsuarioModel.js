@@ -1,4 +1,4 @@
-/*!
+/*
  * This file is part of Foros BogoTIC.
  *
  * Foros BogoTIC is free software: you can redistribute it and/or modify
@@ -21,6 +21,8 @@
  * @api public
  */
 
+var crypto = require('crypto');
+
 module.exports = require(app.set('models') + '/ApplicationModel').extend(function() {
   var localidades = this.localidades;
   var ObjectId = this.ObjectId;
@@ -39,12 +41,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     twitter         : { type: String, required: false },
     foros           : { type: Array, required: false },
     avisos          : { type: Boolean, required: false, default: true },
+    password        : { type: String, required: false },
     mensajes        : [MensajeSchema],
     notificaciones  : [NotificacionSchema]
-  });
-
-  this.DBModel.plugin(this.mongooseAuth, {
-    password: true
   });
 
   var MensajeSchema = new this.Schema({
@@ -102,7 +101,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      */
 
     show: function(username, callback) {
-      this.DBModel.find({ username: username }, function(usuario, callback) {
+      this.DBModel.find({ username: username }, function(err, usuario) {
         if(err) throw new Error(err);
         if(callback) callback(usuario);
       })
@@ -130,7 +129,27 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      */
     
     create: function(resource, callback) {
+      resource.password = crypto.createHmac('sha256', 'BOGOTIC').update(resource.clave).digest('hex');
+      delete resource.clave;
       var _resource = new this.DBModel(resource);
       _resource.save(callback);
+    },
+    authenticate: function (loginData, callback) {
+      this.DBModel.findOne({correo:loginData.correo}, function (err, user) {
+        if (err) throw new Erro(err);
+
+        if (user) {
+          var clave = crypto.createHmac('sha256', 'BOGOTIC').update(loginData.clave).digest('hex');
+          if (clave === user.password) {
+            callback(null, user);
+          } else {
+            console.log('Fallo Autenticacion');
+            callback({message:'Datos Incorrectos'});
+          }
+        } else {
+          console.log('Solicitado un usuario que no existe', loginData);
+          callback({message:'Correo no registrado'});
+        }
+      });
     }
   })

@@ -31,7 +31,7 @@
   },
   "scripts": {
     "start": "node server",
-    "test": "vows test/*-test.js --spec -i",
+    "test": "vows tests/*-test.js --spec -i",
     "docs": "dox < **/*.js | node bin/doc_builder.js > docs/index.html && dox < **/*.js > docs/index.json"
   }
 }
