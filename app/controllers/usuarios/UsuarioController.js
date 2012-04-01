@@ -76,9 +76,10 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     create: function() {
       var self = this;
       var usuario = this.request.body.usuario;
-      this.getModel('Usuario').create(usuario, v.bind(this, function(usuario) {
+      this.getModel('Usuario').create(usuario, function(err, usuario) {
+        if (err) console.log(err);
         self.response.redirect("/");
-      }))
+      });
     },
 
     /**
@@ -142,5 +143,22 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       this.getModel('Usuario').modify(username, params, function(usuario) {
         self.send(200);
       });
+    },
+    login: function () {
+      var self = this;
+      var data = this.request.body.usuario;
+      this.getModel('Usuario').authenticate(data, function (err, user) {
+        if (err) self.request.flash('error', err.message);
+        if (user) {
+          self.request.session.usuario = user;
+        } else {
+          self.request.flash('error', 'El usuario no se encontro');
+        }
+        self.response.redirect('/');
+      });
+    },
+    logout: function () {
+      this.request.session.destroy();
+      this.response.redirect('/');
     }
   })

@@ -31,7 +31,7 @@ module.exports = require('matador').BaseController.extend(function () {
     allForos: function(callback) {
       var self = this;
       this.getModel('Foro').all(function(foros) {
-        self.response.foros = foros;
+        self.response.foros = (foros ? foros : []);
         return callback(null)
       })
     },
@@ -47,14 +47,13 @@ module.exports = require('matador').BaseController.extend(function () {
      */
 
     usuarioActual: function(callback) {
-      var self = this;
-      if(this.request.cookies.autorizado) {
-        this.getModel('Usuario').show(function(usuario) {
-          self.response.usuario = usuario;
-          return callback(null)
-        })
-      } else {
-        return callback(null)
+      var self = this,
+          user = this.request.session.usuario;
+
+      if (user) {
+        self.response.usuario = user;
       }
+
+      return callback(null)
     }
   });
