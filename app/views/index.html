@@ -16,27 +16,23 @@
       </blockquote>
     </div>
 
-    <div id="participate" class="span6">
-      <h2>¿Desea participar?</h2>
-      <form class="form-horizontal" action="/usuarios/login" method="POST">
-        <div class="form-actions">
+    <div class="span6 box">
+      <div class="box-inner">
+        <h2><span>¿Desea participar?</span></h2>
+        <form class="form-horizontal" action="/usuarios/login" method="POST">
           <div class="control-group">
             <label class="control-label" for="usuario[correo]">Correo Electr&oacute;nico</label>
             <div class="controls">
-                <input type="text" class="input-xlarge" name="usuario[correo]" size="30">
+              <input type="text" class="input-xlarge" name="usuario[correo]" size="30">
             </div>
           </div>
 
           <div class="control-group">
-             <label for="usuario[clave]" class="control-label">Contraseña</label>
-             <div class="controls">
-                <input type="password" class="input-xlarge" name="usuario[clave]" size="30">
-              </div>
-              <button type="submit" class="btn btn-primary controls" style="margin-top: 20px">Ingresar</button>
+            <label for="usuario[clave]" class="control-label">Contraseña</label>
+            <div class="controls">
+              <input type="password" class="input-xlarge" name="usuario[clave]" size="30">
+            </div>
           </div>
-          <a href="/usuarios/nuevo" class="btn btn-primary btn-large" >Crear cuenta nueva. »</a></p>
-        </div>
-
 
           <!-- <div class="control-group">
             <div class="controls">
@@ -46,8 +42,14 @@
                 </input>
               </label>
             </div>
-        </div> -->
+          </div> -->
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+          </div>
       </form>
+      <a href="/usuarios/nuevo" class="btn btn-primary btn-large" >Crear cuenta nueva. »</a></p>
+      </div>
 
     </div>
   </div>
