@@ -49,11 +49,36 @@ body {
 
 .logo {
   float: left;
-  margin-right: 52px;
+  margin: 5px 52px 0 0;
 }
 
 .nav-collapse {
-  margin: 13px 30px 0 30px;
+  margin: 0 30px;
+}
+
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+  background: none;
+}
+
+.navbar .nav > li > a {
+  padding: 20px 10px 21px;
+  text-shadow: none;
+}
+
+.navbar-search {
+  margin-top: 15px;
+}
+
+.navbar-search .search-query {
+  border: none;
+  background: #f5f5f5;
+  border-radius: 5px;
+  color: #555555;
+}
+
+.navbar-search .search-query:hover {
+  color: #555555;
 }
 
 /* Clase que interviene en el scroll */
@@ -63,6 +88,17 @@ body {
   width: 100%;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
 }
+
+.navbar .menu-fixed .active > a,
+.navbar .menu-fixed .active > a:hover {
+  color: #333333;
+}
+
+.navbar .menu-fixed .nav > li > a:hover {
+  color: #333333;
+}
+
+
 
 /* Subnav */
 .subnav {
