@@ -1,6 +1,14 @@
 body {
-  padding-top: 60px;
+  padding-top: 85px;
   padding-bottom: 40px;
+  background-color: #b0d766;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#b0d766), to(#e4f3f9));
+  background-image: -webkit-linear-gradient(top, #b0d7e6, #e4f3f9);
+  background-image: -moz-linear-gradient(top, #b0d7e6, #e4f3f9);
+  background-image: -ms-linear-gradient(top, #b0d7e6, #e4f3f9);
+  background-image: -o-linear-gradient(top, #b0d7e6, #e4f3f9);
+  background-image: linear-gradient(to bottom, #b0d7e6, #e4f3f9);
+
 }
 .sidebar-nav {
   padding: 9px 0;
@@ -11,11 +19,13 @@ body {
   padding: 35px 0 36px;
 }
 
-.navbar-fixed-top .brand {
-  padding-right: 0;
-  padding-left: 0;
-  margin-left: 20px;
-  float: right;
+.navbar {
+  margin: 0;
+}
+
+.navbar-fixed-top {
+  position: absolute;
+  padding: 0;
   font-weight: bold;
   color: #000;
   text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
@@ -23,8 +33,35 @@ body {
      -moz-transition: all .2s linear;
           transition: all .2s linear;
 }
-.navbar-fixed-top .brand:hover {
+.navbar-fixed-top {
   text-decoration: none;
+}
+
+.navbar-inner {
+  background: none;
+  box-shadow: none;
+}
+
+.navbar-inner .container{
+  margin: 0;
+  width: 100%;
+}
+
+.logo {
+  float: left;
+  margin-right: 52px;
+}
+
+.nav-collapse {
+  margin: 13px 30px 0 30px;
+}
+
+/* Clase que interviene en el scroll */
+.menu-fixed {
+  position: fixed;
+  background-color: #f5f5f5;
+  width: 100%;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
 }
 
 /* Subnav */
