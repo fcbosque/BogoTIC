@@ -40,6 +40,39 @@
     </div>
 
     <script data-main="/js/main" src="/js/require.js"></script>
+    <!-- Incluyo JQuery privisionalmente en esta vista, supongo que los scripts de manipulación 
+    del DOM realizan con backbone --> 
+    <script type="text/javascript" src="/js/libs/jquery/jquery-min.js"></script>
+    <script type="text/javascript" src="/js/libs/bootstrap/bootstrap-transition.js"></script>
+    <script type="text/javascript" src="/js/libs/bootstrap/bootstrap-carousel.js"></script>
+    <script>
+        
+        $(document).ready(function() {
+
+            $(".carousel").carousel({
+              interval: 3500,
+          });
+
+            var menu = $("#menu");
+            var navbarInner = $(".navbar-inner");
+            var view = $(window);
+
+            view.bind("scroll resize", function() {
+              var menuTop = menu.offset().top;
+              var viewTop = view.scrollTop();
+
+              if((viewTop > menuTop) && !navbarInner.is(".menu-fixed")) {
+                console.log("entra");
+                menu.height(menu.height());
+                navbarInner.addClass("menu-fixed");
+              } else if ((viewTop <= menuTop) && navbarInner.is(".menu-fixed")) {
+                console.log("sale")
+                menu.css("height", "auto");
+                navbarInner.removeClass("menu-fixed");
+              }
+            });
+        });
+    </script>
 
   <!--[if lt IE 7 ]>
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
