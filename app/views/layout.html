@@ -49,7 +49,9 @@
         
         $(document).ready(function() {
 
-            $(".carousel").carousel();
+            $(".carousel").carousel({
+              interval: 3500,
+          });
 
             var menu = $("#menu");
             var navbarInner = $(".navbar-inner");
