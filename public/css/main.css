@@ -226,6 +226,7 @@ body {
 
 /* Estilo para .hero-Unit */
 .hero-unit {
+  float: left;
   padding: 60px 30px 15px;
   margin-bottom: 60px;
   border-radius: 0;
@@ -246,6 +247,10 @@ body {
 }
 
 /* Estilo para carousel de imagenes de foros */
+.img-right {
+  float: right;
+}
+
 .carousel {
   float: right;
   width: 400px;
