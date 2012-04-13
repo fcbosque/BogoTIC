@@ -198,10 +198,25 @@ body {
  background-color: #f5f5f5;
 }
 
+.sidebar-custom h3 {
+  text-align: center;
+  background-color: #61acd6;
+  float: left;
+  font-size: 20px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  padding: 14px 0;
+  width: 100%;
+}
+
+.sidebar-custom h3 > a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
 .sidebar-inner {
-  background-color: #fffceb;
-  border: 1px solid #e3dcb2;
-  margin: 5px;
+  background-color: #ecf5f8;
+  border: 1px solid #c6e0e7;
+  margin: 60px 5px 5px;
   padding: 5px;
 }
 
