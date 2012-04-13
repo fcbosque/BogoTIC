@@ -245,6 +245,12 @@ body {
   padding: 15px 20px;
 }
 
+/* Estilo para carousel de imagenes de foros */
+.carousel {
+  float: right;
+  width: 400px;
+}
+
 /* Estilo para .box */
 .box {
   background-color: #f5f5f5;
