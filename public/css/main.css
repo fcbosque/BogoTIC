@@ -1,5 +1,5 @@
 body {
-  padding-top: 115px;
+  padding-top: 100px;
   padding-bottom: 40px;
   background-color: #b0d766;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#b0d766), to(#e4f3f9));
@@ -54,6 +54,10 @@ body {
 
 .nav-collapse {
   margin: 0 30px;
+}
+
+.navbar {
+  border-bottom: 1px solid #f5f5f5;
 }
 
 .navbar .nav .active > a,
