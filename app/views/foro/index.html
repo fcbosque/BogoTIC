@@ -21,6 +21,23 @@
           <p>Lorem ipsum dolor sit amet status tales <a href="#">Conocer más</a></p>
         </div>
           <a class="btn btn-primary btn-large" href="#">Ingresar al foro</a>
+        <div class="row-fluid">
+          <ul class="thumbnails">
+            {{#foros}}
+            <li class="span3">
+              <div id="thumbnail">
+                <a class="thumbnail" href="/foros/{{id}}"><img src="http://placehold.it/260x180" alt=""></a>
+                <h5 style="margin-bottom: 10px">{{nombre}} <small>{{fecha}}</small></h5>
+                <p>
+                  <span class="label">{{categoria}}</span>
+                </p>
+                <p>{{descripcion}}</p>
+                <p style="text-align:right"><a class="btn" href="/foros/{{id}}">Entrar</a></p>
+              </div>
+            </li>
+            {{/foros}}
+          </ul>
+        </div>
       </div>
     </div>
     
@@ -34,21 +51,4 @@
     </div>
 
   </div>
-
-    <div class="span6">
-      <ul class="thumbnails">
-        {{#foros}}
-        <li class="span3">
-          <div id="thumbnail">
-            <a class="thumbnail" href="/foros/{{id}}"><img src="http://placehold.it/260x180" alt=""></a>
-            <h5 style="margin-bottom: 10px">{{nombre}} <small>{{fecha}}</small></h5>
-            <p>
-              <span class="label">{{categoria}}</span>
-            </p>
-            <p>{{descripcion}}</p>
-            <p style="text-align:right"><a class="btn" href="/foros/{{id}}">Entrar</a></p>
-          </div>
-        </li>
-        {{/foros}}
-      </ul>
-    </div>
+</div>
