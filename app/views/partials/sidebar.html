@@ -1,8 +1,10 @@
-<div class="span2">
-  <div class="well sidebar-nav">
-    <ul class="nav nav-list">
-      <li class="nav-header"><a href="/foros"><i class="icon-home"></i> Listado de foros</a></li>
-      {{#foros}}<li><a href="/foros/{{id}}"><i class="icon-chevron-right"></i> {{nombre}}</a></li>{{/foros}}
-    </ul>
+<div class="span2 sidebar-custom">
+  <div class="sidebar-nav sidebar-inner">
+      <h3><a href="/foros">Listado de foros</a></li></h3>
+      <ul class="nav nav-list">
+        {{#foros}}<li><a href="/foros/{{id}}"><i class="icon-chevron-right"></i> {{nombre}}</a></li>{{/foros}}
+        <li>test</li>
+        <li>tes2</li>
+      </ul>
   </div>
 </div>

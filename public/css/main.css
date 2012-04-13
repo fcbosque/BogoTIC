@@ -193,6 +193,18 @@ body {
   }
 }
 
+/* Estilo custom para .sidebar */
+.sidebar-custom {
+ background-color: #f5f5f5;
+}
+
+.sidebar-inner {
+  background-color: #fffceb;
+  border: 1px solid #e3dcb2;
+  margin: 5px;
+  padding: 5px;
+}
+
 /* Estilo para .hero-Unit */
 .hero-unit {
   padding: 60px 30px 15px;
