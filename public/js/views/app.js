@@ -16,9 +16,9 @@
 */
 
 define([
-  "jquery",
-  "underscore",
-  "backbone",
+  "jQuery",
+  "Underscore",
+  "Backbone",
   "collections/foros",
   "views/foros"
   ], function($, _, Backbone, ForoCollection, ForoView) {

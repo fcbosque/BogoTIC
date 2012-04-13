@@ -17,13 +17,19 @@
 
 require.config({
   paths: {
-    jquery: 'libs/jquery/jquery-min',
-    bootstrap: 'libs/bootstrap/bootstrap-min',
-    underscore: 'libs/underscore/underscore-min',
-    backbone: 'libs/backbone/backbone-min'
+    jQuery: 'libs/jquery/jquery',
+    Bootstrap: 'libs/bootstrap/bootstrap',
+    Underscore: 'libs/underscore/underscore',
+    Backbone: 'libs/backbone/backbone'
   }
 });
 
-require(["views/app"], function(AppView) {
+require([
+  "views/app",
+  'order!libs/jquery/jquery',
+  'order!libs/bootstrap/bootstrap',
+  'order!libs/underscore/underscore',
+  'order!libs/backbone/backbone'
+], function(AppView) {
   var appView = new AppView();
 });
