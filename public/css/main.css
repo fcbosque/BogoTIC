@@ -263,6 +263,19 @@ body {
   padding: 60px 30px 15px;
 }
 
+.box-inner .center {
+  text-align: center;
+}
+
+.box-inner > ul.center {
+  list-style: none;
+  margin: 0;
+}
+
+.box-inner > ul.center > li {
+  margin-bottom: 20px;
+}
+
 .box h2 {
   float: left;
   color: #ffffff;
