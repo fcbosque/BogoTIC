@@ -1,6 +1,5 @@
 body {
   padding-top: 100px;
-  padding-bottom: 40px;
   background-color: #b0d766;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#b0d766), to(#e4f3f9));
   background-image: -webkit-linear-gradient(top, #b0d7e6, #e4f3f9);
@@ -276,4 +275,9 @@ body {
 .box h2 > span {
   background-color: #a5ad2b;
   padding: 15px 20px;
+}
+
+/* Estilos para .footer */
+.footer {
+  padding: 10px 0;
 }
