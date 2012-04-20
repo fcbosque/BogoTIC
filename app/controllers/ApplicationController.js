@@ -67,6 +67,10 @@ module.exports = require('matador').BaseController.extend(function () {
      * iniciada con un usuario. De otro modo lo mandamos al inicio '/'
      */
     estaLogueado: function (callback) {
+      if (this.request.url === "/usuarios/nuevo") {
+        // Hack para permitir mostrar el formulario de creacion de usuario.
+        return callback(null);
+      } else
       if (this.request.session.usuario) {
         return callback(null);
       } else {
