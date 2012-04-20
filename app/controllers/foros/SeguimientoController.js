@@ -41,12 +41,14 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var foro = this.request.params.foro;
       var seguimiento = this.request.params.id;
       this.getModel('Foro').show(foro, function(err, foro) {
-        self.getModel('Seguimiento').all(foro, function(foro, seguimientos) {
-          self.render('index', {
-            foros: self.response.foros,
-            foro: foro,
-            seguimientos: seguimientos
-          });
+        if (foro) {
+          self.locals.foro = foro;
+        }
+        self.getModel('Seguimiento').all(foro, function(err, seguimientos) {
+          if (seguimientos) {
+            self.locals.seguimientos = seguimientos;
+          }
+          self.render('index', self.locals);
         })
       });
     },
@@ -72,13 +74,12 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var foro = this.request.params.foro;
       this.getModel('Foro').show(foro, function(err, foro) {
-        self.render('new', {
-          foros: self.response.foros,
-          foro: {
-            id: foro._id,
+        if (foro) {
+          self.locals.foro = { id: foro._id,
             nombre: foro.nombre
-          }
-        });
+          };
+        }
+        self.render('new', self.locals);
       });
     },
 
@@ -129,18 +130,19 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
 
     show: function() {
       var self = this;
-      var foro = this.request.params.foro;
-      var seguimiento = this.request.params.id;
-      this.getModel('Foro').show(foro, function(err, foro) {
-        self.getModel('Seguimiento').show(foro, seguimiento, function(foro, seguimiento) {
-          self.render('show', {
-            foros: self.response.foros,
-            foro: {
-              id: foro.id,
-              nombre: foro.nombre
-            },
-            seguimiento: seguimiento
-          });
+      var foroId = this.request.params.foro;
+      var seguimientoId = this.request.params.id;
+      this.getModel('Foro').show(foroId, function(err, foro) {
+        if (foro) {
+          self.locals.foro = { id: foro.id,
+            nombre: foro.nombre
+          };
+        }
+        self.getModel('Seguimiento').show(seguimientoId, function(err, seguimiento) {
+          if (seguimiento) {
+            self.locals.seguimiento = seguimiento;
+          }
+          self.render('show', self.locals);
         });
       });
     },

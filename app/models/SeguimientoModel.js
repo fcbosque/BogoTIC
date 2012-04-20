@@ -113,20 +113,17 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * callback especificado en el controlador con el objeto del
      * grupo de seguimiento.
      *
-     * La busqueda se realiza mediante `foro` y se pasa como
-     * parámetro en el `callback` que especifica el controlador.
      *
      * @api public
-     * @param {Integer} foro
      * @param {Integer} id
      * @param {Function} callback
      * @see ForoController.show
      */
 
-    show: function(foro, id, callback) {
+    show: function(id, callback) {
       this.DBModel.findById(id, function(err, item) {
         if(err) throw new Error(err);
-        if(callback) callback(foro, item);
+        if(callback) callback(err, item);
       });
     },
     
@@ -199,7 +196,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         _foro.localidad = foro.localidad;
         _foro.fecha = foro.fecha;
         _foro.categoria = foro.categoria;
-        if(callback) callback(_foro, items);
+        if(callback) callback(err, _foro, items);
       });
     },
 
