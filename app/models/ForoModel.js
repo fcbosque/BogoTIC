@@ -233,12 +233,12 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
       var self = this;
       this.DBModel.findById(foro, function(err, foro) {
         if(err) throw new Error(err);
-        var pregunta = foro.preguntas.filter(function (preg) {
-          return (preg._id.toString() == preguntaId.toString());
+        var preguntaCorrecta = foro.preguntas.filter(function (preg) {
+          return (preg._id.toString() == pregunta.toString());
         });
 
         callback(null, {
-          pregunta: pregunta[0],
+          pregunta: preguntaCorrecta[0],
           foro: foro
         });
       });
