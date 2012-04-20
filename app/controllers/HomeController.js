@@ -25,9 +25,9 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      */
     index: function () {
       if (this.request.session.usuario) {
-        this.render('dashboard', { usuario: this.request.session.usuario });
+        this.render('dashboard', this.locals);
       } else {
-        this.render('index', { foros: this.response.foros });
+        this.render('index', this.locals);
       }
     },
     /**
@@ -37,7 +37,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @render acerca
      */
     acerca: function() {
-      this.render('acerca', { foros: this.response.foros });
+      this.render('acerca', this.locals);
     },
     /**
      * Ruta de ayuda
@@ -46,7 +46,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @render ayuda
      */
     ayuda: function() {
-      this.render('ayuda', { foros: this.response.foros });
+      this.render('ayuda', this.locals);
     },
     /**
      * Ruta de TOS
@@ -55,6 +55,6 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @render tos
      */
     tos: function() {
-      this.render('tos', { foros: this.response.foros });
+      this.render('tos', this.locals);
     }
   })
