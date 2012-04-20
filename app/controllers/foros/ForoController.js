@@ -33,8 +33,6 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      */
 
     index: function() {
-      var self = this;
-      
       this.render('index', this.locals);
     },
 
@@ -101,16 +99,15 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var foro = this.request.params.id
       this.getModel('Foro').show(foro, function(err, foro) {
-        self.render('show', {
-          foros: self.locals.foros,
-          foro: {
-            nombre: foro.nombre,
+        if (foro) {
+          self.locals.foro = { nombre: foro.nombre,
             id: foro._id,
             fecha: foro.fecha,
             preguntas: foro.preguntas,
             descripcion: foro.descripcion
           }
-        })
+        }
+        self.render('show', self.locals);
       })
     },
 
