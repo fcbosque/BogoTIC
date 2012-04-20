@@ -46,7 +46,9 @@
       <div class="box-inner">
         <p>Actualmente tenemos <strong>{{total_foros}}</strong> foro(s) abierto(s):</p>
           {{{seguimientos}}}
-        <a class="btn btn-primary btn-large" href="/foros/nuevo"><i class="icon-flag icon-white"></i> Crear nuevo foro</a>
+        {{#usuario}}
+          <a class="btn btn-primary btn-large" href="/foros/nuevo"><i class="icon-flag icon-white"></i> Crear nuevo foro</a>
+        {{/usuario}}
       </div>
     </div>
 

@@ -19,6 +19,7 @@ module.exports = require('matador').BaseController.extend(function () {
   this.viewFolder = ''
   this.addBeforeFilter(this.allForos)
   this.addBeforeFilter(this.usuarioActual)
+  this.addBeforeFilter(['new'], this.estaLogueado)
 
   // Creo este espacio para ir almacenando las locals que deban meter
   // los otros middlewares.
@@ -59,5 +60,17 @@ module.exports = require('matador').BaseController.extend(function () {
       }
 
       return callback(null)
+    },
+
+    /**
+     * Verifico si el usuario que solicita el recurso tiene una session
+     * iniciada con un usuario. De otro modo lo mandamos al inicio '/'
+     */
+    estaLogueado: function (callback) {
+      if (this.request.session.usuario) {
+        return callback(null);
+      } else {
+        this.response.redirect('/');
+      }
     }
   });
