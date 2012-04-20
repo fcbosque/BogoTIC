@@ -34,7 +34,7 @@ module.exports = require('matador').BaseController.extend(function () {
 
     allForos: function(callback) {
       var self = this;
-      this.getModel('Foro').all(function(foros) {
+      this.getModel('Foro').all(function(err, foros) {
         self.locals.foros = (foros ? foros : []);
         return callback(null)
       })
