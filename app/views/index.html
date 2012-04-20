@@ -93,3 +93,24 @@
     </div>
   </div>
 </div>
+<script>
+  function scrollResize (menu, navbarInner, view) {
+    return function () {
+      var menuTop = menu.offset().top;
+      var viewTop = view.scrollTop();
+
+      if((viewTop > menuTop) && !navbarInner.is(".menu-fixed")) {
+        menu.height(menu.height());
+        navbarInner.addClass("menu-fixed");
+      } else if ((viewTop <= menuTop) && navbarInner.is(".menu-fixed")) {
+        //menu.css("height", "auto"); // Comento para evitar la linea blanca moviendose.(chrome solamente)
+        navbarInner.removeClass("menu-fixed");
+      }
+    }
+  }
+
+  $(document).ready(function() {
+      $(".carousel").carousel({ interval: 3500 });
+      $(window).bind("scroll resize", scrollResize($("#menu"), $(".navbar-inner"), $(window)));
+  });
+</script>
