@@ -100,7 +100,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     show: function() {
       var self = this;
       var foro = this.request.params.id
-      this.getModel('Foro').show(foro, function(foro) {
+      this.getModel('Foro').show(foro, function(err, foro) {
         self.render('show', {
           foros: self.locals.foros,
           foro: {
