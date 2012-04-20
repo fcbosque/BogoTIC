@@ -187,16 +187,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      */
 
     all: function(foro, callback) {
-      var ObjectId = this.ObjectId;
       this.DBModel.find({ foro: foro }, function(err, items) {
         if(err) throw new Error(err);
-        var _foro = {};
-        _foro.id = foro._id;
-        _foro.nombre = foro.nombre;
-        _foro.localidad = foro.localidad;
-        _foro.fecha = foro.fecha;
-        _foro.categoria = foro.categoria;
-        if(callback) callback(err, _foro, items);
+        if(callback) callback(err, items);
       });
     },
 

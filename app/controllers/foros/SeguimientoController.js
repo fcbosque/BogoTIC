@@ -42,7 +42,12 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var seguimiento = this.request.params.id;
       this.getModel('Foro').show(foro, function(err, foro) {
         if (foro) {
-          self.locals.foro = foro;
+          self.locals.foro = {
+            id: foro._id,
+            nombre: foro.nombre,
+            fecha: foro.fecha,
+            categoria: foro.categoria
+          };
         }
         self.getModel('Seguimiento').all(foro, function(err, seguimientos) {
           if (seguimientos) {
