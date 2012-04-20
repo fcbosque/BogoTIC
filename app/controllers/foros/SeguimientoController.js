@@ -40,7 +40,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var foro = this.request.params.foro;
       var seguimiento = this.request.params.id;
-      this.getModel('Foro').show(foro, function(foro) {
+      this.getModel('Foro').show(foro, function(err, foro) {
         self.getModel('Seguimiento').all(foro, function(foro, seguimientos) {
           self.render('index', {
             foros: self.response.foros,
@@ -71,7 +71,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     new: function() {
       var self = this;
       var foro = this.request.params.foro;
-      this.getModel('Foro').show(foro, function(foro) {
+      this.getModel('Foro').show(foro, function(err, foro) {
         self.render('new', {
           foros: self.response.foros,
           foro: {
@@ -131,7 +131,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var foro = this.request.params.foro;
       var seguimiento = this.request.params.id;
-      this.getModel('Foro').show(foro, function(foro) {
+      this.getModel('Foro').show(foro, function(err, foro) {
         self.getModel('Seguimiento').show(foro, seguimiento, function(foro, seguimiento) {
           self.render('show', {
             foros: self.response.foros,

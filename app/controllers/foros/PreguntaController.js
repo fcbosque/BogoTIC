@@ -39,7 +39,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     index: function() {
       var self = this;
       var foro = this.request.params.foro;
-      this.getModel('Foro').show(foro, function(foro) {
+      this.getModel('Foro').show(foro, function(err, foro) {
         self.render('index', {
           foros: self.response.foros,
           foro: {
@@ -69,7 +69,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     new: function() {
       var self = this;
       var foro = this.request.params.foro;
-      this.getModel('Foro').show(foro, function(foro) {
+      this.getModel('Foro').show(foro, function(err, foro) {
         self.render('new', {
           foros: self.response.foros,
           foroId: foro._id
@@ -125,7 +125,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var foro = this.request.params.foro;
       var pregunta = this.request.params.id;
-      this.getModel('Foro').getPregunta(foro, pregunta, function(item) {
+      this.getModel('Foro').getPregunta(foro, pregunta, function(err, item) {
         self.render('show', {
           foros: self.response.foros,
           foro: {
@@ -150,7 +150,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     remove: function() {
       var self = this;
       var id = this.request.params.id;
-      this.getModel('Pregunta').remove(id, function(pregunta) {
+      this.getModel('Pregunta').remove(id, function(err, pregunta) {
         self.send(200);
       })
     },
@@ -168,7 +168,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     modify: function() {
       var self = this;
       var id = this.request.params.id;
-      this.getModel('Pregunta').modify(id, params, function(pregunta) {
+      this.getModel('Pregunta').modify(id, params, function(err, pregunta) {
         self.send(200);
       });
     }
