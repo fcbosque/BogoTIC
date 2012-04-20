@@ -24,6 +24,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @render index
      */
     index: function () {
+      this.locals.esIndex = true;
       if (this.request.session.usuario) {
         this.render('dashboard', this.locals);
       } else {
