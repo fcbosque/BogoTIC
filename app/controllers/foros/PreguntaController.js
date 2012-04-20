@@ -127,7 +127,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
           self.locals.foro = { id: item.foro.id,
             nombre: item.foro.nombre
           };
-          self.locals.pregunt = item.pregunta;
+          self.locals.pregunta = item.pregunta;
         }
         self.render('show', self.locals);
       })
