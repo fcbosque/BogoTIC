@@ -2,9 +2,9 @@
       <h3><a href="/foros">Listado de foros</a></li></h3>
   <div class="sidebar-nav sidebar-inner">
       <ul class="nav nav-list">
-        {{#foros}}<li><a href="/foros/{{id}}"><i class="icon-chevron-right"></i> {{nombre}}</a></li>{{/foros}}
-        <li>test</li>
-        <li>tes2</li>
+        {{#foros}}
+          <li><a href="/foros/{{id}}"><i class="icon-chevron-right"></i> {{nombre}}</a></li>
+        {{/foros}}
       </ul>
   </div>
 </div>
