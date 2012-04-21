@@ -200,15 +200,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      */
 
     addPregunta: function(foro, pregunta, callback) {
-      var self = this;
-      this.DBModel.findById(foro, function(err, foro) {
-        if(err) throw new Error(err);
-        foro.preguntas.push(new self.Pregunta(pregunta));
-        foro.save(function(err) {
-          if(err) throw new Error(err);
-          callback(err, foro);
-        })
-      })
+      _add(this, 'preguntas', 'Pregunta', foro, pregunta, callback);
     },
 
     /**
@@ -243,12 +235,60 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         });
       });
     },
-    addParticipante: function(foro, participante, callback) {},
-    remParticipante: function(foro, participante, callback) {},
-    addSponsor: function(foro, sponsor, callback) {},
-    remSponsor: function(foro, sponsor, callback) {},
-    addAlianza: function(foro, alianza, callback) {},
-    remAlianza: function(foro, alianza, callback) {},
-    addAsistente: function(foro, asistente, callback) {},
-    remAsistente: function(foro, asistente, callback) {}
+    addParticipante: function(foro, participante, callback) {
+      _add(this, 'participantes', 'Participante', foro, participante, callback);
+    },
+    remParticipante: function(foro, participante, callback) {
+      throw new Error({
+        message: "NO IMPLEMENTADO AUN"
+      })
+    },
+    addSponsor: function(foro, sponsor, callback) {
+      _add(this, 'sponsors', 'Sponsor', foro, sponsor, callback);
+    },
+    remSponsor: function(foro, sponsor, callback) {
+      throw new Error({
+        message: "NO IMPLEMENTADO AUN"
+      })
+    },
+    addAlianza: function(foro, alianza, callback) {
+      _add(this, 'alianzas', 'Alianza', foro, alianza, callback);
+    },
+    remAlianza: function(foro, alianza, callback) {
+      throw new Error({
+        message: "NO IMPLEMENTADO AUN"
+      })
+    },
+    addAsistente: function(foro, asistente, callback) {
+      _add(this, 'asistentes', 'Asistente', foro, asistente, callback);
+    },
+    remAsistente: function(foro, asistente, callback) {
+      throw new Error({
+        message: "NO IMPLEMENTADO AUN"
+      })
+    }
   });
+
+
+/**
+ * Funcion para agregar recurso al foro.
+ * ES una funcion interna para simplificar las funciones
+ * de agregar/quitar que se definen para los submodelos del foro
+ * como el participante, asistente, sponsor y demas modelos
+ * @param self {Object} Es la clase en si, es el mismo 'this' de arriba.
+ * @param recurso {String} El nombre del recurso que desea agregar.
+ * @param clase {String} La clase a instanciar como el nuevo recurso.
+ * @param foroId {String} ID del foro al que se le agregara el recurso.
+ * @param datos {Object} Datos a guardar como recurso de este foro.
+ * @param callback {Function} Funcion a llamar al final con el FORO.
+ */
+function _add(self, recurso, clase, foroId, datos, callback) {
+  self.DBModel.findById(foroId, function(err, foro) {
+    if(err) throw new Error(err);
+    foro[recurso].push(new self[clase](datos));
+    foro.save(function(err) {
+      if(err) throw new Error(err);
+      callback(err, foro);
+    })
+  })
+}
