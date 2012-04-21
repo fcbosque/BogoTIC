@@ -13,8 +13,8 @@ app.configure(function () {
 var ForoModel = require('../app/models/ForoModel.js');
 
 var testForo = {
-  nombre: 'Foro de prueba',
-  descripcion: 'Probando la descripcion',
+  nombre: "Ciudadania y TIC's",
+  descripcion: "Espacio para la participacion ciudadana usando las TIC's",
   fecha: new Date(),
   abierto: true
 };
@@ -188,6 +188,70 @@ vows.describe('app/models/ForoModel').addBatch({
          assert.ok(res.pregunta._id);
          assert.equal(res.pregunta.contenido.length, 57);
         },
+      }
+    }
+  }
+}).addBatch({
+  "Creando un foro": {
+    topic: function () {
+      var self = this;
+      var Foro = new ForoModel();
+      testForo.nombre = "Muchas Preguntas creadas";
+      Foro.create(testForo, function (err, foro) {
+        self.callback(err, Foro, foro);
+      });
+    },
+    "con muchas preguntas": {
+      topic: function (Foro, foro) {
+        var self = this;
+
+        function genPreguntas (preguntas) {
+          var retorno = [];
+          v.each(preguntas, function(pregunta) {
+            pregunta.fecha = new Date();
+            pregunta.contenido = "Espero que la pregunta quede guardada en la base de datos";
+            retorno.push(function (cb) {
+              Foro.addPregunta(foro._id, pregunta, function (err, foro) {
+                if (!err && foro) cb(null);
+              });
+            });
+          });
+          return retorno;
+        }
+
+        v.waterfall(genPreguntas(
+          [
+            {
+              autor: "AUtor Uno",
+              localidad: "Kennedy",
+              titulo: "¿Pregunta numero uno?"
+            }, {
+              autor: "Autor Dos",
+              localidad: "Chapinero",
+              titulo: "¿Pregunta numero dos?"
+            }, {
+              autor: "Autor Tres",
+              localidad: "Otra Localidad",
+              titulo: "¿Pregunta numero tres?"
+            }, {
+              autor: "Autor Cuatro",
+              localidad: "Santa Fe",
+              titulo: "¿Pregunta numero cuatro?"
+            }, {
+              autor: "Autor Cinco",
+              localidad: "Usaquen",
+              titulo: "¿Pregunta numero cinco?"
+            }
+          ]
+        ), function () {
+          Foro.show(foro._id, self.callback);
+        });
+      },
+      "Debe conterlas todas": function (err, foro) {
+        assert.isNull(err);
+        assert.ok(foro);
+        assert.isArray(foro.preguntas);
+        assert.equal(foro.preguntas.length, 5);
       }
     }
   }

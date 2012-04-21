@@ -36,10 +36,10 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     index: function() {
       var self = this;
       this.getModel('Usuario').all(function(usuarios) {
-        self.render('index', {
-          usuarios: usuarios,
-          foros: this.response.foros
-        })
+        if (usuarios) {
+          self.locals.usuarios = usuarios;
+        }
+        self.render('index', self.locals);
       })
     },
 
@@ -56,7 +56,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      */
 
     new: function() {
-      this.render('new', { foros: this.response.foros });
+      this.render('new', this.locals);
     },
 
     /**
@@ -101,10 +101,10 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var username = this.request.params.username;
       this.getModel('Usuario').show(username, function(usuario) {
-        self.render('show', {
-          usuario: usuario,
-          foros: this.response.foros
-        })
+        if (usuario) {
+          self.locals.usuario = usuario;
+        }
+        self.render('show', self.locals);
       })
     },
 

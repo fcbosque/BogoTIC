@@ -19,6 +19,11 @@ module.exports = require('matador').BaseController.extend(function () {
   this.viewFolder = ''
   this.addBeforeFilter(this.allForos)
   this.addBeforeFilter(this.usuarioActual)
+  this.addBeforeFilter(['new'], this.estaLogueado)
+
+  // Creo este espacio para ir almacenando las locals que deban meter
+  // los otros middlewares.
+  this.locals = {};
 }).methods({
     /**
      * Agrega un arreglo que contiene todos los foros al objeto
@@ -30,8 +35,8 @@ module.exports = require('matador').BaseController.extend(function () {
 
     allForos: function(callback) {
       var self = this;
-      this.getModel('Foro').all(function(foros) {
-        self.response.foros = (foros ? foros : []);
+      this.getModel('Foro').all(function(err, foros) {
+        self.locals.foros = (foros ? foros : []);
         return callback(null)
       })
     },
@@ -51,9 +56,25 @@ module.exports = require('matador').BaseController.extend(function () {
           user = this.request.session.usuario;
 
       if (user) {
-        self.response.usuario = user;
+        self.locals.usuario = user;
       }
 
       return callback(null)
+    },
+
+    /**
+     * Verifico si el usuario que solicita el recurso tiene una session
+     * iniciada con un usuario. De otro modo lo mandamos al inicio '/'
+     */
+    estaLogueado: function (callback) {
+      if (this.request.url === "/usuarios/nuevo") {
+        // Hack para permitir mostrar el formulario de creacion de usuario.
+        return callback(null);
+      } else
+      if (this.request.session.usuario) {
+        return callback(null);
+      } else {
+        this.response.redirect('/');
+      }
     }
   });
