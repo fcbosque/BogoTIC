@@ -36,6 +36,19 @@ de entorno `NODE_ENV`:
   * `TESTING`
   * `PRODUCTION`
 
+### Corriendo las pruebas
+
+Las pruebas estan escritas en [Vows](http://vowsjs.org/) un framework de pruebas en node.
+Es muy bueno que se familiarize con este framework ya que es el usado en `tests/`
+
+Tenemos 2 clases de tests, los **server-side** y los **client-side**
+
+Las pruebas de client-side adicionalmente usan [Vows-BDD](https://github.com/jmreidy/vows-bdd) y [Zombie](https://github.com/assaf/zombie)
+
+Para correr todas las pruebas solamente ejecute:
+
+`% npm test`
+
 ## Participación y desarrollo
 
 Empieza por enviarnos un pull request al repositorio solucionando
