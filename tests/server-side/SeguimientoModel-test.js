@@ -4,13 +4,13 @@ var vows = require('vows'),
     app = global.app = require('matador').createServer();
 
 app.configure(function () {
-  app.set('models', __dirname + '/../app/models')
-  app.set('helpers', __dirname + '/../app/helpers')
-  app.set('views', __dirname + '/../app/views')
-  app.set('controllers', __dirname + '/../app/controllers')
+  app.set('models', __dirname + '/../../app/models')
+  app.set('helpers', __dirname + '/../../app/helpers')
+  app.set('views', __dirname + '/../../app/views')
+  app.set('controllers', __dirname + '/../../app/controllers')
 });
 
-var SeguimientoModel = require('../app/models/SeguimientoModel.js');
+var SeguimientoModel = require('../../app/models/SeguimientoModel.js');
 
 var testSeguimiento = {
   titulo: "Veeduria de Presupuesto",
@@ -21,7 +21,7 @@ var testSeguimiento = {
 var testContext = {};
 
 function createForo (callback) {
-  var ForoModel = require('../app/models/ForoModel.js');
+  var ForoModel = require('../../app/models/ForoModel.js');
 
   var testForo = {
     nombre: "Rendicion Cuentas Presupuesto",

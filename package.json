@@ -27,11 +27,13 @@
     "api-easy": "0.3.x",
     "dox": "0.2.x",
     "commander": "0.5.x",
-    "hogan.js": "1.0.x"
+    "hogan.js": "1.0.x",
+    "vows-bdd": "0.2.x",
+    "zombie": "0.12.x"
   },
   "scripts": {
     "start": "node server",
-    "test": "vows tests/*-test.js --spec -i",
+    "test": "vows tests/**/*-test.js --spec -i",
     "docs": "dox < **/*.js | node bin/doc_builder.js > docs/index.html && dox < **/*.js > docs/index.json"
   }
 }

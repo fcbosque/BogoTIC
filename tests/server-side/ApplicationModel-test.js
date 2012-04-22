@@ -2,7 +2,7 @@ var vows = require('vows'),
     assert = require('assert'),
     Class = global.Class = require('klass');
 
-var AppModel = require('../app/models/ApplicationModel.js');
+var AppModel = require('../../app/models/ApplicationModel.js');
 
 vows.describe('app/models/ApplicationModel').addBatch({
   "Modelo principal de la aplicacion": {
