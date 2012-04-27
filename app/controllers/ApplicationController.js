@@ -20,6 +20,7 @@ module.exports = require('matador').BaseController.extend(function () {
   this.addBeforeFilter(this.allForos)
   this.addBeforeFilter(this.usuarioActual)
   this.addBeforeFilter(['new'], this.estaLogueado)
+  this.addBeforeFilter(this.errorsToLocals)
 
   // Creo este espacio para ir almacenando las locals que deban meter
   // los otros middlewares.
@@ -76,5 +77,25 @@ module.exports = require('matador').BaseController.extend(function () {
       } else {
         this.response.redirect('/');
       }
+    },
+
+    /**
+     * Copio los errores guardados dentro de la sesion a los locales del proximo render
+     */
+    errorsToLocals: function (callback) {
+      var self = this;
+      this.locals.errores = [];
+      v.each(['success', 'info', 'error'], function (tipo) {
+        var mensajes = self.request.flash(tipo);
+        if (mensajes.length > 0) {
+          v.each(mensajes, function (mensaje) {
+            self.locals.errores.push({
+              tipo: tipo,
+              message: mensaje
+            })
+          });
+        }
+      })
+      return callback(null);
     }
   });

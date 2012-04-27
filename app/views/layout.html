@@ -30,6 +30,18 @@
     <section id="navbar">{{> navbar}}</section>
 
     <div class="container-fluid">
+      {{#errores}}
+        <div class="row">
+          <div class="span8 offset4">
+            <div class="alert alert-{{tipo}}">
+              <button class="close" data-dismiss="alert">×</button>
+              {{message}}
+            </div>
+            <br />
+          </div>
+        </div>
+      {{/errores}}
+
       <div class="row-fluid">
         {{> sidebar }}
         {{{body}}}

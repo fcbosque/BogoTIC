@@ -77,7 +77,12 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       var self = this;
       var usuario = this.request.body.usuario;
       this.getModel('Usuario').create(usuario, function(err, usuario) {
-        if (err) console.log(err);
+        if (err) {
+          console.log(err);
+          self.request.flash('error', err.message);
+        } else {
+          self.request.flash('success', 'Usuario creado con exito!')
+        }
         self.response.redirect("/");
       });
     },

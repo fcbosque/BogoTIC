@@ -34,7 +34,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     edad            : { type: Number, required: false },
     educacion       : { type: String, required: false },
     correo          : { type: String, required: true },
-    avatar          : { type: String, required: true, default: 'avatar.png' },
+    avatar          : { type: String, required: false, default: 'avatar.png' },
     fecha           : { type: Date, required: true, default: Date.now },
     karma           : { type: Number, required: false, default: 0 },
     url             : { type: String, required: false, default: "http://bogotic.com" },
