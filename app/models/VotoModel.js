@@ -27,8 +27,8 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
   var ObjectId = this.ObjectId;
   var VotoSchema = new this.Schema({
     modelo   : { type: String, required: true },
-    modeloId : { type: ObjectId, required: true },
-    usuario  : { type: ObjectId, required: true },
+    modeloId : { type: String, required: true },
+    usuario  : { type: String, required: true },
     voto     : { type: Number, required: true, enum: [1, -1] }
   });
 
@@ -38,12 +38,36 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
    * Este metodo permitira registrar los votos
    */
   registrarVoto: function (modelo, modeloID, usuario, voto, callback) {
-    var voto = new this.DBModel({
+    // @todo Agregar un find aca por los datos para verificar que no este
+    // duplicando voto.
+    var self = this;
+    var votando = new this.DBModel({
       modelo: modelo,
       modeloId: modeloID,
       usuario: usuario,
       voto: voto
     });
-    voto.save(callback);
+    votando.save(function (err, doc) {
+      // Agregamos el voto al modelo elejido
+      var modelos = modelo.split(':');
+      var query = {};
+      // Creamos la condicion de acuerdo al subrecurso mencionado
+      query[modelos[1] + '._id'] = new self.mongoose.Types.ObjectId(modeloID);
+      // Traemos el modelo de acuerdo al recurso especificado
+      self.mongoose.model(modelos[0]).find(query, function (err, foros) {
+        // Filtramos la pregunta correcta.
+        var correcto = foros[0][modelos[1]].filter(function (preg) {
+          return (preg._id.toString() == modeloID);
+        });
+        // Ajustamos el voto
+        correcto[0].votos += voto;
+        correcto[0].votantes++;
+        // Pasamos la lista de preguntas actualizada
+        var diferencia = {};
+        diferencia[modelos[1]] = foros[0][modelos[1]];
+        // Actualizamos el recurso
+        self.mongoose.model(modelos[0]).update(query, diferencia, callback);
+      })
+    });
   }
 });

@@ -72,7 +72,8 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     fecha        : { type: Date, required: true, default: Date.now },
     autor        : { type: String, required: true },
     votos        : { type: Number, default: 0 },
-    favs         : { type: Number, default: 0 }
+    favs         : { type: Number, default: 0 },
+    votantes     : { type: Number, default: 0 }
   });
 
   this.Participante = this.mongoose.model('Participante', ParticipanteSchema);

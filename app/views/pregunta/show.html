@@ -26,11 +26,11 @@
           <div class="well">
             <h1>{{pregunta.titulo}}</h1>
             <blockquote><p>{{pregunta.contenido}}</p><small>{{pregunta.autor}}</small></blockquote>
-            <a id="votarUp" class="btn btn-success" href="#">
+            <a id="votarUp" class="btn btn-success" href="#" data-loading-text="Votando...">
               <i class="icon-upload icon-white"></i>
               Votar a favor
             </a>
-            <a id="votarDown" class="btn btn-danger" href="#">
+            <a id="votarDown" class="btn btn-danger" href="#" data-loading-text="Votando...">
               <i class="icon-download icon-white"></i>
               Votar en contra
             </a>
@@ -41,7 +41,7 @@
           <div class="well">
             <h2>Estadisticas</h2>
             <p>Favs: {{pregunta.favs}}</p>
-            <p>Votos: {{pregunta.votos}}</p>
+            <p>Votacion: {{pregunta.votos}} / Numero de Votantes: {{pregunta.votantes}}</p>
           </div>
         </div>
 
@@ -51,22 +51,29 @@
 </div>
 <script type="text/javascript">
 window.onload = function (){
-  function votar (v, boton) {
+  function votar (v) {
     var voto = ( v ? 'favor' : 'contra');
     $.post(location.pathname + '/votar', {
       voto: voto
     }, function (data, status) {
-      console.log('RES', arguments);
+      $('#votarUp, #votarDown').fadeOut(500, function () {
+        $(this).remove();
+      });
     }).error(function (xhr) {
       alert(xhr.status + ' ' + xhr.responseText);
     });
   }
 
-  $('#votarUp').click(function () {
+  var btnUp = $('#votarUp'),
+      btnDown = $('#votarDown');
+
+  btnUp.click(function () {
+    btnUp.button('loading');
     votar(true);
   });
 
-  $('#votarDown').click(function () {
+  btnDown.click(function () {
+    btnDown.button('loading');
     votar(false);
   });
 }
