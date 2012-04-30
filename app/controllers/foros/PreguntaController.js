@@ -167,5 +167,36 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       this.getModel('Pregunta').modify(id, params, function(err, pregunta) {
         self.send(200);
       });
+    },
+
+    /**
+     * Votar a favor/contra de una de las preguntas
+     */
+
+    votar: function () {
+      var self = this,
+          preguntaId = this.request.params.id,
+          foroId = this.request.params.foro,
+          body = this.request.body;
+
+      if (this.request.session.usuario) {
+        var userId = this.request.session.usuario._id,
+            voto = 0;
+        console.log('voto', body.voto);
+        if (body.voto === 'favor') {
+          voto = 1;
+        } else if (body.voto === 'contra') {
+          voto = -1;
+        }
+        this.getModel('Voto').registrarVoto('Foro:Pregunta', preguntaId, userId, voto, function (err, resultado) {
+          if (!err && resultado) {
+            self.response.send(202);
+          } else {
+            self.response.send(err.message, 500)
+          }
+        });
+      } else {
+        self.response.send('Necesita iniciar sesion para votar', 401);
+      }
     }
   })

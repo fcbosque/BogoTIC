@@ -26,11 +26,11 @@
           <div class="well">
             <h1>{{pregunta.titulo}}</h1>
             <blockquote><p>{{pregunta.contenido}}</p><small>{{pregunta.autor}}</small></blockquote>
-            <a class="btn btn-success" href="#">
+            <a id="votarUp" class="btn btn-success" href="#">
               <i class="icon-upload icon-white"></i>
               Votar a favor
             </a>
-            <a class="btn btn-danger" href="#">
+            <a id="votarDown" class="btn btn-danger" href="#">
               <i class="icon-download icon-white"></i>
               Votar en contra
             </a>
@@ -49,3 +49,25 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+window.onload = function (){
+  function votar (v, boton) {
+    var voto = ( v ? 'favor' : 'contra');
+    $.post(location.pathname + '/votar', {
+      voto: voto
+    }, function (data, status) {
+      console.log('RES', arguments);
+    }).error(function (xhr) {
+      alert(xhr.status + ' ' + xhr.responseText);
+    });
+  }
+
+  $('#votarUp').click(function () {
+    votar(true);
+  });
+
+  $('#votarDown').click(function () {
+    votar(false);
+  });
+}
+</script>
