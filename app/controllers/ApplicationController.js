@@ -15,6 +15,8 @@
  * along with Foros BogoTIC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+var EE = require('eventemitter2').EventEmitter2;
+
 module.exports = require('matador').BaseController.extend(function () {
   this.viewFolder = ''
   this.addBeforeFilter(this.allForos)
@@ -25,6 +27,13 @@ module.exports = require('matador').BaseController.extend(function () {
   // Creo este espacio para ir almacenando las locals que deban meter
   // los otros middlewares.
   this.locals = {};
+
+  // Agrego el Emisor de eventos a este controller
+  this.events = new EE({
+    wildcard: true,
+    delimiter: ':',
+    maxListeners: 30
+  });
 }).methods({
     /**
      * Agrega un arreglo que contiene todos los foros al objeto

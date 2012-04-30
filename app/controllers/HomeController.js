@@ -15,7 +15,12 @@
  * along with Foros BogoTIC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-module.exports = require(app.set('controllers') + '/ApplicationController').extend()
+module.exports = require(app.set('controllers') + '/ApplicationController').extend(function () {
+  var self = this;
+  this.events.on('render:*', function (req) {
+    self.getModel('Evento').saveEvent(this.event, req);
+  });
+})
   .methods({
     /**
      * Ruta de index
@@ -26,8 +31,10 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     index: function () {
       this.locals.esIndex = true;
       if (this.request.session.usuario) {
+        this.events.emit('render:dashboard', this.request);
         this.render('dashboard', this.locals);
       } else {
+        this.events.emit('render:home', this.request);
         this.render('index', this.locals);
       }
     },
@@ -38,6 +45,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @render acerca
      */
     acerca: function() {
+      this.events.emit('render:acerca', this.request);
       this.render('acerca', this.locals);
     },
     /**
@@ -47,6 +55,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @render ayuda
      */
     ayuda: function() {
+      this.events.emit('render:ayuda', this.request);
       this.render('ayuda', this.locals);
     },
     /**
@@ -56,6 +65,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @render tos
      */
     tos: function() {
+      this.events.emit('render:tos', this.request);
       this.render('tos', this.locals);
     }
   })

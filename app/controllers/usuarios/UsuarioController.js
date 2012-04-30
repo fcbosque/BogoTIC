@@ -16,7 +16,11 @@
 */
 
 module.exports = require(app.set('controllers') + '/ApplicationController').extend(function() {
-  this.viewFolder = 'usuario'
+  var self = this;
+  this.viewFolder = 'usuario';
+  this.events.on('user:*:*', function (req, data) {
+    self.getModel('Evento').saveEvent(this.event, req, data);
+  });
 }).methods({
     /**
      * Renderiza el listado de usuarios.
@@ -56,6 +60,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      */
 
     new: function() {
+      this.events.emit('user:creacion:form', this.request);
       this.render('new', this.locals);
     },
 
@@ -76,11 +81,14 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     create: function() {
       var self = this;
       var usuario = this.request.body.usuario;
-      this.getModel('Usuario').create(usuario, function(err, usuario) {
+      this.events.emit('user:creacion:inicia', this.request, usuario);
+      this.getModel('Usuario').create(usuario, function(err, usr) {
         if (err) {
           console.log(err);
+          self.events.emit('user:creacion:error', self.request, err);
           self.request.flash('error', err.message);
         } else {
+          self.events.emit('user:creacion:exito', self.request, usr);
           self.request.flash('success', 'Usuario creado con exito!')
         }
         self.response.redirect("/");
