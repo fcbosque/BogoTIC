@@ -26,6 +26,7 @@
         <h2>Descripción</h2>
         <p>{{foro.descripcion}}</p>
         <hr>
+        {{#usuario}}
         <div class="modal hide fade in" id="modal-formular-pregunta">
             <div class="modal-header">
               <a class="close" data-dismiss="modal">x</a>
@@ -84,6 +85,7 @@
             </div>
         </div>
         <a class="btn btn-primary btn-large right" data-toggle="modal" href="#modal-formular-pregunta">Formula tu pregunta</a>
+        {{/usuario}}
       </div>
     </div>
 
