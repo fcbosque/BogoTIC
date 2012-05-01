@@ -43,7 +43,8 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     avisos          : { type: Boolean, required: false, default: true },
     password        : { type: String, required: false },
     mensajes        : [MensajeSchema],
-    notificaciones  : [NotificacionSchema]
+    notificaciones  : [NotificacionSchema],
+    favoritos       : { type: Array, required: false }
   });
 
   var MensajeSchema = new this.Schema({
@@ -134,9 +135,18 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
       var _resource = new this.DBModel(resource);
       _resource.save(callback);
     },
+
+    /**
+     * Autenticacion de un usuario.
+     *
+     * Simplemente ciframos debilmente la clave y comparamos con el hash
+     * que hay guardado en la BD.
+     *
+     * @param {Object} loginData La info ingresada por el usuario
+     */
     authenticate: function (loginData, callback) {
       this.DBModel.findOne({correo:loginData.correo}, function (err, user) {
-        if (err) throw new Erro(err);
+        if (err) throw new Error(err);
 
         if (user) {
           var clave = crypto.createHmac('sha256', 'BOGOTIC').update(loginData.clave).digest('hex');
@@ -149,6 +159,29 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         } else {
           console.log('Solicitado un usuario que no existe', loginData);
           callback({message:'Correo no registrado'});
+        }
+      });
+    },
+
+    /**
+     * Revisamos si un ID es favorito.
+     *
+     * Simplemente revisamos si el id esta en la matriz de favoritos
+     *
+     * @param {String} ID del recurso a revisar
+     * @param {String} ID del usuario a revisar
+     */
+    esFavorito: function (recurso, usuario, callback) {
+      this.DBModel.findById(usuario, function (err, user) {
+        if (err) throw new Error(err);
+
+        if (user) {
+          var resultado = user.favoritos.filter(function (check) {
+            return (check == recurso);
+          });
+          callback(resultado.length === 1);
+        } else {
+          callback(false);
         }
       });
     }

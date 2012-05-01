@@ -36,6 +36,20 @@
               Votar en contra
             </a>
             {{/botones}}
+
+            {{#esFavorito}}
+            <a id="favorito" class="btn btn-primary" href="#" data-toggle="button">
+              <i class="icon-star icon-white"></i>
+              Quitar de Favoritos
+            </a>
+            {{/esFavorito}}
+
+            {{^esFavorito}}
+            <a id="favorito" class="btn btn-primary" href="#" data-toggle="button">
+              <i class="icon-star-empty icon-white"></i>
+              Agregar a Favoritos
+            </a>
+            {{/esFavorito}}
           </div>
         </div>
 
@@ -51,6 +65,7 @@
     </div>
   </div>
 </div>
+{{#botones}}
 <script type="text/javascript">
 window.onload = function (){
   function votar (v) {
@@ -78,5 +93,37 @@ window.onload = function (){
     btnDown.button('loading');
     votar(false);
   });
+}
+</script>
+{{/botones}}
+<script type="text/javascript">
+window.onload = function () {
+  var favorito = $('#favorito');
+
+  favorito.click(function () {
+    favoritear(favorito);
+  });
+
+  function esFav (btn) {
+    return btn.find('i').hasClass('icon-star');
+  }
+
+  function favoritear (b) {
+    var fav = esFav(b);
+    $.post(location.pathname + '/favorito', {
+      favorito: !fav
+    }, function (data, status) {
+      b.button('toggle');
+      if (fav) {
+        b.find('i').removeClass('icon-star');
+        b.find('i').addClass('icon-star-empty');
+      } else {
+        b.find('i').removeClass('icon-star-empty');
+        b.find('i').addClass('icon-star');
+      }
+    }, function (xhr) {
+      alert(xhr.status + ' ' + xhr.responseText);
+    });
+  };
 }
 </script>
