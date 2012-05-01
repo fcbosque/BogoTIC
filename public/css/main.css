@@ -12,11 +12,6 @@ body {
 .sidebar-nav {
   padding: 9px 0;
 }
-.footer {
-  border-top: 1px solid #e5e5e5;
-  margin-top: 45px;
-  padding: 35px 0 36px;
-}
 
 .navbar {
   margin: 0;
@@ -265,28 +260,6 @@ body {
   padding: 5px;
 }
 
-/* Estilo para .hero-Unit */
-.hero-unit {
-  float: left;
-  padding: 60px 30px 15px;
-  margin-bottom: 60px;
-  border-radius: 0;
-}
-
-.hero-unit h1 {
-  float: left;
-  color: #ffffff;
-  font-size: 25px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-  padding: 0 0 10px;
-  margin: -75px 0 0 0;
-}
-
-.hero-unit h1 > span {
-  background-color: #a5ad2b;
-  padding: 15px 20px;
-}
-
 /* Estilo para carousel de imagenes de foros */
 .img-right {
   float: right;
@@ -300,6 +273,7 @@ body {
 /* Estilo para .box */
 .box {
   background-color: #f5f5f5;
+  margin-bottom: 30px;
 }
 .box-inner {
   padding: 85px 30px 15px;
@@ -334,5 +308,6 @@ body {
 
 /* Estilos para .footer */
 .footer {
+  border-top: 1px solid #e5e5e5;
   padding: 10px 0;
 }
