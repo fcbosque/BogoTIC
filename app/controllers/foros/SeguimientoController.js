@@ -229,7 +229,13 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       });
     },
     getConsulta: function() {
-
+      var self = this;
+      var foro = this.request.params.foro;
+      var seguimiento = this.request.params.seguimiento;
+      var consulta = this.request.params.id;
+      this.getModel('Seguimiento').getConsulta(seguimiento, consulta, function () {
+        self.response.redirect('/foros/' + foro + '/seguimientos/' + seguimiento + '/consulta/' + consulta);
+      });
     },
     getPregunta: function() {
 

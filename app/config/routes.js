@@ -54,7 +54,7 @@ module.exports = {
     ['post',  '/:foro/seguimientos/:seguimiento/preguntas',       'Seguimiento', 'addPregunta'],
     ['get',   '/:foro/seguimientos/:seguimiento/preguntas/:id',   'Seguimiento', 'getPregunta'],
     ['del',   '/:foro/seguimientos/:seguimiento/preguntas/:id',   'Seguimiento', 'delPregunta'],
-    ['put',   '/:foro/seguimientos/:seguimiento/preguntas/.id',   'Seguimiento', 'editPregunta'],
+    ['put',   '/:foro/seguimientos/:seguimiento/preguntas/:id',   'Seguimiento', 'editPregunta'],
     // Seguimiento / Consultas
     ['get',   '/:foro/seguimientos/:seguimiento/consultas',       'Seguimiento', 'getConsultas'],
     ['post',  '/:foro/seguimientos/:seguimiento/consultas',       'Seguimiento', 'addConsulta'],

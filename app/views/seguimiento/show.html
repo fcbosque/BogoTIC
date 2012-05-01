@@ -20,10 +20,9 @@
   <br>
   <div class="row-fluid">
     <div class="span8">
-      <h1>Grupo {{seguimiento.titulo}} <small>{{foro.nombre}}</small></h1>
-      <h2>Descripción</h2>
-      <p>{{seguimiento.descripcion}}</p>
-      <span class="label">{{seguimiento.localidad}}</span>
+      <h2>Grupo {{seguimiento.titulo}} <small>{{foro.nombre}}</small></h2>
+      <h3>Descripción</h3>
+      <p>{{seguimiento.descripcion}} <span class="label">{{seguimiento.localidad}}</span></p>
       <ul class="thumbnails">
         <li><a href="#"><img class="thumbnail" src="http://placehold.it/90x90" alt=""></a></li>
       </ul>
@@ -154,25 +153,22 @@
       <div class=row-fluid">
         <div class="span6">
           <h3>Preguntas</h3>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Pregunta</th>
-                <th>Fecha</th>
-                <th>Localidad</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#seguimiento.preguntas}}
-              <tr>
-                <td><a href="/foros/{{foro.id}}/seguimientos/{{_id}}">{{titulo}}</a></td>
-                <td>{{fecha}}</td>
-                <td><span class="label">{{localidad}}</span></td>
-              </tr>
-              {{/seguimiento.preguntas}}
-            </tbody>
-          </table>
-        </div>
+
+          <div id="preguntas" class="accordion">
+            {{#seguimiento.preguntas}}
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" href="#pregunta-{{titulo}}" data-parent="#preguntas" data-toggle="collapse">{{titulo}}</a>
+              </div>
+              <div id="pregunta-{{titulo}}" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                  <p>El {{fecha}} desde <span class="label">{{localidad}}</span> se preguntó: {{contenido}}</p>
+                </div>
+              </div>
+            </div>
+            {{/seguimiento.preguntas}}
+          </div>
+        </div> 
 
         <div class="span5">
           <h3>Consultas</h3>
@@ -181,17 +177,15 @@
               <tr>
                 <th>Motivo</th>
                 <th>Fecha</th>
-                <th>Favoritos</th>
-                <th>Votos</th>
+                <th>Estado</th>
               </tr>
             </thead>
             <tbody>
               {{#seguimiento.consultas}}
               <tr>
-                <td><a href="/foros/{{foro.id}}/seguimientos/{{_id}}">{{motivo}}</a></td>
+                <td><a href="/foros/{{foro.id}}/seguimientos/{{seguimiento.id}}/consultas/{{_id}}">{{motivo}}</a></td>
                 <td>{{fecha}}</td>
-                <td>{{favs}}</td>
-                <td>{{votos}}</td>
+                <td><span class="label">{{estado}}</span></td>
               </tr>
               {{/seguimiento.consultas}}
             </tbody>
@@ -203,3 +197,6 @@
   </div>
 
 </div>
+<script>
+  $(".collapse").collapse()
+</script>
