@@ -36,6 +36,11 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
 }).methods({
   /**
    * Este metodo permitira registrar los votos
+   *
+   * @param {modelo} String Recurso y subrecurso concatenados por : Ej. Foro:preguntas
+   * @param {modeloID} String El ID del subrecurso el cual va a votar
+   * @param {ususario} String El ID del usuario que vota
+   * @param {voto} Number El voto puede ser 1 o -1
    */
   registrarVoto: function (modelo, modeloID, usuario, voto, callback) {
     var self = this;
@@ -74,6 +79,20 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
           self.mongoose.model(modelos[0]).update(query, diferencia, callback);
         })
       });
+    });
+  },
+
+  /**
+   * Este metodo ayuda para verificar si un usuario ya voto o no por
+   * cierto recurso
+   *
+   * @param {modelo} String Recurso y subrecurso concatenados por : Ej. Foro:preguntas
+   * @param {modeloID} String El ID del subrecurso el cual va a votar
+   * @param {ususario} String El ID del usuario que vota
+   */
+  votado: function (modeloID, usuario, callback) {
+    this.DBModel.find({ modeloId: modeloID, usuario: usuario }, function (err, docs) {
+      callback(docs.length > 0);
     });
   }
 });

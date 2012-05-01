@@ -26,6 +26,7 @@
           <div class="well">
             <h1>{{pregunta.titulo}}</h1>
             <blockquote><p>{{pregunta.contenido}}</p><small>{{pregunta.autor}}</small></blockquote>
+            {{#botones}}
             <a id="votarUp" class="btn btn-success" href="#" data-loading-text="Votando...">
               <i class="icon-upload icon-white"></i>
               Votar a favor
@@ -34,6 +35,7 @@
               <i class="icon-download icon-white"></i>
               Votar en contra
             </a>
+            {{/botones}}
           </div>
         </div>
 

@@ -129,7 +129,17 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
           };
           self.locals.pregunta = item.pregunta;
         }
-        self.render('show', self.locals);
+
+        // Verifico si se pude o no mostrar los botones de votacion
+        if (self.request.session.usuario) {
+          self.getModel('Voto').votado(pregunta, self.request.session.usuario._id, function (votado) {
+              self.locals.botones = (votado ? false : true);
+              self.render('show', self.locals);
+          });
+        } else {
+          self.locals.botones = false;
+          self.render('show', self.locals);
+        }
       })
     },
 
