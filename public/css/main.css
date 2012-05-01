@@ -276,7 +276,8 @@ body {
   margin-bottom: 30px;
 }
 .box-inner {
-  padding: 85px 30px 15px;
+  float:left;
+  padding: 15px;
 }
 
 .box-inner .center {
