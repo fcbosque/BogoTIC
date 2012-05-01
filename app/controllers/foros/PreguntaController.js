@@ -212,7 +212,31 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
           }
         });
       } else {
-        self.response.send('Necesita iniciar sesion para votar', 401);
+        self.response.send('Necesita iniciar sesión para votar', 401);
+      }
+    },
+
+    /**
+     * Favoritear o desfavoritear una pregunta
+     */
+    favorito: function () {
+      var self = this,
+          preguntaId = this.request.params.id,
+          foroId = this.request.params.foro,
+          body = this.request.body;
+
+      if (this.request.session.usuario) {
+        var userId = this.request.session.usuario._id;
+
+        this.getModel('Usuario').favoritear('Foro:preguntas', userId, preguntaId, function (confirm) {
+          if (confirm) {
+            self.response.send(202);
+          } else {
+            self.response.send('No se pudo marcar, Intentelo de nuevo por favor.');
+          }
+        })
+      } else {
+        self.response.send('Necesita iniciar sesión. Adelante!', 401);
       }
     }
   })

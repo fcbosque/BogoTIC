@@ -121,7 +121,7 @@ window.onload = function () {
         b.find('i').removeClass('icon-star-empty');
         b.find('i').addClass('icon-star');
       }
-    }, function (xhr) {
+    }).error(function (xhr) {
       alert(xhr.status + ' ' + xhr.responseText);
     });
   };

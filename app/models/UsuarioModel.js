@@ -184,5 +184,63 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
           callback(false);
         }
       });
+    },
+
+    /**
+     * Agregamos o quitamos un ID de favoritos.
+     *
+     * @param {String} modelo Una cadena referenciando el recurso a usar.
+     * @param {String} userID El ID del usuario seleccionado.
+     * @param {String} recurso El ID del recurso a agregar como favorito.
+     */
+    favoritear: function (modelo, userID, recurso, callback) {
+      var self = this;
+      // Consultamos el usuario que esta logueado
+      this.DBModel.findById(userID, function (err, user) {
+        if (err) throw new Error(err);
+
+        if (user) {
+          // Verificamos si el ID ya esta como favorito
+          var test = user.favoritos.indexOf(recurso);
+          if (test === -1) {
+            // En caso de que no este lo agregamos
+            user.favoritos.push(recurso);
+          } else {
+            // En caso de que si esta entonces lo eliminamos
+            user.favoritos.splice(test, 1);
+          }
+          // Guardamos los cambios
+          user.save(function (err, doc) {
+            // Vamos ahora a actualizar el recurso que se favoriteo
+            // sacamos el modelo
+            var modelos = modelo.split(':');
+            var query = {};
+            // Creamos la condicion de acuerdo al subrecurso mencionado
+            query[modelos[1] + '._id'] = new self.mongoose.Types.ObjectId(recurso);
+            // Traemos el modelo de acuerdo al recurso especificado
+            self.mongoose.model(modelos[0]).find(query, function (err, recursos) {
+              // Filtramos el subrecurso correcto.
+              var correcto = recursos[0][modelos[1]].filter(function (sub) {
+                return (sub._id.toString() == recurso);
+              });
+              // Ajustamos el valor del numero de favoritos
+              if (test === -1) {
+                correcto[0].favs++;
+              } else {
+                correcto[0].favs--;
+              }
+              // Pasamos la lista de subrecursos actualizada
+              var diferencia = {};
+              diferencia[modelos[1]] = recursos[0][modelos[1]];
+              // Actualizamos el recurso
+              self.mongoose.model(modelos[0]).update(query, diferencia, function (err) {
+                callback((err) ? false : true);
+              });
+            });
+          });
+        } else {
+          callback(false);
+        }
+      })
     }
   })
