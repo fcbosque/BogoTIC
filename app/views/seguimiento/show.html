@@ -27,9 +27,12 @@
       <ul class="thumbnails">
         <li><a href="#"><img class="thumbnail" src="http://placehold.it/90x90" alt=""></a></li>
       </ul>
+      {{#usuario}}
       <button class="btn btn-primary" data-toggle="button" data-complete-text="Siguiendo"><i class="icon-plus icon-white"></i> Seguir</button>
+      {{/usuario}}
     </div>
 
+    {{#usuario}}
     <div class="span4">
       <a class="btn btn-primary btn-large" data-toggle="modal" href="#nuevaPregunta"><i class="icon-question-sign icon-white"></i> Formular nueva pregunta</a>
       <a style="margin-top: 10px;" data-toggle="modal" class="btn btn-primary btn-large" href="#nuevaConsulta"><i class="icon-info-sign icon-white"></i> Formular nueva consulta</a>
@@ -141,6 +144,7 @@
         <p><small>Acepto los <a href="/tos" target=_blank>términos y condiciones</a> de uso.</small></p>
       </div>
     </div>
+    {{/usuario}}
   </div>
 
   <hr>

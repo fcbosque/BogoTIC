@@ -129,7 +129,17 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
           };
           self.locals.pregunta = item.pregunta;
         }
-        self.render('show', self.locals);
+
+        // Verifico si se pude o no mostrar los botones de votacion
+        if (self.request.session.usuario) {
+          self.getModel('Voto').votado(pregunta, self.request.session.usuario._id, function (votado) {
+              self.locals.botones = (votado ? false : true);
+              self.render('show', self.locals);
+          });
+        } else {
+          self.locals.botones = false;
+          self.render('show', self.locals);
+        }
       })
     },
 
@@ -167,5 +177,36 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
       this.getModel('Pregunta').modify(id, params, function(err, pregunta) {
         self.send(200);
       });
+    },
+
+    /**
+     * Votar a favor/contra de una de las preguntas
+     */
+
+    votar: function () {
+      var self = this,
+          preguntaId = this.request.params.id,
+          body = this.request.body;
+
+      if (this.request.session.usuario) {
+        var userId = this.request.session.usuario._id,
+            voto = 0;
+
+        if (body.voto === 'favor') {
+          voto = 1;
+        } else if (body.voto === 'contra') {
+          voto = -1;
+        }
+
+        this.getModel('Voto').registrarVoto('Foro:preguntas', preguntaId, userId, voto, function (err, resultado) {
+          if (!err && resultado) {
+            self.response.send(202);
+          } else {
+            self.response.send(err.message, 500)
+          }
+        });
+      } else {
+        self.response.send('Necesita iniciar sesion para votar', 401);
+      }
     }
   })

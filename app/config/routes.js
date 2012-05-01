@@ -43,6 +43,7 @@ module.exports = {
     ['get',   '/:foro/preguntas/:id',   'Pregunta', 'show'],
     ['del',   '/:foro/preguntas/:id',   'Pregunta', 'remove'],
     ['put',   '/:foro/preguntas/:id',   'Pregunta', 'modify'],
+    ['post',  '/:foro/preguntas/:id/votar', 'Pregunta', 'votar'],
     // Seguimiento
     ['get',   '/:foro/seguimientos',       'Seguimiento', 'index'],
     ['post',  '/:foro/seguimientos',       'Seguimiento', 'create'],

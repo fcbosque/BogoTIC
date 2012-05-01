@@ -156,8 +156,6 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
         if (err) self.request.flash('error', err.message);
         if (user) {
           self.request.session.usuario = user;
-        } else {
-          self.request.flash('error', 'El usuario no se encontro');
         }
         self.response.redirect('/');
       });
