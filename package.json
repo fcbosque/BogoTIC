@@ -10,7 +10,7 @@
   "private": "true",
   "description": "Plataforma de foros de BogoTIC",
   "main": "./lib/bogotic",
-  "version": "0.0.2",
+  "version": "0.0.2-1",
   "repository": {
     "type": "git",
     "url": "git://github.com/bogotic/main.git"
