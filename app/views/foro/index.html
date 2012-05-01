@@ -1,42 +1,34 @@
 <div class="span10">
   <div class="row-fluid">
-    <div id="list-forums" class="span9 box">
+
+    <div class="span9 box">
       <h2><span>Listado de foros</span></h2>
       <div class="box-inner">
-        <div class="span4">
+        <div class="span7">
           <h3>Nombre del foro</h3>
           <span>2012-12-12</span>
           <br />
           <h3>Categoría</h3>
           <span>Tecnología y deuda pública</span>
-          <br />
         </div>
-        <div class="span4">
-          <div id="last-forum">
+        <div class="span5">
             <a href="#" class="thumbnail"><img src="http://placehold.it/360x268" alt="" /></a>
-          </div>
         </div>
         <div class="row-fluid">
           <h3>Relatoría</h3>
           <p>Lorem ipsum dolor sit amet status tales <a href="#">Conocer más</a></p>
-        </div>
           <a class="btn-custom btn-large" href="#">Ingresar al foro</a>
+        </div>
         <div class="row-fluid">
-          <ul class="thumbnails">
-            {{#foros}}
-            <li class="span3">
-              <div id="thumbnail">
-                <a class="thumbnail" href="/foros/{{id}}"><img src="http://placehold.it/260x180" alt=""></a>
-                <h5 style="margin-bottom: 10px">{{nombre}} <small>{{fecha}}</small></h5>
-                <p>
-                  <span class="label">{{categoria}}</span>
-                </p>
-                <p>{{descripcion}}</p>
-                <p style="text-align:right"><a class="btn-custom" href="/foros/{{id}}">Entrar</a></p>
-              </div>
-            </li>
-            {{/foros}}
-          </ul>
+          {{#foros}}
+          <div class="span4">
+            <a class="thumbnail" href="/foros/{{id}}"><img src="http://placehold.it/260x180" alt=""></a>
+            <h5 style="margin-bottom: 10px">{{nombre}} <small>{{fecha}}</small></h5>
+            <span class="label">{{categoria}}</span>
+            <p>{{descripcion}}</p>
+            <p style="text-align:right"><a class="btn-custom" href="/foros/{{id}}">Entrar</a></p>
+          </div>
+          {{/foros}}
         </div>
       </div>
     </div>
