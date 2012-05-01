@@ -20,7 +20,7 @@
           <h3>Relatoría</h3>
           <p>Lorem ipsum dolor sit amet status tales <a href="#">Conocer más</a></p>
         </div>
-          <a class="btn btn-primary btn-large" href="#">Ingresar al foro</a>
+          <a class="btn-custom btn-large" href="#">Ingresar al foro</a>
         <div class="row-fluid">
           <ul class="thumbnails">
             {{#foros}}
@@ -32,7 +32,7 @@
                   <span class="label">{{categoria}}</span>
                 </p>
                 <p>{{descripcion}}</p>
-                <p style="text-align:right"><a class="btn" href="/foros/{{id}}">Entrar</a></p>
+                <p style="text-align:right"><a class="btn-custom" href="/foros/{{id}}">Entrar</a></p>
               </div>
             </li>
             {{/foros}}
@@ -47,7 +47,7 @@
         <p>Actualmente tenemos un total de <strong>{{total_foros}}</strong> foro(s) abierto(s):</p>
           {{{seguimientos}}}
         {{#usuario}}
-          <a class="btn btn-primary btn-large" href="/foros/nuevo"><i class="icon-flag icon-white"></i> Crear nuevo foro</a>
+          <a class="btn-custom btn-large" href="/foros/nuevo"><i class="icon-flag icon-white"></i> Crear nuevo foro</a>
         {{/usuario}}
       </div>
     </div>
