@@ -143,7 +143,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
           if (clave === user.password) {
             callback(null, user);
           } else {
-            console.log('Fallo Autenticacion');
+            console.log('Fallo Autenticacion de', loginData.correo);
             callback({message:'Datos Incorrectos'});
           }
         } else {
