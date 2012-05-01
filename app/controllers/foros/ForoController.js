@@ -68,11 +68,15 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
 
     create: function() {
       var self = this;
-      var foro = this.request.body.foro
-      this.getModel('Foro').create(foro, function(err) {
-        if(err) throw new Error(err);
+      var foro = this.request.body.foro;
+      this.getModel('Foro').create(foro, function(err, doc) {
+        if(err) {
+          self.request.flash('error', err.message);
+        } else if (doc) {
+          self.request.flash('success', 'Foro creado con exito.')
+        }
+        this.response.redirect('/foros');
       })
-      this.response.redirect('/foros');
     },
 
     /**
