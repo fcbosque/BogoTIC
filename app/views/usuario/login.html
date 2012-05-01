@@ -1,0 +1,27 @@
+<div class="span10">
+  <div class="row-fluid">
+    <div class="span8 box">
+      <h2><span>Iniciar Sesión</span></h2>
+      <div class="box-inner">
+        <form class="form-horizontal" action="/usuarios/login" method="POST">
+          <div class="control-group">
+            <label class="control-label" for="usuario[correo]">Correo Electr&oacute;nico</label>
+            <div class="controls">
+              <input type="text" class="input-xlarge" name="usuario[correo]" size="30">
+            </div>
+          </div>
+          <div class="control-group">
+            <label for="usuario[clave]" class="control-label">Contraseña</label>
+            <div class="controls">
+              <input type="password" class="input-xlarge" name="usuario[clave]" size="30">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+          </div>
+      </form>
+      <a href="/usuarios/nuevo" class="btn btn-primary btn-large" >Crear cuenta nueva. »</a></p>
+      </div>
+    </div>
+  </div>
+</div>

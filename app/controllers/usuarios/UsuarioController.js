@@ -149,19 +149,42 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
         self.send(200);
       });
     },
+
+    /**
+     * Identifica un usario ante el sistema
+     * si los datos son correctos los datos son puestos
+     * en la sesion.
+     */
+
     login: function () {
       var self = this;
       var data = this.request.body.usuario;
       this.getModel('Usuario').authenticate(data, function (err, user) {
-        if (err) self.request.flash('error', err.message);
+        if (err) {
+          self.request.flash('error', err.message);
+          self.response.redirect('/usuarios/login');
+        }
         if (user) {
           self.request.session.usuario = user;
+          self.response.redirect('/');
         }
-        self.response.redirect('/');
       });
     },
+
+    /**
+     * Destruimos la sesion
+     */
+
     logout: function () {
       this.request.session.destroy();
       this.response.redirect('/');
+    },
+
+    /**
+     * Simplemente renderizamos el formulario de login
+     */
+
+    loginForm: function () {
+      this.render('login', this.locals);
     }
   })
