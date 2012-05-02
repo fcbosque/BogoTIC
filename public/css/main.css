@@ -320,6 +320,10 @@ h6 small {
   padding: 0 20px;
 }
 
+.no-float {
+  float: none;
+}
+
 /* Estilos para thumbnails de la lista de foros anteriores */
 
 .text {
