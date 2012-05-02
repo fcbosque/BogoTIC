@@ -308,6 +308,13 @@ body {
 }
 
 /* Estilos para thumbnails */
+.crop-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+}
 
 /* Estilos para .footer */
 .footer {
