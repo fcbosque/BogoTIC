@@ -18,18 +18,27 @@
   <div class="row-fluid">
     <div class="span7">
       <div class="row-fluid">
-        <div class="span12">
-          <div class="well">
-            <h1>Relatoría <small>{{foro.nombre}}</small></h1>
+        <div class="span12 box">
+          <h2><span>Relatoría</span></h2>
+          <div class="box-inner">
+            <h3>{{foro.nombre}}</h3>
             <p>Resumen del evento</p>
           </div>
         </div>
         <div class="row-fluid">
-          <div class="span8">
-            <h3>Video</h3>
+          <div class="span12 box">
+            <h2><span>Video</span></h2>
+            <div class="box-inner">
+              Content
+            </div>
           </div>
-          <div class="span4">
-            <h3>Mapas</h3>
+        </div>
+        <div class="row-fluid">
+          <div class="span12 box">
+            <h2><span>Mapas</span></h2>
+            <div class="box-inner">
+              Content
+            </div>
           </div>
         </div>
       </div>
@@ -37,32 +46,34 @@
     
     <div class="span5">
       <div class="row-fluid">
-        <div class="span12">
-          <h1>Actividad reciente</h1>
+        <div class="span12 box">
+          <h2><span>Actividad reciente</span></h2>
           <ul id="actividad-reciente" class="nav nav-tabs">
             <li class="active"><a href="#actividad" data-toggle="tab">Actividad <i class="icon-asterisk"></i></a></li>
             <li><a href="#grupos" data-toggle="tab">Grupos de seguimiento <i class="icon-eye-open"></i></a></li>
             <li><a href="#buscar" data-toggle="tab">Buscar <i class="icon-search"></i></a></li>
           </ul>
-          <div class="tab-content">
-            <div class="tab-pane active" id="actividad">
-              <ul>
-                <li>
-                lol
-                </li>
-              </ul>
-            </div>
-            <div class="tab-pane" id="grupos">
-              <ul>
-              {{#seguimientos}}
-                <li><p><em><a href="/foros/{{foro}}/seguimientos/{{id}}">{{titulo}}</a></em> <span class="label">{{localidad}}</span> <i class="icon-tag"></i></p></li>
+          <div class="box-inner">
+            <div class="tab-content">
+              <div class="tab-pane active" id="actividad">
+                <ul>
+                  <li>
+                  lol
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-pane" id="grupos">
+                <ul>
+                {{#seguimientos}}
+                  <li><p><em><a href="/foros/{{foro}}/seguimientos/{{id}}">{{titulo}}</a></em> <span class="label">{{localidad}}</span> <i class="icon-tag"></i></p></li>
               {{/seguimientos}}
-            </div>
-            <div class="tab-pane" id="buscar">
-              <form class="form-search">
-                <input type="text" class="input-medium search-query">
-                <button type="submit" class="btn">Buscar</button>
-              </form>
+              </div>
+              <div class="tab-pane" id="buscar">
+                <form class="form-search">
+                  <input type="text" class="input-medium search-query">
+                  <button type="submit" class="btn">Buscar</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
