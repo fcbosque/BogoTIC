@@ -28,38 +28,39 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
   var ObjectId = this.ObjectId;
 
   var UsuarioSchema = new this.Schema({
-    nombre          : { type: String, required: true, match: /[a-z]/ },
-    apellido        : { type: String, required: true, match: /[a-z]/ },
-    localidad       : { type: String, required: false, enum: localidades },
-    edad            : { type: Number, required: false },
-    educacion       : { type: String, required: false },
-    correo          : { type: String, required: true },
-    avatar          : { type: String, required: false, default: 'avatar.png' },
-    fecha           : { type: Date, required: true, default: Date.now },
-    karma           : { type: Number, required: false, default: 0 },
-    url             : { type: String, required: false, default: "http://bogotic.com" },
-    twitter         : { type: String, required: false },
-    foros           : { type: Array, required: false },
+    nombre          : { type: String,  required: true, match: /[a-z]/ },
+    apellido        : { type: String,  required: true, match: /[a-z]/ },
+    admin           : { type: Boolean, required: false, default: false },
+    localidad       : { type: String,  required: false, enum: localidades },
+    edad            : { type: Number,  required: false },
+    educacion       : { type: String,  required: false },
+    correo          : { type: String,  required: true },
+    avatar          : { type: String,  required: false, default: 'avatar.png' },
+    fecha           : { type: Date,    required: true, default: Date.now },
+    karma           : { type: Number,  required: false, default: 0 },
+    url             : { type: String,  required: false, default: "http://bogotic.com" },
+    twitter         : { type: String,  required: false },
+    foros           : { type: Array,   required: false },
     avisos          : { type: Boolean, required: false, default: true },
-    password        : { type: String, required: false },
+    password        : { type: String,  required: false },
     mensajes        : [MensajeSchema],
     notificaciones  : [NotificacionSchema],
-    favoritos       : { type: Array, required: false }
+    favoritos       : { type: Array,   required: false }
   });
 
   var MensajeSchema = new this.Schema({
-    titulo    : { type: String, required: true, match: /[a-z]/ },
+    titulo    : { type: String,   required: true, match: /[a-z]/ },
     autor     : { type: ObjectId, required: true },
-    contenido : { type: String, required: true },
-    fecha     : { type: Date, required: true, default: Date.now }
-  })
+    contenido : { type: String,   required: true },
+    fecha     : { type: Date,    required: true, default: Date.now }
+  });
 
   var NotificacionSchema = new this.Schema({
     titulo    : { type: String, required: true, match: /[a-z]/ },
     tipo      : { type: String, required: true },
     contenido : { type: String, required: true },
-    fecha     : { type: Date, required: true, default: Date.now }
-  })
+    fecha     : { type: Date,   required: true, default: Date.now }
+  });
 
   this.Mensaje      = this.mongoose.model('Mensaje', MensajeSchema);
   this.Notificacion = this.mongoose.model('Notificacion', NotificacionSchema);
@@ -77,11 +78,11 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @param {Function} callback
      */
 
-    all: function(callback) {
-      this.DBModel.find({}, function(err, usuarios) {
-        if(err) throw new Error(err);
-        if(callback) callback(usuarios);
-      })
+    all: function (callback) {
+      this.DBModel.find({}, function (err, usuarios) {
+        if (err) throw new Error(err);
+        if (callback) callback(usuarios);
+      });
     },
 
     /**
@@ -101,16 +102,16 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @see ForoController.show
      */
 
-    show: function(username, callback) {
-      this.DBModel.find({ username: username }, function(err, usuario) {
-        if(err) throw new Error(err);
-        if(callback) callback(usuario);
-      })
+    show: function (username, callback) {
+      this.DBModel.find({ username: username }, function (err, usuario) {
+        if (err) throw new Error(err);
+        if (callback) callback(usuario);
+      });
     },
-    modify: function(username, params, callback) {
+    modify: function (username, params, callback) {
       
     },
-    remove: function(username, callback) {
+    remove: function (username, callback) {
     
     },
 
@@ -129,7 +130,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @see UsuarioController.create
      */
     
-    create: function(resource, callback) {
+    create: function (resource, callback) {
       resource.password = crypto.createHmac('sha256', 'BOGOTIC').update(resource.clave).digest('hex');
       delete resource.clave;
       var _resource = new this.DBModel(resource);
@@ -139,16 +140,17 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     /**
      * Autenticacion de un usuario.
      *
-     * Simplemente ciframos debilmente la clave y comparamos con el hash
-     * que hay guardado en la BD.
+     * Simplemente ciframos debilmente la clave y comparamos
+     * con el hash que hay guardado en la BD.
      *
      * @param {Object} loginData La info ingresada por el usuario
      */
+
     authenticate: function (loginData, callback) {
       this.DBModel.findOne({correo:loginData.correo}, function (err, user) {
         if (err) throw new Error(err);
-
         if (user) {
+          // FIXME: Se debe cambiar el salt. Seguimiento en #45
           var clave = crypto.createHmac('sha256', 'BOGOTIC').update(loginData.clave).digest('hex');
           if (clave === user.password) {
             callback(null, user);
@@ -166,15 +168,15 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     /**
      * Revisamos si un ID es favorito.
      *
-     * Simplemente revisamos si el id esta en la matriz de favoritos
+     * Simplemente revisamos si el ID esta en la matriz de favoritos.
      *
      * @param {String} ID del recurso a revisar
      * @param {String} ID del usuario a revisar
      */
+
     esFavorito: function (recurso, usuario, callback) {
       this.DBModel.findById(usuario, function (err, user) {
         if (err) throw new Error(err);
-
         if (user) {
           var resultado = user.favoritos.filter(function (check) {
             return (check == recurso);
@@ -189,29 +191,30 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     /**
      * Agregamos o quitamos un ID de favoritos.
      *
+     * Luego de una consulta para verificar si el usuario ha ingresado
+     * verificamos si el ID del recurso ya ha sido favoriteado con
+     * anterioridad para poder agregarlo o removerlo.
+     * 
      * @param {String} modelo Una cadena referenciando el recurso a usar.
      * @param {String} userID El ID del usuario seleccionado.
      * @param {String} recurso El ID del recurso a agregar como favorito.
      */
+
     favoritear: function (modelo, userID, recurso, callback) {
       var self = this;
       // Consultamos el usuario que esta logueado
       this.DBModel.findById(userID, function (err, user) {
         if (err) throw new Error(err);
-
         if (user) {
           // Verificamos si el ID ya esta como favorito
           var test = user.favoritos.indexOf(recurso);
           if (test === -1) {
-            // En caso de que no este lo agregamos
             user.favoritos.push(recurso);
           } else {
-            // En caso de que si esta entonces lo eliminamos
             user.favoritos.splice(test, 1);
           }
-          // Guardamos los cambios
+
           user.save(function (err, doc) {
-            // Vamos ahora a actualizar el recurso que se favoriteo
             // sacamos el modelo
             var modelos = modelo.split(':');
             var query = {};
@@ -241,6 +244,6 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         } else {
           callback(false);
         }
-      })
+      });
     }
-  })
+  });
