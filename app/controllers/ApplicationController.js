@@ -36,8 +36,16 @@ module.exports = require('matador').BaseController.extend(function () {
 
     allForos: function (callback) {
       var self = this;
-      this.getModel('Foro').all(function(err, foros) {
+      this.getModel('Foro').all(function (err, foros) {
         self.locals.foros = (foros ? foros : []);
+        self.locals.organizado = function () {
+          var res = [],
+              listado = foros.map(function (f) { return { foro:f }; });
+          for (var i=0; i <= listado.length; i+=3 ) {
+            res.push({ filas: listado.slice(i, i + 3) });
+          }
+          return res;
+        };
         return callback(null);
       });
     },
