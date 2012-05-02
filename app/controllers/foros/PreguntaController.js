@@ -130,11 +130,17 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
           self.locals.pregunta = item.pregunta;
         }
 
-        // Verifico si se pude o no mostrar los botones de votacion
         if (self.request.session.usuario) {
+          // Verifico si se pude o no mostrar los botones de votacion
           self.getModel('Voto').votado(pregunta, self.request.session.usuario._id, function (votado) {
               self.locals.botones = (votado ? false : true);
-              self.render('show', self.locals);
+              // Verifico si el usuario ya tiene favorito o no.
+              self.getModel('Usuario').esFavorito(pregunta, self.request.session.usuario._id, function (fav) {
+                if (fav) {
+                  self.locals.esFavorito = true;
+                }
+                self.render('show', self.locals);
+              });
           });
         } else {
           self.locals.botones = false;
@@ -206,7 +212,31 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
           }
         });
       } else {
-        self.response.send('Necesita iniciar sesion para votar', 401);
+        self.response.send('Necesita iniciar sesión para votar', 401);
+      }
+    },
+
+    /**
+     * Favoritear o desfavoritear una pregunta
+     */
+    favorito: function () {
+      var self = this,
+          preguntaId = this.request.params.id,
+          foroId = this.request.params.foro,
+          body = this.request.body;
+
+      if (this.request.session.usuario) {
+        var userId = this.request.session.usuario._id;
+
+        this.getModel('Usuario').favoritear('Foro:preguntas', userId, preguntaId, function (confirm) {
+          if (confirm) {
+            self.response.send(202);
+          } else {
+            self.response.send('No se pudo marcar, Intentelo de nuevo por favor.');
+          }
+        })
+      } else {
+        self.response.send('Necesita iniciar sesión. Adelante!', 401);
       }
     }
   })

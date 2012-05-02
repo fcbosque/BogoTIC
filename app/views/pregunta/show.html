@@ -36,6 +36,20 @@
               Votar en contra
             </a>
             {{/botones}}
+
+            {{#esFavorito}}
+            <a id="favorito" class="btn btn-primary" href="#" data-toggle="button">
+              <i class="icon-star icon-white"></i>
+              Quitar de Favoritos
+            </a>
+            {{/esFavorito}}
+
+            {{^esFavorito}}
+            <a id="favorito" class="btn btn-primary" href="#" data-toggle="button">
+              <i class="icon-star-empty icon-white"></i>
+              Agregar a Favoritos
+            </a>
+            {{/esFavorito}}
           </div>
         </div>
 
@@ -51,32 +65,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-window.onload = function (){
-  function votar (v) {
-    var voto = ( v ? 'favor' : 'contra');
-    $.post(location.pathname + '/votar', {
-      voto: voto
-    }, function (data, status) {
-      $('#votarUp, #votarDown').fadeOut(500, function () {
-        $(this).remove();
-      });
-    }).error(function (xhr) {
-      alert(xhr.status + ' ' + xhr.responseText);
-    });
-  }
-
-  var btnUp = $('#votarUp'),
-      btnDown = $('#votarDown');
-
-  btnUp.click(function () {
-    btnUp.button('loading');
-    votar(true);
-  });
-
-  btnDown.click(function () {
-    btnDown.button('loading');
-    votar(false);
-  });
-}
-</script>
