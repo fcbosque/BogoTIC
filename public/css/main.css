@@ -20,6 +20,12 @@ h6 small {
   font-size: 0.7em;
 }
 
+.nav-list > li > a {
+  padding: 3px;
+}
+
+/* fin de ovverride */
+
 .sidebar-nav {
   padding: 9px 0;
 }
