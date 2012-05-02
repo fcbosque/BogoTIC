@@ -67,10 +67,6 @@ h6 small {
   margin: 0 30px;
 }
 
-.navbar {
-  border-bottom: 1px solid #f5f5f5;
-}
-
 .navbar .nav .active > a,
 .navbar .nav .active > a:hover {
   background: none;
