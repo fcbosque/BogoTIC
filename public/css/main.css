@@ -9,6 +9,17 @@ body {
   background-image: linear-gradient(to bottom, #b0d7e6, #e4f3f9);
 
 }
+
+/* Override a los elementos small de bootstrap */
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
+  font-size: 0.7em;
+}
+
 .sidebar-nav {
   padding: 9px 0;
 }
@@ -307,7 +318,11 @@ body {
   padding: 0 20px;
 }
 
-/* Estilos para thumbnails */
+/* Estilos para thumbnails de la lista de foros anteriores */
+
+.text {
+  margin-top: 10px;
+}
 .crop-text {
   white-space: nowrap;
   overflow: hidden;
