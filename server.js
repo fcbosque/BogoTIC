@@ -27,7 +27,10 @@ app.configure(function () {
   app.register('.html', matador.engine)
 
   app.use(matador.methodOverride())
-  app.use(matador.bodyParser())
+  app.use(matador.bodyParser({
+    uploadDir: __dirname + '/public/subidos',
+    keepExtensions: true
+  }))
   app.use(matador.cookieParser())
   app.use(matador.session({ secret:"SeSiOnEsDeBoGoTiC" }))
   app.use(matador.static(__dirname + '/public'))

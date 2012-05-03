@@ -69,13 +69,20 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     create: function() {
       var self = this;
       var foro = this.request.body.foro;
+      // Verificamos si viene un archivo como imagen
+      if (this.request.files) {
+        if (this.request.files.foro && this.request.files.foro.imagen) {
+          var imagen = this.request.files.foro.imagen;
+          foro.imagen = imagen.path.split('public').pop();
+        }
+      }
       this.getModel('Foro').create(foro, function(err, doc) {
         if(err) {
           self.request.flash('error', err.message);
         } else if (doc) {
           self.request.flash('success', 'Foro creado con exito.')
         }
-        this.response.redirect('/foros');
+        self.response.redirect('/foros');
       })
     },
 
@@ -108,7 +115,8 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
             id: foro._id,
             fecha: foro.fecha,
             preguntas: foro.preguntas,
-            descripcion: foro.descripcion
+            descripcion: foro.descripcion,
+            imagen: foro.imagen
           }
         }
         self.render('show', self.locals);

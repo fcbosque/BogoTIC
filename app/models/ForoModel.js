@@ -36,7 +36,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     alianzas       : [AlianzaSchema],
     fecha          : { type: Date, required: true },
     abierto        : { type: Boolean, required: true, default: true },
-    imagen         : { type: String, required: true, default: "bogotic.png" },
+    imagen        : { type: String, required: true, default: "/img/logo.png" },
     lugar          : { type: String, required: true, default: "Por definir" },
     url            : { type: String, required: false, default: "www.bogotic.com" },
     relatoria      : { type: String, required: false },
