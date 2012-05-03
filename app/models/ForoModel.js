@@ -27,22 +27,22 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
   var ObjectId = this.ObjectId;
 
   var ForoSchema = new this.Schema({
-    nombre        : { type: String, required: false, match: /[a-z]/ },
-    descripcion   : { type: String, required: false },
-    categoria     : { type: String, required: false, enum: categorias },
-    participantes : [ParticipanteSchema],
-    sponsors      : [SponsorSchema],
-    preguntas     : [PreguntaSchema],
-    alianzas      : [AlianzaSchema],
-    fecha         : { type: Date, required: true },
-    abierto       : { type: Boolean, required: true, default: true },
-    imagen        : { type: String, required: true, default: "bogotic.png" },
-    lugar         : { type: String, required: true, default: "Por definir" },
-    url           : { type: String, required: false, default: "www.bogotic.com" },
-    relatoria     : { type: String, required: false },
-    video         : { type: String, required: false },
-    asistentes    : { type: Array, required: false, default: [] },
-    informes      : { type: Array, required: false, default: [] }
+    nombre         : { type: String, required: false, match: /[a-z]/ },
+    descripcion    : { type: String, required: false },
+    categoria      : { type: String, required: false, enum: categorias },
+    participantes  : [ParticipanteSchema],
+    patrocinadores : [PatrocinadorSchema],
+    preguntas      : [PreguntaSchema],
+    alianzas       : [AlianzaSchema],
+    fecha          : { type: Date, required: true },
+    abierto        : { type: Boolean, required: true, default: true },
+    imagen         : { type: String, required: true, default: "bogotic.png" },
+    lugar          : { type: String, required: true, default: "Por definir" },
+    url            : { type: String, required: false, default: "www.bogotic.com" },
+    relatoria      : { type: String, required: false },
+    video          : { type: String, required: false },
+    asistentes     : { type: Array, required: false, default: [] },
+    informes       : { type: Array, required: false, default: [] }
   });
   
   var ParticipanteSchema = new this.Schema({
@@ -52,7 +52,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     entidad      : { type: String, required: true }
   });
 
-  var SponsorSchema = new this.Schema({
+  var PatrocinadorSchema = new this.Schema({
     nombre    : { type: String, required: true },
     imagen    : { type: String, required: true }
   });
@@ -77,7 +77,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
   });
 
   this.Participante = this.mongoose.model('Participante', ParticipanteSchema);
-  this.Sponsor      = this.mongoose.model('Sponsor', SponsorSchema);
+  this.Patrocinador = this.mongoose.model('Patrocinador', PatrocinadorSchema);
   this.Alianza      = this.mongoose.model('Alianza', AlianzaSchema);
   this.Pregunta     = this.mongoose.model('Pregunta', PreguntaSchema);
   this.DBModel      = this.mongoose.model('Foro', ForoSchema);
@@ -112,10 +112,10 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @see ForoController.show
      */
 
-    show: function(id, callback) {
-      this.DBModel.findById(id, function(err, item) {
-        if(err) throw new Error(err);
-        if(callback) callback(err, item);
+    show: function (id, callback) {
+      this.DBModel.findById(id, function (err, item) {
+        if (err) throw new Error(err);
+        if (callback) callback(err, item);
       });
     },
 
@@ -133,8 +133,8 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
     
     remove: function(id, callback) {
       var _resource = this.DBModel.findById(id);
-      _resource.remove(function(err, confirm) {
-        if(err) throw new Error(err);
+      _resource.remove(function (err, confirm) {
+        if (err) throw new Error(err);
         callback(err, confirm);
       });        
     },
@@ -151,9 +151,9 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @param {Function} callback
      */
 
-    modify: function(id, params, callback) {
+    modify: function (id, params, callback) {
       var self = this;
-      this.DBModel.findById(id, function(resource, callback) {
+      this.DBModel.findById(id, function (resource, callback) {
         resource.update(self.params.id, self.params, callback);
       });
     },
@@ -168,10 +168,10 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @param {Function} callback
      */
 
-    all: function(callback) {
-      this.DBModel.find({}, function(err, items) {
-        if(err) throw new Error(err);
-        if(callback) callback(err, items);
+    all: function (callback) {
+      this.DBModel.find({}, function (err, items) {
+        if (err) throw new Error(err);
+        if (callback) callback(err, items);
       });
     },
 
@@ -187,7 +187,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @param {Function} callback
      */
 
-    search: function(param, callback) {
+    search: function (param, callback) {
       this.DBModel.where('', new RegExp(param, 'i')).run(callback);
     },
 
@@ -200,7 +200,7 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @param {Function} callback
      */
 
-    addPregunta: function(foro, pregunta, callback) {
+    addPregunta: function (foro, pregunta, callback) {
       _add(this, 'preguntas', 'Pregunta', foro, pregunta, callback);
     },
 
@@ -222,10 +222,10 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
      * @param {Function} callback
      */
 
-    getPregunta: function(foro, pregunta, callback) {
+    getPregunta: function (foro, pregunta, callback) {
       var self = this;
-      this.DBModel.findById(foro, function(err, foro) {
-        if(err) throw new Error(err);
+      this.DBModel.findById(foro, function (err, foro) {
+        if (err) throw new Error(err);
         var preguntaCorrecta = foro.preguntas.filter(function (preg) {
           return (preg._id.toString() == pregunta.toString());
         });
@@ -236,60 +236,68 @@ module.exports = require(app.set('models') + '/ApplicationModel').extend(functio
         });
       });
     },
-    addParticipante: function(foro, participante, callback) {
+    addParticipante: function (foro, participante, callback) {
       _add(this, 'participantes', 'Participante', foro, participante, callback);
     },
-    remParticipante: function(foro, participante, callback) {
+    remParticipante: function (foro, participante, callback) {
       throw new Error({
         message: "NO IMPLEMENTADO AUN"
-      })
+      });
     },
-    addSponsor: function(foro, sponsor, callback) {
+    addSponsor: function (foro, sponsor, callback) {
       _add(this, 'sponsors', 'Sponsor', foro, sponsor, callback);
     },
-    remSponsor: function(foro, sponsor, callback) {
+    remSponsor: function (foro, sponsor, callback) {
       throw new Error({
         message: "NO IMPLEMENTADO AUN"
-      })
+      });
     },
-    addAlianza: function(foro, alianza, callback) {
+    addAlianza: function (foro, alianza, callback) {
       _add(this, 'alianzas', 'Alianza', foro, alianza, callback);
     },
-    remAlianza: function(foro, alianza, callback) {
+    remAlianza: function (foro, alianza, callback) {
       throw new Error({
         message: "NO IMPLEMENTADO AUN"
-      })
+      });
     },
-    addAsistente: function(foro, asistente, callback) {
+    addAsistente: function (foro, asistente, callback) {
       _add(this, 'asistentes', 'Asistente', foro, asistente, callback);
     },
-    remAsistente: function(foro, asistente, callback) {
+    remAsistente: function (foro, asistente, callback) {
       throw new Error({
         message: "NO IMPLEMENTADO AUN"
-      })
+      });
     }
   });
 
 
 /**
  * Funcion para agregar recurso al foro.
- * ES una funcion interna para simplificar las funciones
- * de agregar/quitar que se definen para los submodelos del foro
- * como el participante, asistente, sponsor y demas modelos
- * @param self {Object} Es la clase en si, es el mismo 'this' de arriba.
- * @param recurso {String} El nombre del recurso que desea agregar.
- * @param clase {String} La clase a instanciar como el nuevo recurso.
- * @param foroId {String} ID del foro al que se le agregara el recurso.
- * @param datos {Object} Datos a guardar como recurso de este foro.
- * @param callback {Function} Funcion a llamar al final con el FORO.
+ * 
+ * Funcion interna para simplificar las tareas de agregar
+ * o quitar recursos al foro.
+ * 
+ * Hasta el momento los recursos a registrar son:
+ *  - Participante
+ *  - Asistente
+ *  - Patrocinador
+ * 
+ * @api private
+ * @param {Object} self Es la clase en si, es el mismo 'this' de arriba.
+ * @param {String} recurso El nombre del recurso que desea agregar.
+ * @param {String} clase La clase a instanciar como el nuevo recurso.
+ * @param {String} foroId ID del foro al que se le agregara el recurso.
+ * @param {Object} datos Datos a guardar como recurso de este foro.
+ * @param {Function} callback Funcion a llamar al final.
+ * @return {Function} callback Funcion a llamar al final.
  */
 function _add(self, recurso, clase, foroId, datos, callback) {
-  self.DBModel.findById(foroId, function(err, foro) {
-    if(err) throw new Error(err);
+  self.DBModel.findById(foroId, function (err, foro) {
+    if (err) throw new Error(err);
     foro[recurso].push(new self[clase](datos));
-    foro.save(function(err) {
-      if(err) throw new Error(err);
+    foro.save(function (err) {
+      if (err) throw new Error(err);
       callback(err, foro);
-    })
-  })
+    });
+  });
 }

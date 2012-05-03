@@ -1,8 +1,7 @@
-<div class="span10">
-  <div class="hero-unit">
-    <h1>Felicitaciones!</h1>
-    <p>Se ha logueado correctamente en el Dashboard.</p>
-    <p>El nombre {{ usuario.nombre }} tiene el apellido {{ usuario.apellido }}</p>
-    <p><a href="/usuarios/logout" class="btn btn-primary btn-large" rel="popover">Salir »</a></p>
+<div class="span8 box">
+  <h2><span>Dashboard</span></h2>
+  <div class="box-inner">
+    <p>Bienvenido {{usuario.nombre}} {{ usuario.apellido }}, se ha logueado correctamente en BogoTIC.</p>
+    <p><a href="/usuarios/logout" class="btn-custom btn-large" rel="popover">Salir »</a></p>
   </div>
 </div>

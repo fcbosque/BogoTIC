@@ -1,8 +1,11 @@
 <div class="span10">
   <div class="row-fluid">
     <div class="span12">
-      <div class="subnav subnav-fluid">
+      <div class="subnav subnav-fluid breadcrumbs">
         <ul class="nav nav-pills">
+          <li>
+            <a href="/foros"><i class="icon-home"></i> Foros</a>
+          </li>
           <li class="active">
             <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
           </li>
@@ -14,147 +17,163 @@
     </div>
   </div>
 
-  <!-- /breadcumbs -->
-  <br>
   <div class="row-fluid">
-    <div class="span5">
+    <div class="span9">
       <div class="row-fluid">
-        <h1>Foro {{foro.nombre}} <small>{{foro.id}}</small></h1>
-        <p style="text-align:center">
-          <a href="#"><img class="thumbnail" src="http://placehold.it/360x268" alt=""></a>
-        </p>
-        <h2>Descripción</h2>
-        <p>{{foro.descripcion}}</p>
-        <hr>
-        {{#usuario}}
-        <div class="modal hide fade in" id="modal-formular-pregunta">
-            <div class="modal-header">
-              <a class="close" data-dismiss="modal">x</a>
-              <h3>Formula tu pregunta</h3>
-            </div>
-            <div class="modal-body">
-              <form class="form-horizontal" action="/foros/{{foro.id}}/preguntas" method="POST">
-                  <div class="control-group">
-                    <label class="control-label" for="pregunta[titulo]">Titulo</label>
-                    <div class="controls">
-                      <input class="input-xlarge" id="preguntaTitulo" name="pregunta[titulo]" size="30" type="text">
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="pregunta[contenido]">¿Cual es su pregunta?</label>
-                    <div class="controls">
-                      <textarea class="input-xlarge" id="preguntaContenido" name="pregunta[contenido]" rows="5"></textarea>
-                      <p class="help-block">Sea claro en la formulación de su pregunta.</p>
-                    </div>
-                  </div>
-                  <div class="control-group">
-                    <label class="control-label" for="pregunta[localidad]">Seleccione la localidad</label>
-                    <div class="controls">
-                      <select class="input-xlarge" name="pregunta[localidad]" id="preguntaLocalidad">
-                        <option>Antonio Nariño</option>
-                        <option>Barrios Unidos</option>
-                        <option>Bosa</option>
-                        <option>Chapinero</option>
-                        <option>Ciudad Bolívar</option>
-                        <option>Engativá</option>
-                        <option>Fontibón</option>
-                        <option>Kennedy</option>
-                        <option>La Candelaria</option>
-                        <option>Los Mártires</option>
-                        <option>Puente Aranda</option>
-                        <option>Rafael Uribe Uribe</option>
-                        <option>San Cristóbal</option>
-                        <option>Santa Fe</option>
-                        <option>Suba</option>
-                        <option>Sumapaz</option>
-                        <option>Teusaquillo</option>
-                        <option>Tunjuelito</option>
-                        <option>Usaquén</option>
-                        <option>Usme</option>
-                      </select>
-                      <span class="help-block">
-                      </span>
-                    </div>
-                  </div>
-                  <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Guardar</button>
-                    <button type="reset" class="btn"><i class="icon-remove"></i> Cancelar</button>
-                  </div>
-                </fieldset>
-              </form>
-            </div>
+        <div class="span12 box">
+          <h2><span>{{foro.nombre}}</h2>
+          <div class="box-inner">
+              <div class="span7">
+                <a href="#"><img class="thumbnail" src="http://placehold.it/360x268" alt=""></a>
+              </div>
+              <div class="span5">
+                <p><b>ID</b>: <span class="label label-info">{{foro.id}}</span></p>
+                <h3>Descripción</h3>
+                <p>{{foro.descripcion}}</p>
+              </div>
+          </div>
         </div>
-        <a class="btn btn-primary btn-large right" data-toggle="modal" href="#modal-formular-pregunta">Formula tu pregunta</a>
-        {{/usuario}}
       </div>
-    </div>
-
-    <div class="span7">
       <div class="row-fluid">
-        <div class="span12">
-          <div class="row-fluid">
-            <div class="span9">
-              <h2>Participantes</h2>
-              <ul class="thumbnails">
-                <li>
-                  <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
-                </li>
-                <li>
-                  <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
-                </li>
-                <li>
-                  <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
-                </li>
-                <li>
-                  <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="span3">
-              <h2>Sponsors</h2>
-              <ul class="thumbnails">
-                <li class="span2">
-                  <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
-                </li>
-                <li class="span2">
-                  <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
-                </li>
-                <li class="span2">
-                  <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
-                </li>
-                <li class="span2">
-                  <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
-                </li>
-              </ul>
+        <div class="row-fluid">
+          <div class="span12 box">
+            <h2><span>Preguntas más votadas</span></h2>
+            <div class="box-inner no-float">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Pregunta</th>
+                    <th>Favoritos</th>
+                    <th>Votos</th>
+                    <th>Localidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#foro.preguntas}}
+                  <tr>
+                    <td><a href="/foros/{{foro.id}}/preguntas/{{_id}}">{{titulo}}</a></td>
+                    <td><i class="icon-star"></i> +{{favs}}</td>
+                    <td><i class="icon-thumbs-up"></i> +{{votos}}</td>
+                    <td><span class="label">{{localidad}}</span></td>
+                  </tr>
+                  {{/foro.preguntas}}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div class="span12">
-          <h2>Preguntas más votadas</h2>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Pregunta</th>
-                <th>Favoritos</th>
-                <th>Votos</th>
-                <th>Localidad</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#foro.preguntas}}
-              <tr>
-                <td><a href="/foros/{{foro.id}}/preguntas/{{_id}}">{{titulo}}</a></td>
-                <td>{{favs}}</td>
-                <td>{{votos}}</td>
-                <td><span class="label">{{localidad}}</span></td>
-              </tr>
-              {{/foro.preguntas}}
-            </tbody>
-          </table>
-          <p style="text-align: right;"><small>Ver <a href="/foros/{{foro.id}}/preguntas">más</a></small></p>
+        <p style="text-align: right;"><small>Ver <a href="/foros/{{foro.id}}/preguntas">más</a></small></p>
+      </div>
+    </div>
+
+    <div class="span3">
+      <div class="row-fluid">
+        <div class="span12 box">
+          <h2><span>Participa</span></h2>
+          <div class="box-inner">
+            <a class="btn btn-primary btn-large right" data-toggle="modal" href="#modal-formular-pregunta">Formula tu pregunta</a>
+          </div>
+        </div>
+      </div>
+      {{#usuario}}
+      <div class="row-fluid">
+        <div class="span12 box">
+          <h2><span>Participantes</span></h2>
+          <div class="box-inner">
+            <ul class="thumbnails">
+              <li>
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li>
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li>
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li>
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{/usuario}}
+
+      <div class="row-fluid">
+        <div class="span12 box">
+          <h2><span>Sponsors</span></h2>
+          <div class="box-inner">
+            <ul class="thumbnails">
+              <li>
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+              <li>
+                <a href="#" class="thumbnail"><img src="http://placehold.it/160x120" alt=""></a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+<!-- Modal show -->
+{{#usuario}}
+<div class="modal hide fade in" id="modal-formular-pregunta">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">x</a>
+    <h3>Formula tu pregunta</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal" action="/foros/{{foro.id}}/preguntas" method="POST">
+      <div class="control-group">
+        <label class="control-label" for="pregunta[titulo]">Titulo</label>
+        <div class="controls">
+          <input class="input-xlarge" id="preguntaTitulo" name="pregunta[titulo]" size="30" type="text">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="pregunta[contenido]">¿Cual es su pregunta?</label>
+        <div class="controls">
+          <textarea class="input-xlarge" id="preguntaContenido" name="pregunta[contenido]" rows="5"></textarea>
+          <p class="help-block">Sea claro en la formulación de su pregunta.</p>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="pregunta[localidad]">Seleccione la localidad</label>
+          <div class="controls">
+            <select class="input-xlarge" name="pregunta[localidad]" id="preguntaLocalidad">
+              <option>Antonio Nariño</option>
+              <option>Barrios Unidos</option>
+              <option>Bosa</option>
+              <option>Chapinero</option>
+              <option>Ciudad Bolívar</option>
+              <option>Engativá</option>
+              <option>Fontibón</option>
+              <option>Kennedy</option>
+              <option>La Candelaria</option>
+              <option>Los Mártires</option>
+              <option>Puente Aranda</option>
+              <option>Rafael Uribe Uribe</option>
+              <option>San Cristóbal</option>
+              <option>Santa Fe</option>
+              <option>Suba</option>
+              <option>Sumapaz</option>
+              <option>Teusaquillo</option>
+              <option>Tunjuelito</option>
+              <option>Usaquén</option>
+              <option>Usme</option>
+            </select>
+            <span class="help-block">
+            </span>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> Guardar</button>
+          <button type="reset" class="btn"><i class="icon-remove"></i> Cancelar</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </div>
+{{/usuario}}
