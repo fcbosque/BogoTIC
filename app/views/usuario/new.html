@@ -3,7 +3,7 @@
     <div class="span8 box">
       <h2><span>Crear cuenta nueva</span></h2>
       <div class="box-inner">
-      <form class="form-horizontal" action="/usuarios" method="POST">
+      <form class="form-horizontal" action="/usuarios" method="POST" enctype="multipart/form-data">
         <fieldset>
         <legend>Datos de usuario</legend>
           <div class="control-group">
@@ -24,7 +24,16 @@
               </p>
             </div>
           </div>
-           <div class="control-group">
+          <div class="control-group">
+            <label class="control-label" for="usuario[correo]">Correo(*)</label>
+            <div class="controls">
+              <input class="input-xlarge" id="usuarioCorreo" name="usuario[correo]" size="30" type="email">
+              <p class="help-block">
+
+              </p>
+            </div>
+          </div>
+          <div class="control-group">
             <label class="control-label" for="usuario[clave]">Contraseña(*)</label>
             <div class="controls">
               <input class="input-xlarge" id="usuarioClave" name="usuario[clave]" size="30" type="password">
@@ -56,15 +65,6 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="usuario[correo]">Correo(*)</label>
-            <div class="controls">
-              <input class="input-xlarge" id="usuarioCorreo" name="usuario[correo]" size="30" type="email">
-              <p class="help-block">
-
-              </p>
-            </div>
-          </div>
-          <div class="control-group">
             <label class="control-label" for="usuario[url]">URL</label>
             <div class="controls">
               <input class="input-xlarge" id="usuarioUrl" name="usuario[url]" size="30" type="text">
@@ -85,10 +85,8 @@
           <div class="control-group">
             <label class="control-label" for="usuario[avatar]">Avatar</label>
             <div class="controls">
-              <input class="input-file" id="usuarioAvatar" name="usuario[avatar]" size="30" type="file">
-              <p class="help-block">
-
-              </p>
+              <input class="input-file" id="usuarioAvatar" name="usuario[avatar]" type="file">
+              <p class="help-block">Recuerda usar una imagen de tamaño pequeño para no desajustar el diseño</p>
             </div>
           </div>
           <div class="control-group">

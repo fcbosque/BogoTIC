@@ -76,7 +76,16 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
     create: function () {
       var self = this;
       var usuario = this.request.body.usuario;
-      this.getModel('Usuario').create(usuario, function (err, usuario) {
+      // Verificamos si viene un archivo como imagen
+      if (this.request.files) {
+        if (this.request.files.usuario && this.request.files.usuario.avatar
+          // Hack para evitar la subida de archivos vacios (Chrome)
+          && this.request.files.usuario.avatar.size > 0) {
+          var imagen = this.request.files.usuario.avatar;
+          usuario.avatar = imagen.path.split('public').pop();
+        }
+      }
+      this.getModel('Usuario').create(usuario, function(err, usuario) {
         if (err) {
           console.log(err);
           self.request.flash('error', err.message);
@@ -102,15 +111,15 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @see UsuarioModel.show
      */
 
-    show: function () {
-      var self = this;
-      var username = this.request.params.username;
-      this.getModel('Usuario').show(username, function (usuario) {
-        if (usuario) {
-          self.locals.usuario = usuario;
+    show: function() {
+      // Nos aseguramos que este un usuario logueado.
+      if (this.request.session.usuario) {
+        if (this.locals.usuario && this.locals.usuario === this.request.session.usuario) {
+          this.render('show', this.locals);
         }
-        self.render('show', self.locals);
-      });
+      } else {
+        this.response.redirect('/');
+      }
     },
 
     /**
