@@ -21,13 +21,13 @@
     <div class="span9">
       <div class="row-fluid">
         <div class="span12 box">
-          <h2><span>{{foro.nombre}} </h2>
+          <h2><span>{{foro.nombre}}</h2>
           <div class="box-inner">
               <div class="span7">
                 <a href="#"><img class="thumbnail" src="http://placehold.it/360x268" alt=""></a>
               </div>
               <div class="span5">
-                <small>{{foro.id}}</small>
+                <p><b>ID</b>: <span class="label label-info">{{foro.id}}</span></p>
                 <h3>Descripción</h3>
                 <p>{{foro.descripcion}}</p>
               </div>
@@ -52,7 +52,7 @@
                   {{#foro.preguntas}}
                   <tr>
                     <td><a href="/foros/{{foro.id}}/preguntas/{{_id}}">{{titulo}}</a></td>
-                    <td>{{favs}}</td>
+                    <td><i class="icon-star"></i> +{{favs}}</td>
                     <td>{{votos}}</td>
                     <td><span class="label">{{localidad}}</span></td>
                   </tr>
