@@ -44,6 +44,7 @@ module.exports = {
     ['del',   '/:foro/preguntas/:id',   'Pregunta', 'remove'],
     ['put',   '/:foro/preguntas/:id',   'Pregunta', 'modify'],
     ['post',  '/:foro/preguntas/:id/votar', 'Pregunta', 'votar'],
+    ['post',  '/:foro/preguntas/:id/favorito', 'Pregunta', 'favorito'],
     // Seguimiento
     ['get',   '/:foro/seguimientos',       'Seguimiento', 'index'],
     ['post',  '/:foro/seguimientos',       'Seguimiento', 'create'],
@@ -68,6 +69,7 @@ module.exports = {
     ['get',   '/dashboard', 'Usuario', 'index'],
     ['get',   '/nuevo',     'Usuario', 'new'],
     ['get',   '/perfil',    'Usuario', 'getPerfil'],
+    ['get',   '/login',     'Usuario', 'loginForm'],
     ['post',  '/login',     'Usuario', 'login'],
     ['get',   '/logout',    'Usuario', 'logout'],
     ['get',   '/:username', 'Usuario', 'show'],

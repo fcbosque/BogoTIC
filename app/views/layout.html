@@ -58,6 +58,7 @@
     <script type="text/javascript" src="/js/libs/bootstrap/bootstrap-transition.js"></script>
     <script type="text/javascript" src="/js/libs/bootstrap/bootstrap-carousel.js"></script>
     <script type="text/javascript" src="/js/libs/bootstrap/bootstrap-button.js"></script>
+    <script type="text/javascript" src="/js/libs/bootstrap/bootstrap-tooltip.js"></script>
     <script>
       function scrollResize (menu, navbarInner, view) {
         return function () {
@@ -79,6 +80,10 @@
           $(window).bind("scroll resize", scrollResize($("#menu"), $(".navbar-inner"), $(window)));
       });
     </script>
+    {{#botones}}
+      <script type="text/javascript" src="/js/bogotic-votacion.js"></script>
+    {{/botones}}
+    <script type="text/javascript" src="/js/bogotic-favorito.js"></script>
 
   <!--[if lt IE 7 ]>
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>

@@ -4,10 +4,10 @@ var vows = require('vows'),
     app = global.app = require('matador').createServer();
 
 app.configure(function () {
-  app.set('models', __dirname + '/../app/models')
-  app.set('helpers', __dirname + '/../app/helpers')
-  app.set('views', __dirname + '/../app/views')
-  app.set('controllers', __dirname + '/../app/controllers')
+  app.set('models', __dirname + '/../app/models');
+  app.set('helpers', __dirname + '/../app/helpers');
+  app.set('views', __dirname + '/../app/views');
+  app.set('controllers', __dirname + '/../app/controllers');
 });
 
 var ForoModel = require('../app/models/ForoModel.js');
@@ -26,15 +26,15 @@ vows.describe('app/models/ForoModel').addBatch({
     "revisando la clase": {
       "y modelos anexos": {
         topic: new ForoModel(),
-        "debe tener los 4 modelos anexos": function (clase) {
+        "debe tener los 4 modelos anexos [Participante, Sponsor, Alianza, Pregunta]": function (clase) {
           assert.isFunction(clase.Participante);
-          assert.isFunction(clase.Sponsor);
+          assert.isFunction(clase.Patrocinador);
           assert.isFunction(clase.Alianza);
           assert.isFunction(clase.Pregunta);
         },
         "debe tener los constructores respectivos": function (clase) {
           assert.equal(clase.Participante.modelName, 'Participante');
-          assert.equal(clase.Sponsor.modelName, 'Sponsor');
+          assert.equal(clase.Patrocinador.modelName, 'Patrocinador');
           assert.equal(clase.Alianza.modelName, 'Alianza');
           assert.equal(clase.Pregunta.modelName, 'Pregunta');
         }
@@ -42,11 +42,11 @@ vows.describe('app/models/ForoModel').addBatch({
       "y los metodos prometidos": {
         topic: new ForoModel(),
         "debe tener create, show, remove, modify and all": function (clase) {
-          assert.isFunction(clase.create)
-          assert.isFunction(clase.show)
-          assert.isFunction(clase.remove)
-          assert.isFunction(clase.modify)
-          assert.isFunction(clase.all)
+          assert.isFunction(clase.create);
+          assert.isFunction(clase.show);
+          assert.isFunction(clase.remove);
+          assert.isFunction(clase.modify);
+          assert.isFunction(clase.all);
         },
         "debe tener los adicionales addPregunta y getPregunta": function (clase) {
           assert.isFunction(clase.addPregunta);
@@ -85,7 +85,7 @@ vows.describe('app/models/ForoModel').addBatch({
     topic: new ForoModel(),
     "all() ": {
       topic: function (Foro) {
-        Foro.all(this.callback)
+        Foro.all(this.callback);
       },
       "Listado de foros": function (err, lista) {
         assert.isNull(err);

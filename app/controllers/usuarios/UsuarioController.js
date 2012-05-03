@@ -16,7 +16,7 @@
 */
 
 module.exports = require(app.set('controllers') + '/ApplicationController').extend(function() {
-  this.viewFolder = 'usuario'
+  this.viewFolder = 'usuario';
 }).methods({
     /**
      * Renderiza el listado de usuarios.
@@ -33,14 +33,14 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @see UsuarioModel.all
      */
 
-    index: function() {
+    index: function () {
       var self = this;
       this.getModel('Usuario').all(function(usuarios) {
         if (usuarios) {
           self.locals.usuarios = usuarios;
         }
         self.render('index', self.locals);
-      })
+      });
     },
 
     /**
@@ -55,7 +55,7 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @see ApplicationController.new
      */
 
-    new: function() {
+    new: function () {
       this.render('new', this.locals);
     },
 
@@ -73,15 +73,15 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @see UsuarioModel.create
      */
     
-    create: function() {
+    create: function () {
       var self = this;
       var usuario = this.request.body.usuario;
-      this.getModel('Usuario').create(usuario, function(err, usuario) {
+      this.getModel('Usuario').create(usuario, function (err, usuario) {
         if (err) {
           console.log(err);
           self.request.flash('error', err.message);
         } else {
-          self.request.flash('success', 'Usuario creado con exito!')
+          self.request.flash('success', 'Usuario creado con exito!');
         }
         self.response.redirect("/");
       });
@@ -102,15 +102,15 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @see UsuarioModel.show
      */
 
-    show: function() {
+    show: function () {
       var self = this;
       var username = this.request.params.username;
-      this.getModel('Usuario').show(username, function(usuario) {
+      this.getModel('Usuario').show(username, function (usuario) {
         if (usuario) {
           self.locals.usuario = usuario;
         }
         self.render('show', self.locals);
-      })
+      });
     },
 
     /**
@@ -123,12 +123,12 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @see UsuarioModel.remove
      */
 
-    remove: function() {
+    remove: function () {
       var self = this;
       var username = this.request.params.username;
-      this.getModel('Usuario').remove(username, function(usuario) {
+      this.getModel('Usuario').remove(username, function (usuario) {
         self.send(200);
-      })
+      });
     },
 
     /**
@@ -142,26 +142,60 @@ module.exports = require(app.set('controllers') + '/ApplicationController').exte
      * @see UsuarioModel.modify
      */
    
-    modify: function() {
+    modify: function () {
       var self = this;
       var username = this.request.params.username;
-      this.getModel('Usuario').modify(username, params, function(usuario) {
+      this.getModel('Usuario').modify(username, params, function (usuario) {
         self.send(200);
       });
     },
+
+    /**
+     * Identifica un usario ante el sistema
+     * 
+     * Si los datos son correctos los datos son puestos
+     * en la sesion. Si el ingreso es exitoso se redirecciona a /
+     * de lo contrario de vuelta a /usuarios/login
+     * 
+     * @api public
+     * @redirect /
+     * @param {Object} usuario
+     */
+
     login: function () {
       var self = this;
       var data = this.request.body.usuario;
       this.getModel('Usuario').authenticate(data, function (err, user) {
-        if (err) self.request.flash('error', err.message);
+        if (err) {
+          self.request.flash('error', err.message);
+          self.response.redirect('/usuarios/login');
+        }
         if (user) {
           self.request.session.usuario = user;
+          self.response.redirect('/');
         }
-        self.response.redirect('/');
       });
     },
+
+    /**
+     * Destruimos la sesion
+     * 
+     * @api public
+     * @redirect /
+     */
+
     logout: function () {
       this.request.session.destroy();
       this.response.redirect('/');
+    },
+
+    /**
+     * Simplemente renderizamos el formulario de login
+     * 
+     * @api public
+     */
+
+    loginForm: function () {
+      this.render('login', this.locals);
     }
-  })
+  });

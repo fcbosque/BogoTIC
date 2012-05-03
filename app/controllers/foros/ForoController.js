@@ -16,7 +16,7 @@
 */
 
 module.exports = require(app.set('controllers') + '/ApplicationController').extend(function() {
-  this.viewFolder = 'foro'
+  this.viewFolder = 'foro';
 }).methods({
     /**
      * Renderiza el listado de foros.

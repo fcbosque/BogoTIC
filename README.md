@@ -1,3 +1,5 @@
+![Build status](https://secure.travis-ci.org/fcbosque/BogoTIC.png?branch=master)
+
 # Foros BogoTIC
 
 TBD

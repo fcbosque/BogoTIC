@@ -16,11 +16,11 @@
 */
 
 module.exports = require('matador').BaseController.extend(function () {
-  this.viewFolder = ''
-  this.addBeforeFilter(this.allForos)
-  this.addBeforeFilter(this.usuarioActual)
-  this.addBeforeFilter(['new'], this.estaLogueado)
-  this.addBeforeFilter(this.errorsToLocals)
+  this.viewFolder = '';
+  this.addBeforeFilter(this.allForos);
+  this.addBeforeFilter(this.usuarioActual);
+  this.addBeforeFilter(['new'], this.estaLogueado);
+  this.addBeforeFilter(this.errorsToLocals);
 
   // Creo este espacio para ir almacenando las locals que deban meter
   // los otros middlewares.
@@ -34,12 +34,20 @@ module.exports = require('matador').BaseController.extend(function () {
      * @return {Function} callback del controlador
      */
 
-    allForos: function(callback) {
+    allForos: function (callback) {
       var self = this;
-      this.getModel('Foro').all(function(err, foros) {
+      this.getModel('Foro').all(function (err, foros) {
         self.locals.foros = (foros ? foros : []);
-        return callback(null)
-      })
+        self.locals.organizado = function () {
+          var res = [],
+              listado = foros.map(function (f) { return { foro:f }; });
+          for (var i=0; i <= listado.length; i+=3 ) {
+            res.push({ filas: listado.slice(i, i + 3) });
+          }
+          return res;
+        };
+        return callback(null);
+      });
     },
 
     /**
@@ -47,12 +55,15 @@ module.exports = require('matador').BaseController.extend(function () {
      * en el objeto `response` para ser usado en todos los
      * controladores si el usuario se encuentra autorizado y su
      * cookie como su sessión han sido validados.
+     * 
+     * Si el usuario es administrador, tambien se pobla el objeto
+     * admin para ser pasado en las vistas.
      *
      * @api private
      * @return {Function} callback del controlador
      */
 
-    usuarioActual: function(callback) {
+    usuarioActual: function (callback) {
       var self = this,
           user = this.request.session.usuario;
 
@@ -60,13 +71,21 @@ module.exports = require('matador').BaseController.extend(function () {
         self.locals.usuario = user;
       }
 
-      return callback(null)
+      if (user && user.admin == true) {
+        self.locals.admin = user;
+      }
+
+      return callback(null);
     },
 
     /**
-     * Verifico si el usuario que solicita el recurso tiene una session
+     * Verifica si el usuario que solicita el recurso tiene una session
      * iniciada con un usuario. De otro modo lo mandamos al inicio '/'
+     * 
+     * @api private
+     * @return {Function} callback del controlador
      */
+
     estaLogueado: function (callback) {
       if (this.request.url === "/usuarios/nuevo") {
         // Hack para permitir mostrar el formulario de creacion de usuario.
@@ -76,12 +95,17 @@ module.exports = require('matador').BaseController.extend(function () {
         return callback(null);
       } else {
         this.response.redirect('/');
-      }
+      };
     },
 
     /**
-     * Copio los errores guardados dentro de la sesion a los locales del proximo render
+     * Copia los errores guardados dentro de la sesion a los
+     * locales del proximo render.
+     * 
+     * @api private
+     * @return {Function} callback del controlador
      */
+
     errorsToLocals: function (callback) {
       var self = this;
       this.locals.errores = [];
@@ -92,10 +116,10 @@ module.exports = require('matador').BaseController.extend(function () {
             self.locals.errores.push({
               tipo: tipo,
               message: mensaje
-            })
+            });
           });
         }
-      })
+      });
       return callback(null);
     }
   });
