@@ -4,6 +4,9 @@
       <div class="subnav subnav-fluid">
         <ul class="nav nav-pills">
           <li>
+            <a href="/foros"><i class="icon-home"></i> Foros</a>
+          </li>
+          <li>
             <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
           </li>
           <li>
@@ -19,13 +22,20 @@
 
   <br>
   <div class="row-fluid">
-    <div class="span12">
-      <div class="row">
-
-        <div class="span7">
+    <div class="span7">
+      <div class="row-fluid">
+        <div class="span12">
           <div class="well">
             <h1>{{pregunta.titulo}}</h1>
             <blockquote><p>{{pregunta.contenido}}</p><small>{{pregunta.autor}}</small></blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span12 box">
+          <h2><span>Participa</span></h2>
+          <div class="box-inner center">
             {{#botones}}
             <a id="votarUp" class="btn btn-success" href="#" data-loading-text="Votando...">
               <i class="icon-upload icon-white"></i>
@@ -52,15 +62,14 @@
             {{/esFavorito}}
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="span4">
-          <div class="well">
-            <h2>Estadisticas</h2>
-            <p>Favs: {{pregunta.favs}}</p>
-            <p>Votacion: {{pregunta.votos}} / Numero de Votantes: {{pregunta.votantes}}</p>
-          </div>
-        </div>
-
+    <div class="span5 box">
+      <h2><span>Estadisticas</span></h2>
+      <div class="box-inner">
+        <p>Favs: {{pregunta.favs}}</p>
+        <p>Votacion: {{pregunta.votos}} / Numero de Votantes: {{pregunta.votantes}}</p>
       </div>
     </div>
   </div>

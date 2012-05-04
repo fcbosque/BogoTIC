@@ -43,7 +43,7 @@ vows.describe('app/models/SeguimientoModel').addBatch({
     "revisando las clases": {
       "y los modelos anexos": {
         topic: new SeguimientoModel(),
-        "debe tener los 4 modelos anexos": function (clase) {
+        "debe tener los 4 modelos anexos [Pregunta, Respuesta, Consulta, Informe]": function (clase) {
           assert.isFunction(clase.Pregunta);
           assert.isFunction(clase.Respuesta);
           assert.isFunction(clase.Consulta);

@@ -26,7 +26,7 @@ vows.describe('app/models/ForoModel').addBatch({
     "revisando la clase": {
       "y modelos anexos": {
         topic: new ForoModel(),
-        "debe tener los 4 modelos anexos": function (clase) {
+        "debe tener los 4 modelos anexos [Participante, Sponsor, Alianza, Pregunta]": function (clase) {
           assert.isFunction(clase.Participante);
           assert.isFunction(clase.Patrocinador);
           assert.isFunction(clase.Alianza);
