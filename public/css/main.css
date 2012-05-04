@@ -10,7 +10,7 @@ body {
 
 }
 
-/* Override a los elementos small de bootstrap */
+/* Override al elementos bootstrap */
 h1 small,
 h2 small,
 h3 small,
@@ -20,8 +20,12 @@ h6 small {
   font-size: 0.7em;
 }
 
+.nav-list [class^="icon-"] {
+  margin-right: 0;
+}
+
 .nav-list > li > a {
-  padding: 3px;
+  padding: 3px 0;
 }
 
 /* fin de ovverride */
@@ -274,7 +278,7 @@ h6 small {
   background-color: #ecf5f8;
   border: 1px solid #c6e0e7;
   margin: 43px 5px 5px;
-  padding: 5px;
+  padding: 5px 1px;
   -webkit-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
 }
