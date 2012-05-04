@@ -28,6 +28,14 @@ h6 small {
   padding: 3px 0;
 }
 
+.nav-tabs > li > a {
+  border-radius: 0;
+}
+
+.search-query {
+  border-radius: 3px;
+}
+
 /* fin de ovverride */
 
 .sidebar-nav {
