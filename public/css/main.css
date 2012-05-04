@@ -354,6 +354,17 @@ h6 small {
   margin-bottom: 15px;
 }
 
+/* Estilos para enlaces de github */
+.github {
+  list-style: none;
+  margin: 0 0 5px;
+  text-align: center;
+}
+
+.github li {
+  display: inline;
+}
+
 /* Estilos para .footer */
 .footer {
   clear: both;
