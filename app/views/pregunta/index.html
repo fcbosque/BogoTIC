@@ -4,6 +4,9 @@
       <div class="subnav subnav-fluid">
         <ul class="nav nav-pills">
           <li>
+            <a href="/foros"><i class="icon-home"></i> Foros</a>
+          </li>
+          <li>
             <a href="/foros/{{foro.id}}"><i class="icon-flag"></i> {{foro.nombre}}</a>
           </li>
           <li class="active">
@@ -16,11 +19,11 @@
 
   <br>
   <div class="row-fluid">
-    <div class="span12">
+    <div class="span7">
       <div class="row-fluid">
-        <div class="span8">
-          <div class="well">
-            <h1>Preguntas más votadas</h1>
+        <div class="span12 box">
+          <h2><span>Preguntas más votadas</span></h2>
+          <div class="box-inner no-float">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -43,18 +46,22 @@
             </table>
           </div>
         </div>
-        <div class="span4">
-          <div class="well">
-            <h3>¿Qué se está comentando?</h3>
+      </div>
+      <div class="row-fluid">
+        <div class="span12 box">
+          <h2><span>Últimas preguntas</span></h2>
+          <div class="box-inner">
+            contenido
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="row-fluid">
-    <div class="span12">
-      <h2>Últimas preguntas</h2>
+    <div class="span5 box">
+      <h2><span>¿Qué se está comentando?</span></h2>
+      <div class="box-inner">
+        contenido
+      </div>
     </div>
   </div>
 </div>
+

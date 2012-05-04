@@ -56,7 +56,7 @@
             <li><a href="#grupos" data-toggle="tab"><i class="icon-eye-open"></i> Grupos de seguimiento</a></li>
             <li><a href="#buscar" data-toggle="tab"><i class="icon-search"></i> Buscar</a></li>
           </ul>
-          <div class="box-inner">
+          <div class="box-inner no-float">
             <div class="tab-content">
               <div class="tab-pane active" id="actividad">
                 <ul>
@@ -73,7 +73,7 @@
               </div>
               <div class="tab-pane" id="buscar">
                 <form class="form-search">
-                  <input type="text" class="input-medium search-query">
+                  <input type="text" class="input search-query">
                   <button type="submit" class="btn">Buscar</button>
                 </form>
               </div>
@@ -82,8 +82,13 @@
         </div>
 
         {{#usuario}}
-        <div class="span12">
-          <a class="btn btn-primary btn-large" data-toggle="modal" data-target="#crearGrupo" href="#crearGrupo"><i class="icon-pencil icon-white"></i> Crear nuevo grupo</a>
+        <div class="row-fluid">
+          <div class="span12 box">
+            <h2><span>Participa</span></h2>
+            <div class="box-inner center">
+              <a class="btn btn-primary btn-large" data-toggle="modal" data-target="#crearGrupo" href="#crearGrupo"><i class="icon-pencil icon-white"></i> Crear nuevo grupo</a>
+            </div>
+          </div>
         </div>
 
         <div id="crearGrupo" class="modal hide fade">
